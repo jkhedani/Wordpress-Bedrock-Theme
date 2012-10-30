@@ -45,18 +45,30 @@
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
-	<header id="masthead" class="site-header" role="banner">
-		<hgroup>
-			<h1 class="site-title"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-		</hgroup>
 
-		<nav role="navigation" class="site-navigation main-navigation">
-			<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
-			<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
+	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+  	<div class="navbar-inner">
+    	<div class="container">
+    		<!-- Bootstrap: Collapses to form mobile toggle menu -->
+      	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        	<span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+        <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
+        <nav class="nav-collapse collapse pull-left">
+        	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
+					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
+        	<?php wp_nav_menu( array(
+        		'theme_location' => 'primary', // Uses menu called 'Primary Menu'. If not defaults to use function 'wp_page_menu'
+        		'container' => false,
+        		'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav">%3$s</ul>',
+        		'fallback_cb' => false
+        	));?>
+      	</nav><!--/.nav-collapse -->
+    	</div><!-- .container -->
+  	</div><!-- .navbar-inner -->
+  </header>
 
-			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-		</nav><!-- .site-navigation .main-navigation -->
-	</header><!-- #masthead .site-header -->
-
-	<div id="main" class="site-main">
+	<div id="main" role="main" class="site-main container">
