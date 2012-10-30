@@ -8,6 +8,18 @@
  * @since _s 1.0
  */
 
+function custom_scripts() {
+	$stylesheetDir = get_stylesheet_directory_uri();
+	// Bootstrap scripts
+	wp_enqueue_style( 'bootstrap-custom-style', "$stylesheetDir/inc/css/style.css" );
+
+	wp_enqueue_script('bootstrap-dropdown', "$stylesheetDir/inc/bootstrap/js/bootstrap-dropdown.js", array(), false, true);
+	wp_enqueue_script('bootstrap-tooltip', "$stylesheetDir/inc/bootstrap/js/bootstrap-tooltip.js", array(), false, true);
+	wp_enqueue_script('bootstrap-popover', "$stylesheetDir/inc/bootstrap/js/bootstrap-popover.js", array(), false, true);
+	wp_enqueue_script('bootstrap-custom-script', "$stylesheetDir/inc/js/scripts.js", array(), false, true);
+}
+add_action( 'wp_enqueue_scripts', 'custom_scripts' );
+
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  *
