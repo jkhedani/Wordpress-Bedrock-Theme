@@ -7,3 +7,8 @@
 
 // Pull in bootstrap mixins/custom-conventions to use in custom styles
 @import "dcdcBootstrap.less";
+
+// If navbar is static on top
+@media (min-width: @navbarCollapseWidth) {
+	body { padding-top: 60px; }
+}

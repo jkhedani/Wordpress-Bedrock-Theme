@@ -6200,3 +6200,8 @@ ul.link-list li a {
 .affix {
   position: fixed;
 }
+@media (min-width: 979px) {
+  body {
+    padding-top: 60px;
+  }
+}
