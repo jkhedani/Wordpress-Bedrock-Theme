@@ -541,6 +541,10 @@ object {
 	margin: 0 0 1.5em;
 }
 
+#main h1.widget-title, .widget-title { 
+	font-size: 23px;
+}
+
 /* Search widget */
 #searchsubmit {
 	display: none;
