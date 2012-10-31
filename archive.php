@@ -10,7 +10,8 @@
 
 get_header(); ?>
 
-		<section id="primary" class="content-area">
+	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
+		<section id="primary" class="content-area span8">
 			<div id="content" class="site-content" role="main">
 
 			<?php if ( have_posts() ) : ?>
@@ -92,6 +93,6 @@ get_header(); ?>
 
 			</div><!-- #content .site-content -->
 		</section><!-- #primary .content-area -->
-
-<?php get_sidebar(); ?>
+		<?php get_sidebar(); ?>
+	</div><!-- .row-fluid -->
 <?php get_footer(); ?>

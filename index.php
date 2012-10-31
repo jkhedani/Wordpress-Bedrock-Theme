@@ -8,6 +8,7 @@
  */
 
 get_header(); ?>
+
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
 		<div id="primary" class="content-area span8">
 			<div id="content" class="site-content" role="main">
@@ -41,4 +42,5 @@ get_header(); ?>
 		</div><!-- #primary .content-area -->
 		<?php get_sidebar(); ?>
 	</div><!-- .row -->
+	
 <?php get_footer(); ?>

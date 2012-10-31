@@ -9,7 +9,8 @@
 get_header();
 ?>
 
-		<div id="primary" class="content-area image-attachment">
+	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
+		<div id="primary" class="content-area image-attachment span8">
 			<div id="content" class="site-content" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -107,5 +108,5 @@ get_header();
 
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area .image-attachment -->
-
+	</div><!-- .row-fluid -->
 <?php get_footer(); ?>
