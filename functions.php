@@ -66,17 +66,88 @@ function _s_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	/**
-	 * This theme uses wp_nav_menu() in one location.
+	 * Add support for the Aside Post Formats
 	 */
+	add_theme_support( 'post-formats', array( 'aside', ) );
+
+	// NAV MENUS
+	// =====================
+
+	// This theme uses one location for nav menus
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', '_s' ),
 	) );
 
-	/**
-	 * Add support for the Aside Post Formats
-	 */
-	add_theme_support( 'post-formats', array( 'aside', ) );
-}
+	// Needed for class control
+	// See http://codex.wordpress.org/Function_Reference/wp_nav_menu#Using_a_Custom_Walker_Function
+	// Extends Walker_Nav_Menu from \wp-includes\nav-menu-template.php
+	class dcdc_walker_nav_menu extends Walker_Nav_Menu {
+
+		// add classes to ul sub-menus
+		function start_lvl( &$output, $depth ) {
+			// depth dependent classes
+			$indent = ( $depth > 0  ? str_repeat( "\t", $depth ) : '' ); // code indent
+			$display_depth = ( $depth + 1); // because it counts the first submenu as 0
+			$classes = array(
+				'sub-menu',
+				( $display_depth % 2  ? 'menu-odd' : 'menu-even' ),
+				( $display_depth >=2 ? 'sub-sub-menu' : '' ),
+				'menu-depth-' . $display_depth,
+				'dropdown-menu'
+			);
+			$class_names = implode( ' ', $classes );
+
+			// build html
+			$output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
+		}
+  
+		// add main/sub classes to li's and links
+		function start_el( &$output, $item, $depth, $args ) {
+			global $wp_query;
+			$indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
+
+			// depth dependent classes
+			$depth_classes = array(
+			  ( $depth == 0 ? 'main-menu-item' : 'sub-menu-item' ),
+			  ( $depth >=2 ? 'sub-sub-menu-item' : '' ),
+			  ( $depth % 2 ? 'menu-item-odd' : 'menu-item-even' ),
+			  'menu-item-depth-' . $depth
+			);
+			$depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
+
+			// passed classes
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+			$class_names = esc_attr( implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ) );
+
+			// build html
+			$output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
+
+			// link attributes
+			$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+			$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+			$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+			$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+			$attributes .= ' class="menu-link ' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+			$attributes .= ' data-toggle="' . ( $depth == 0 ? 'dropdown' : '') . '"'; // Bootstrap: Add data-toggle attribute
+
+			//Bootstrap caret
+			$caret = ($depth == 0 ? '<b class="caret"></b>' : '');
+
+			$item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
+			  $args->before,
+			  $attributes,
+			  $args->link_before,
+			  apply_filters( 'the_title', $item->title, $item->ID ),
+			  $caret, // Bootstrap caret
+			  $args->link_after,
+			  $args->after
+			);
+
+			// build html
+			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+		}
+	} // class dcdc_walker_nav_menu
+} // _s_setup()
 endif; // _s_setup
 add_action( 'after_setup_theme', '_s_setup' );
 
