@@ -133,7 +133,7 @@ textarea {
   clear: both;
 }
 .hide-text {
-  font: 0/0 a;
+  font: a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
@@ -4489,7 +4489,7 @@ input[type="submit"].btn.btn-mini {
   clear: both;
 }
 .hide-text {
-  font: 0/0 a;
+  font: a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
