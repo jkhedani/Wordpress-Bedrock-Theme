@@ -40,6 +40,13 @@
 <![endif]-->
 
 <?php wp_head(); ?>
+
+<?php
+  // Include if navbar is in use
+  if(is_user_logged_in())
+    echo '<style type="text/css"> #navbar { margin-top: 28px; } </style>';
+?>
+
 </head>
 
 <body <?php body_class(); ?>>
