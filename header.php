@@ -79,7 +79,7 @@
               'fallback_cb' => false, // If no menu is present in primary, show nothing.
               'walker' => new dcdc_walker_nav_menu,
             ));
-          
+          }
           ?>
       	</nav><!--/.nav-collapse -->
     	</div><!-- .container -->
