@@ -67,12 +67,20 @@
         <nav class="nav-collapse collapse pull-left">
         	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
 					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
-        	<?php wp_nav_menu( array(
-        		'theme_location' => 'primary', // Uses menu called 'Primary Menu'. If not defaults to use function 'wp_page_menu'
-        		'container' => false,
-        		'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav">%3$s</ul>',
-        		'fallback_cb' => false
-        	));?>
+        	<?php
+
+          if (is_user_logged_in() && !(has_nav_menu( 'primary' ))) { // Add link to Menus page if no menu exists
+            echo '<a href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
+          } else {
+            wp_nav_menu( array(
+              'theme_location' => 'primary',
+              'container' => false,
+              'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav">%3$s</ul>',
+              'fallback_cb' => false, // If no menu is present in primary, show nothing.
+              'walker' => new dcdc_walker_nav_menu,
+            ));
+          
+          ?>
       	</nav><!--/.nav-collapse -->
     	</div><!-- .container -->
   	</div><!-- .navbar-inner -->
