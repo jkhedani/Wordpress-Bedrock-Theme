@@ -256,11 +256,11 @@ add_action('footerCredits','addFooterCredits');
  *
  * @since _s 1.0
  */
-function _s_page_menu_args( $args ) {
-	$args['show_home'] = true;
-	return $args;
-}
-add_filter( 'wp_page_menu_args', '_s_page_menu_args' );
+// function _s_page_menu_args( $args ) {
+// 	$args['show_home'] = true;
+// 	return $args;
+// }
+// add_filter( 'wp_page_menu_args', '_s_page_menu_args' );
 
 /**
  * Adds custom classes to the array of body classes.
