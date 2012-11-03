@@ -79,6 +79,33 @@ function my_remove_menu_pages() {
 }
 add_action( 'admin_menu', 'my_remove_menu_pages' );
 
+// Theme activated functions
+// http://www.krishnakantsharma.com/2011/01/activationdeactivation-hook-for-wordpress-theme/
+// On theme activation, do the following...
+function myactivationfunction($oldname, $oldtheme=false) {
+	
+	// Add Instructor User Role
+	// http://codex.wordpress.org/Function_Reference/add_role
+	add_role('course_instructor', 'Course Instructor', array(
+    'read' => true,
+    'edit_posts' => true,
+    'edit_published_posts' => true,
+    'delete_posts' => true,
+		'delete_published_posts' => true,
+		'publish_posts' => true,
+		'read' => true,
+		'upload_files' => true
+	));
+
+}
+add_action("after_switch_theme", "myactivationfunction", 10 ,  2);
+
+// On theme deactivation, do the following...
+//function mydeactivationfunction($newname, $newtheme) {
+//
+//}
+//add_action("switch_theme", "mydeactivationfunction", 10 , 2);
+
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  *
