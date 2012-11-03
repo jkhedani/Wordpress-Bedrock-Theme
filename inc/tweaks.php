@@ -10,11 +10,14 @@
 
 //		 HELPER UTILITY FUNCTIONS 		//
 
+function get_current_user_role() {
+    global $current_user;
     get_currentuserinfo();
     $user_roles = $current_user->roles;
     $user_role = array_shift($user_roles);
     return $user_role;
 };
+
 //		 END HELPER UTILITY FUNCTIONS 		//
 
 // Load resources and hook in bootstrap
@@ -30,6 +33,29 @@ function custom_scripts() {
 	wp_enqueue_script('bootstrap-custom-script', "$stylesheetDir/inc/js/scripts.js", array(), false, true);
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
+
+// Add additional contact fields
+// http://wpquicktips.wordpress.com/2010/06/21/add-or-change-user-contact-fields/
+function extend_user_contactmethods() {
+	return array(
+		'office_hours' => __( 'Office Hours' ),
+		'voffice_link' => __( 'V-Office Link')
+	);
+}
+add_filter( 'user_contactmethods', 'extend_user_contactmethods' );
+
+// http://justintadlock.com/archives/2009/09/10/adding-and-using-custom-user-profile-fields
+function my_save_extra_profile_fields( $user_id ) {
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return false;
+
+	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. */
+	update_usermeta( $user_id, 'office_hours', $_POST['office_hours'] );
+	update_usermeta( $user_id, 'voffice_link', $_POST['voffice_link'] );
+}
+add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
+add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
+
 
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
