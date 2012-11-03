@@ -57,6 +57,28 @@ add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
 add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
 
 
+// Remove unncessary admin menu items
+function my_remove_menu_pages() {
+	global $userdata;
+	remove_menu_page('edit.php'); // "Posts"
+	remove_menu_page('link-manager.php'); // "Links"
+	
+	// Start removing menu items conditionally
+	if (get_option('default_comment_status') == 'closed')
+		remove_menu_page('edit-comments.php'); // "Comments"
+
+	// Based on user
+	// http://codex.wordpress.org/Roles_and_Capabilities
+	get_currentuserinfo();
+	if ( $userdata->user_level < 2 ) {
+		remove_menu_page('plugins.php'); // "Plugins"
+		remove_menu_page('users.php'); // "Users"
+		remove_menu_page('tools.php'); // "Tools"
+		remove_menu_page('options-general.php'); // "Settings"
+	}
+}
+add_action( 'admin_menu', 'my_remove_menu_pages' );
+
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  *
