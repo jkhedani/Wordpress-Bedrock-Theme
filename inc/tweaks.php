@@ -174,6 +174,59 @@ function course_page_types() {
 	);
 }
 add_action( 'init', 'course_page_types' );
+
+// Create connection types for course structure
+function course_connection_types() {
+	// Connect Modules to Units
+	p2p_register_connection_type(array(
+		'name' => 'units_to_modules',
+		'from' => 'units',
+		'to' => 'modules',
+		'sortable' => 'any',
+		'admin_box' => 'any',
+		'admin_column' => 'any',
+		'cardinality' => 'many-to-many',
+		'title' => array( 'from' => __( 'Units', 'my-textdomain' ), 'to' => __( 'Connected Units', 'my-textdomain' ) ),
+		'from_labels' => array(
+      'singular_name' => __( 'Unit', 'my-textdomain' ),
+      'search_items' => __( 'Search Units', 'my-textdomain' ),
+      'not_found' => __( 'No Units found.', 'my-textdomain' ),
+      'create' => __( 'Connect to a Unit', 'my-textdomain' ),
+  	),
+		'to_labels' => array(
+      'singular_name' => __( 'Module', 'my-textdomain' ),
+      'search_items' => __( 'Search Modules', 'my-textdomain' ),
+      'not_found' => __( 'No Modules found.', 'my-textdomain' ),
+      'create' => __( 'Connect a Module', 'my-textdomain' ),
+  	),
+	));
+
+	// Connect Lessons to Modules
+	p2p_register_connection_type(array(
+		'name' => 'modules_to_lessons',
+		'from' => 'modules',
+		'to' => 'lessons',
+		'sortable' => 'any',
+		'admin_box' => 'any',
+		'admin_column' => 'any',
+		'cardinality' => 'many-to-many',
+		'title' => array( 'from' => __( 'Connected Lessons', 'my-textdomain' ), 'to' => __( 'Connected Lessons', 'my-textdomain' ) ),
+		'from_labels' => array(
+      'singular_name' => __( 'Module', 'my-textdomain' ),
+      'search_items' => __( 'Search Modules', 'my-textdomain' ),
+      'not_found' => __( 'No Modules found.', 'my-textdomain' ),
+      'create' => __( 'Connect to a Module', 'my-textdomain' ),
+  	),
+		'to_labels' => array(
+      'singular_name' => __( 'Lesson', 'my-textdomain' ),
+      'search_items' => __( 'Search Lessons', 'my-textdomain' ),
+      'not_found' => __( 'No Lessons found.', 'my-textdomain' ),
+      'create' => __( 'Connect a Lesson', 'my-textdomain' ),
+  	),
+	));
+}
+add_action( 'p2p_init', 'course_connection_types' );
+
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  *
