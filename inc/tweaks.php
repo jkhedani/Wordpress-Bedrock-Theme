@@ -106,6 +106,74 @@ add_action("after_switch_theme", "myactivationfunction", 10 ,  2);
 //}
 //add_action("switch_theme", "mydeactivationfunction", 10 , 2);
 
+// Create custom post types for courses
+function course_page_types() {
+	$supportedMetaboxes = array('title', 'editor', 'page-attributes');
+	
+	// "Units"
+	$labels = array(
+		'name' => __( 'Units' ),
+		'singular_name' => __( 'Unit' ),
+		'add_new' => __( 'Add New Unit' ),
+		'add_new_item' => __( 'Add New Unit' ),
+		'edit_name' => __( 'Edit This Unit' ),
+		'view_item' => __( 'View This Unit' ),
+		'search_items' => __('Search Units'),
+		'not_found' => __('No Units found.'),
+	);
+	register_post_type( 'units',
+		array(
+		'menu_position' => 5,
+		'public' => true,	
+		'hierarchical' => true,
+		'supports' => $supportedMetaboxes,
+		'labels' => $labels,
+		)
+	);
+
+	// "Modules"
+	$labels = array(
+		'name' => __( 'Modules' ),
+		'singular_name' => __( 'Module' ),
+		'add_new' => __( 'Add New Module' ),
+		'add_new_item' => __( 'Add New Module' ),
+		'edit_name' => __( 'Edit This Module' ),
+		'view_item' => __( 'View This Module' ),
+		'search_items' => __('Search Modules'),
+		'not_found' => __('No Modules found.'),
+	);
+	register_post_type( 'modules',
+		array(
+		'menu_position' => 6,
+		'public' => true,	
+		'hierarchical' => true,
+		'supports' => $supportedMetaboxes,
+		'labels' => $labels,
+		)
+	);
+	
+	// "Lessons"
+	$labels = array(
+		'name' => __( 'Lessons' ),
+		'singular_name' => __( 'Lesson' ),
+		'add_new' => __( 'Add New Lesson' ),
+		'add_new_item' => __( 'Add New Lesson' ),
+		'edit_name' => __( 'Edit This Lesson' ),
+		'view_item' => __( 'View This Lesson' ),
+		'search_items' => __('Search Lessons'),
+		'not_found' => __('No Lessons found.'),
+	);
+	register_post_type( 'lessons',
+		array(
+		'menu_position' => 7,
+		'public' => true,	
+		'hierarchical' => true,
+		'supports' => $supportedMetaboxes,
+		'labels' => $labels,
+		)
+	);
+}
+add_action( 'init', 'course_page_types' );
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  *
