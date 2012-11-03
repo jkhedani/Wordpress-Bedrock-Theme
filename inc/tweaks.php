@@ -227,6 +227,30 @@ function course_connection_types() {
 }
 add_action( 'p2p_init', 'course_connection_types' );
 
+// Footer Credits
+function addFooterCredits() {
+	// Display specific fields for course instructors
+	$users = get_users('role=course_instructor');
+	if (isset($users)) {
+		foreach ($users as $user) {
+			$userID = $user->ID;
+			echo '<div class="instructor-contact">';
+			echo 	get_the_author_meta('first_name',$userID) . ' ';
+			echo 	get_the_author_meta('last_name',$userID);
+			echo '<span class="sep"> | </span>';
+			echo 	get_the_author_meta('user_email',$userID);
+			echo '<span class="sep"> | </span>';
+			echo 	get_the_author_meta('office_hours',$userID);
+			echo '<span class="sep"> | </span>';
+			echo '<a href="' .get_the_author_meta('voffice_link',$userID). '">V-Office Link</a>';
+			echo '</div>';
+		}
+	} else {
+		
+	}
+}
+add_action('footerCredits','addFooterCredits');
+
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
  *
