@@ -8,6 +8,16 @@
  * @since _s 1.0
  */
 
+//		 HELPER UTILITY FUNCTIONS 		//
+
+    get_currentuserinfo();
+    $user_roles = $current_user->roles;
+    $user_role = array_shift($user_roles);
+    return $user_role;
+};
+//		 END HELPER UTILITY FUNCTIONS 		//
+
+// Load resources and hook in bootstrap
 function custom_scripts() {
 	$stylesheetDir = get_stylesheet_directory_uri();
 	// Bootstrap scripts
