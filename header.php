@@ -42,8 +42,10 @@
 <?php wp_head(); ?>
 
 <?php
-  // Include if navbar is in use
-  if(is_user_logged_in())
+  // ADMIN: Move navbar down from under admin when user is
+  // logged in but not in the theme customizer previewer
+  global $wp_customize;
+  if(is_user_logged_in() && ! isset( $wp_customize ))
     echo '<style type="text/css"> #navbar { margin-top: 28px; } </style>';
 ?>
 
