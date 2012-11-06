@@ -6205,3 +6205,56 @@ ul.link-list li a {
     padding-top: 60px;
   }
 }
+#main {
+  min-height: 600px;
+}
+#intro-banner {
+  padding: 25px;
+}
+#intro-banner.dark {
+  background-color: #1B1B1B;
+  color: #FFF;
+}
+#intro-banner.light {
+  background-color: #EBEBEB;
+  color: #1B1B1B;
+}
+#intro-banner #college-branding {
+  min-height: 39px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #FFF;
+  background: url('../images/college-logos.png') no-repeat;
+}
+#intro-banner #college-branding.system.dark {
+  background-position: 0 -521px;
+}
+#intro-banner #college-branding.system.light {
+  background-position: 0 5px;
+  border-bottom-color: #000;
+}
+#intro-banner #college-branding.manoa.dark {
+  background-position: 0 -423px;
+}
+#intro-banner #college-branding.manoa.light {
+  background-position: 0 5px;
+  border-bottom-color: #000;
+}
+#intro-banner #college-branding.hcc.dark {
+  background-position: 0 -620px;
+  height: 78px;
+}
+#intro-banner #college-branding.hcc.light {
+  background-position: 0 5px;
+  border-bottom-color: #000;
+  height: 78px;
+}
+#intro-banner #college-branding.kcc.dark {
+  background-position: 0 -755px;
+  height: 78px;
+}
+#intro-banner #college-branding.kcc.light {
+  background-position: 0 5px;
+  border-bottom-color: #000;
+  height: 78px;
+}
