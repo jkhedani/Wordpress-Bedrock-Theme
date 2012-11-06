@@ -40,7 +40,7 @@ function _s_setup() {
 	 * Custom Theme Options
 	 */
 	//require( get_template_directory() . '/inc/theme-options/theme-options.php' );
-	require( get_template_directory() . '/inc/theme-options/dcdc-theme-options.php' );
+	//require( get_template_directory() . '/inc/theme-options/dcdc-theme-options.php' );
 
 	/**
 	 * WordPress.com-specific functions and definitions
