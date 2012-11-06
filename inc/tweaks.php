@@ -8,6 +8,9 @@
  * @since _s 1.0
  */
 
+// Require Course Options
+require( get_template_directory() . '/inc/theme-options/course-options.php' );
+
 //		 HELPER UTILITY FUNCTIONS 		//
 
 function get_current_user_role() {
