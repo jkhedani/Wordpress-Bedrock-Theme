@@ -9,6 +9,30 @@
 @import "dcdcBootstrap.less";
 
 // If navbar is static on top
-@media (min-width: @navbarCollapseWidth) {
-	body { padding-top: 60px; }
+@media (min-width: @navbarCollapseWidth) { body { padding-top: 60px; } }
+
+
+// Course Template Styles 
+#main { min-height: 600px; }
+#intro-banner {
+	padding: 25px;
+	&.dark { background-color: #1B1B1B; color: #FFF; }
+	&.light{ background-color: #EBEBEB; color: #1B1B1B; }
+	#college-branding {
+		min-height: 39px;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #FFF;
+		background: url('../images/college-logos.png') no-repeat;
+		&.system.dark { background-position: 0 -521px; }
+		&.system.light { background-position: 0 5px; border-bottom-color: #000; }
+		&.manoa.dark { background-position: 0 -423px; }
+		&.manoa.light { background-position: 0 5px; border-bottom-color: #000; }
+		&.hcc.dark { background-position: 0 -620px; height: 78px }
+		&.hcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
+		&.kcc.dark { background-position: 0 -755px; height: 78px }
+		&.kcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
+	}
 }
+
+// Custom Styles
