@@ -179,17 +179,21 @@ function course_page_types() {
 add_action( 'init', 'course_page_types' );
 
 // Create connection types for course structure
+// https://github.com/scribu/wp-posts-to-posts/wiki
 function course_connection_types() {
+
 	// Connect Modules to Units
 	p2p_register_connection_type(array(
+		// Connnection Attributes
 		'name' => 'units_to_modules',
 		'from' => 'units',
 		'to' => 'modules',
 		'sortable' => 'any',
+		'cardinality' => 'one-to-many', // Module can be connected to only one Unit
+		// Display Attributes
 		'admin_box' => 'any',
 		'admin_column' => 'any',
-		'cardinality' => 'many-to-many',
-		'title' => array( 'from' => __( 'Units', 'my-textdomain' ), 'to' => __( 'Connected Units', 'my-textdomain' ) ),
+		'title' => array( 'from' => __( 'Connected Modules', 'my-textdomain' ), 'to' => __( 'Connected Unit', 'my-textdomain' ) ),
 		'from_labels' => array(
       'singular_name' => __( 'Unit', 'my-textdomain' ),
       'search_items' => __( 'Search Units', 'my-textdomain' ),
@@ -206,14 +210,16 @@ function course_connection_types() {
 
 	// Connect Lessons to Modules
 	p2p_register_connection_type(array(
+		// Connnection Attributes
 		'name' => 'modules_to_lessons',
 		'from' => 'modules',
 		'to' => 'lessons',
 		'sortable' => 'any',
+		'cardinality' => 'one-to-many', // Lesson can be connected to only one Module
+		// Display Attributes
 		'admin_box' => 'any',
 		'admin_column' => 'any',
-		'cardinality' => 'many-to-many',
-		'title' => array( 'from' => __( 'Connected Lessons', 'my-textdomain' ), 'to' => __( 'Connected Lessons', 'my-textdomain' ) ),
+		'title' => array( 'from' => __( 'Connected Lessons', 'my-textdomain' ), 'to' => __( 'Connected Module', 'my-textdomain' ) ),
 		'from_labels' => array(
       'singular_name' => __( 'Module', 'my-textdomain' ),
       'search_items' => __( 'Search Modules', 'my-textdomain' ),
