@@ -35,4 +35,36 @@
 	}
 }
 
+.test { height: 100px; background-color: #CCC; }
+
+// Course Template Styles: Single Layout Template Styles
+body.single-layout {
+	#no-content {
+		//height: 200px;
+		padding: 20px 15px;
+		text-align: center;
+		border: 6px dashed #CCC;
+		font-size: 16px;
+		color: #888;
+		.border-radius(4px); 
+		a {
+			span.large-icon { display: block; clear: both; font-size: 120px; line-height: 0; margin: 35px 0 48px; }
+			&.create-new { margin: 12px 0; color: #555; font-size: 27px; line-height: 1.2; display: block; clear: both; margin: 0 0 20px 0;
+				&:hover { text-decoration: none; color: #111; }
+			}
+		}
+	}
+}
+
+// Course Template Styles: Quick Fixes
+// FIX: Override some call somewhere that is miscalculating the width
+// of containers at this media query
+@media (max-width: 979px) and (min-width: 768px) {
+	.container {
+		width: auto;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
 // Custom Styles
