@@ -176,6 +176,10 @@ a:hover {
   -moz-border-radius: 500px;
   border-radius: 500px;
 }
+footer {
+  border-top: 1px solid #DDD;
+  padding: 15px 0;
+}
 .row {
   margin-left: -20px;
   *zoom: 1;
@@ -854,63 +858,64 @@ cite {
 .text-success {
   color: #468847;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+#main h1,
+#main h2,
+#main h3,
+#main h4,
+#main h5,
+#main h6 {
   margin: 10px 0;
   font-family: inherit;
   font-weight: bold;
   line-height: 1;
   color: inherit;
   text-rendering: optimizelegibility;
+  clear: both;
 }
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small {
+#main h1 small,
+#main h2 small,
+#main h3 small,
+#main h4 small,
+#main h5 small,
+#main h6 small {
   font-weight: normal;
   line-height: 1;
   color: #999999;
 }
-h1 {
+#main h1 {
   font-size: 36px;
   line-height: 40px;
 }
-h2 {
+#main h2 {
   font-size: 30px;
   line-height: 40px;
 }
-h3 {
+#main h3 {
   font-size: 24px;
   line-height: 40px;
 }
-h4 {
+#main h4 {
   font-size: 18px;
   line-height: 20px;
 }
-h5 {
+#main h5 {
   font-size: 14px;
   line-height: 20px;
 }
-h6 {
+#main h6 {
   font-size: 12px;
   line-height: 20px;
 }
-h1 small {
+#main h1 small {
   font-size: 24px;
 }
-h2 small {
+#main h2 small {
   font-size: 18px;
 }
-h3 small {
+#main h3 small {
   font-size: 14px;
 }
-h4 small {
+#main h4 small {
   font-size: 14px;
 }
 .page-header {
@@ -3947,6 +3952,18 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand:hover {
   text-decoration: none;
 }
+.navbar .description {
+  float: left;
+  display: block;
+  padding: 10px 20px 10px;
+  margin-left: -20px;
+  font-size: 17px;
+  font-weight: 200;
+  color: #777777;
+}
+.navbar .description:hover {
+  text-decoration: none;
+}
 .navbar-text {
   margin-bottom: 0;
   line-height: 40px;
@@ -5864,6 +5881,9 @@ input[type="submit"].btn.btn-mini {
     margin-left: -20px;
     margin-right: -20px;
   }
+  .navbar .description {
+    display: none;
+  }
   .container-fluid {
     padding: 0;
   }
@@ -5982,6 +6002,11 @@ input[type="submit"].btn.btn-mini {
   }
   .carousel-caption {
     position: static;
+  }
+}
+@media (min-width: 979px) {
+  body {
+    padding-top: 60px;
   }
 }
 @media (max-width: 979px) {
