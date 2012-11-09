@@ -21,31 +21,6 @@ get_header(); ?>
 					'orderby' => 'menu_order'
 				));
 				
-				p2p_type( 'units_to_modules' )->each_connected( $moduleListContent, array(), 'modules' );
-				//$unitName = p2p_type( 'units' )->set_direction( 'to' )->get_connected( $post_id );
-
-				while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
-					
-					p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
-					$unitTitle = get_the_title();
-					echo '<ol class="unit"><li>' . $unitTitle;
-					echo '<ol class="module">';
-					foreach ( $post->modules as $post ) : setup_postdata( $post );
-					$moduleTitle = get_the_title();
-					echo		'<li>' . $moduleTitle;
-					echo 			'<ol class="lesson">';
-					foreach ( $post->lessons as $post ) : setup_postdata( $post );
-					$lessonTitle = get_the_title();
-					echo 				'<li>' . $lessonTitle . '</li>';
-					endforeach; // end Lessons
-					echo 			'</ol>'; // .lesson
-					endforeach; // end Modules
-					echo '</li></ol>'; // .module
-					echo '</li></ol>'; // .unit
-					wp_reset_postdata();
-
-				endwhile;
-				wp_reset_postdata();
 
 				?>
 
