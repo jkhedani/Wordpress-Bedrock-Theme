@@ -16,45 +16,108 @@
 #main { min-height: 600px; }
 #intro-banner {
 	padding: 25px;
-	&.dark { background-color: #1B1B1B; color: #FFF; }
-	&.light{ background-color: #EBEBEB; color: #1B1B1B; }
+	background-color: #1B1B1B; color: #FFF;
 	#college-branding {
 		min-height: 39px;
 		margin-bottom: 20px;
 		padding-bottom: 20px;
 		border-bottom: 1px solid #FFF;
 		background: url('../images/college-logos.png') no-repeat;
-		&.system.dark { background-position: 0 -521px; }
-		&.system.light { background-position: 0 5px; border-bottom-color: #000; }
-		&.manoa.dark { background-position: 0 -423px; }
-		&.manoa.light { background-position: 0 5px; border-bottom-color: #000; }
-		&.hcc.dark { background-position: 0 -620px; height: 78px }
-		&.hcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
-		&.kcc.dark { background-position: 0 -755px; height: 78px }
-		&.kcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
+		&.system { background-position: 0 -521px; }
+		//&.system.light { background-position: 0 5px; border-bottom-color: #000; }
+		&.manoa { background-position: 0 -423px; }
+		//&.manoa.light { background-position: 0 5px; border-bottom-color: #000; }
+		&.hcc { background-position: 0 -620px; height: 78px }
+		//&.hcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
+		&.kcc { background-position: 0 -755px; height: 78px }
+		//&.kcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
+	}
+}
+#no-content {
+	//height: 200px;
+	padding: 20px 15px;
+	text-align: center;
+	border: 6px dashed #CCC;
+	font-size: 16px;
+	color: @gray;
+	.border-radius(4px); 
+	a {
+		background: none;
+		span.large-icon { display: block; clear: both; font-size: 120px; line-height: 0; margin: 35px 0 48px; }
+		&.create-new { margin: 12px 0; color: @grayDark; font-size: 27px; line-height: 1.2; display: block; clear: both; margin: 0 0 20px 0;
+			&:hover { text-decoration: none; color: @grayDarker; }
+		}
 	}
 }
 
-.test { height: 100px; background-color: #CCC; }
+// Course Template Styles: Modules & Lessons
+body.modules-lessons {
+	// FSHN
+	&.single-layout {
+		#main { // Increase specificity
+			ol.modules {
+				margin: 0;
+				li.module { list-style: none; margin-bottom: 20px; background-color: @gray;
+					a { color: @white; display: block; min-height: 184px; padding: 0 0 10px 0;
+						.module-count { padding: 10px; background-color: @grayDarker; font-size: 13px; }
+						.module-title { font-size: 18px; margin: 10px; line-height: 1.2; display: block; }
+						.module-image { margin: 10px; }
+						.module-content { margin: 10px; }
+					}
+					&:nth-child(3n+1) { margin-left: 0; }
+					&.last { background: none; } // Clear background color for "+ Content" list item
+					#no-content {
+						a { background: none; min-height: 0; margin: 20px 0 22px 0; color: @grayDark;
+							&:hover { color: @grayDarker; }
+						}
+					}
+				}
+			}
+		}
+	} // .single-layout
 
-// Course Template Styles: Single Layout Template Styles
-body.single-layout {
-	#no-content {
-		//height: 200px;
-		padding: 20px 15px;
-		text-align: center;
-		border: 6px dashed #CCC;
-		font-size: 16px;
-		color: #888;
-		.border-radius(4px); 
-		a {
-			span.large-icon { display: block; clear: both; font-size: 120px; line-height: 0; margin: 35px 0 48px; }
-			&.create-new { margin: 12px 0; color: #555; font-size: 27px; line-height: 1.2; display: block; clear: both; margin: 0 0 20px 0;
-				&:hover { text-decoration: none; color: #111; }
+	// PEPS
+	&.nested-layout {
+		#main {
+			ol.modules {
+				margin: 0;
+				li.module { list-style: none; margin: 0 0 20px 0; color: @gray; display: block; min-height: 184px; background-color: @grayLighter;
+					.module-count { padding: 10px 15px; color: @grayLighter; background-color: @grayDarker; }
+					.module-title { font-size: 26px; margin: 10px; }
+					.module-content { margin: 10px; }
+				}
+			}
+		}
+	} // .nested-layout
+} // body.modules-lessons
+
+// Course Template Styles: Units, Modules & Lessons
+body.units-modules-lessons {
+	#main { // Increase specificity
+		ol.units { margin: 0;
+			li.unit { list-style: none; margin: 0 0 20px 0; color: @gray; display: block; min-height: 184px; background-color: @grayLighter; padding-bottom: 10px;
+				.unit-count { padding: 10px 15px; color: @grayLighter; background-color: @grayDarker; }
+				.unit-title { font-size: 26px; margin: 10px; }
+			}
+		}
+		ol.modules {
+			margin: 10px;
+			li.module { list-style: none;
+				#no-content {
+					a { background: none; min-height: 0; margin: 0 0 42px 0; color: @grayDark;
+						&:hover { color: @grayDarker; }
+					}
+				}
+				a { color: @white; display: block; min-height: 184px; background-color: @gray;
+					.module-count { padding: 10px; background-color: @grayDarker; }
+					.module-title { font-size: 26px; margin: 10px; }
+				}
+				&:nth-child(3n+1) { margin-left: 0; }
 			}
 		}
 	}
 }
+
 
 // Course Template Styles: Quick Fixes
 // FIX: Override some call somewhere that is miscalculating the width

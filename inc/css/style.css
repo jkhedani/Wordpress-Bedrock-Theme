@@ -4940,14 +4940,8 @@ ul.link-list li a {
 }
 #intro-banner {
   padding: 25px;
-}
-#intro-banner.dark {
   background-color: #1B1B1B;
   color: #FFF;
-}
-#intro-banner.light {
-  background-color: #EBEBEB;
-  color: #1B1B1B;
 }
 #intro-banner #college-branding {
   min-height: 39px;
@@ -4956,71 +4950,174 @@ ul.link-list li a {
   border-bottom: 1px solid #FFF;
   background: url('../images/college-logos.png') no-repeat;
 }
-#intro-banner #college-branding.system.dark {
+#intro-banner #college-branding.system {
   background-position: 0 -521px;
 }
-#intro-banner #college-branding.system.light {
-  background-position: 0 5px;
-  border-bottom-color: #000;
-}
-#intro-banner #college-branding.manoa.dark {
+#intro-banner #college-branding.manoa {
   background-position: 0 -423px;
 }
-#intro-banner #college-branding.manoa.light {
-  background-position: 0 5px;
-  border-bottom-color: #000;
-}
-#intro-banner #college-branding.hcc.dark {
+#intro-banner #college-branding.hcc {
   background-position: 0 -620px;
   height: 78px;
 }
-#intro-banner #college-branding.hcc.light {
-  background-position: 0 5px;
-  border-bottom-color: #000;
-  height: 78px;
-}
-#intro-banner #college-branding.kcc.dark {
+#intro-banner #college-branding.kcc {
   background-position: 0 -755px;
   height: 78px;
 }
-#intro-banner #college-branding.kcc.light {
-  background-position: 0 5px;
-  border-bottom-color: #000;
-  height: 78px;
-}
-.test {
-  height: 100px;
-  background-color: #CCC;
-}
-body.single-layout #no-content {
+#no-content {
   padding: 20px 15px;
   text-align: center;
   border: 6px dashed #CCC;
   font-size: 16px;
-  color: #888;
+  color: #555555;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-body.single-layout #no-content a span.large-icon {
+#no-content a {
+  background: none;
+}
+#no-content a span.large-icon {
   display: block;
   clear: both;
   font-size: 120px;
   line-height: 0;
   margin: 35px 0 48px;
 }
-body.single-layout #no-content a.create-new {
+#no-content a.create-new {
   margin: 12px 0;
-  color: #555;
+  color: #333333;
   font-size: 27px;
   line-height: 1.2;
   display: block;
   clear: both;
   margin: 0 0 20px 0;
 }
-body.single-layout #no-content a.create-new:hover {
+#no-content a.create-new:hover {
   text-decoration: none;
-  color: #111;
+  color: #222222;
+}
+body.modules-lessons.single-layout #main ol.modules {
+  margin: 0;
+}
+body.modules-lessons.single-layout #main ol.modules li.module {
+  list-style: none;
+  margin-bottom: 20px;
+  background-color: #555555;
+}
+body.modules-lessons.single-layout #main ol.modules li.module a {
+  color: #ffffff;
+  display: block;
+  min-height: 184px;
+  padding: 0 0 10px 0;
+}
+body.modules-lessons.single-layout #main ol.modules li.module a .module-count {
+  padding: 10px;
+  background-color: #222222;
+  font-size: 13px;
+}
+body.modules-lessons.single-layout #main ol.modules li.module a .module-title {
+  font-size: 18px;
+  margin: 10px;
+  line-height: 1.2;
+  display: block;
+}
+body.modules-lessons.single-layout #main ol.modules li.module a .module-image {
+  margin: 10px;
+}
+body.modules-lessons.single-layout #main ol.modules li.module a .module-content {
+  margin: 10px;
+}
+body.modules-lessons.single-layout #main ol.modules li.module:nth-child(3n+1) {
+  margin-left: 0;
+}
+body.modules-lessons.single-layout #main ol.modules li.module.last {
+  background: none;
+}
+body.modules-lessons.single-layout #main ol.modules li.module #no-content a {
+  background: none;
+  min-height: 0;
+  margin: 20px 0 22px 0;
+  color: #333333;
+}
+body.modules-lessons.single-layout #main ol.modules li.module #no-content a:hover {
+  color: #222222;
+}
+body.modules-lessons.nested-layout #main ol.modules {
+  margin: 0;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module {
+  list-style: none;
+  margin: 0 0 20px 0;
+  color: #555555;
+  display: block;
+  min-height: 184px;
+  background-color: #eeeeee;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-count {
+  padding: 10px 15px;
+  color: #eeeeee;
+  background-color: #222222;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-title {
+  font-size: 26px;
+  margin: 10px;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-content {
+  margin: 10px;
+}
+body.units-modules-lessons #main ol.units {
+  margin: 0;
+}
+body.units-modules-lessons #main ol.units li.unit {
+  list-style: none;
+  margin: 0 0 20px 0;
+  color: #555555;
+  display: block;
+  min-height: 184px;
+  background-color: #eeeeee;
+  padding-bottom: 10px;
+}
+body.units-modules-lessons #main ol.units li.unit .unit-count {
+  padding: 10px 15px;
+  color: #eeeeee;
+  background-color: #222222;
+}
+body.units-modules-lessons #main ol.units li.unit .unit-title {
+  font-size: 26px;
+  margin: 10px;
+}
+body.units-modules-lessons #main ol.modules {
+  margin: 10px;
+}
+body.units-modules-lessons #main ol.modules li.module {
+  list-style: none;
+}
+body.units-modules-lessons #main ol.modules li.module #no-content a {
+  background: none;
+  min-height: 0;
+  margin: 0 0 42px 0;
+  color: #333333;
+}
+body.units-modules-lessons #main ol.modules li.module #no-content a:hover {
+  color: #222222;
+}
+body.units-modules-lessons #main ol.modules li.module a {
+  color: #ffffff;
+  display: block;
+  min-height: 184px;
+  background-color: #555555;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-count {
+  padding: 10px;
+  background-color: #222222;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-title {
+  font-size: 26px;
+  margin: 10px;
+}
+body.units-modules-lessons #main ol.modules li.module:nth-child(3n+1) {
+  margin-left: 0;
 }
 @media (max-width: 979px) and (min-width: 768px) {
   .container {
