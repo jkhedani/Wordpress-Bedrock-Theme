@@ -7,11 +7,10 @@
  */
 ?>
 	<?php if( is_home() ) { ?>
-		<div id="intro-banner" class="<?php echo get_theme_mod('courses_branding_tint', 'default_value'); ?> span4" role="complementary">
+		<div id="intro-banner" class="span4" role="complementary">
 			<?php
 				echo '<div id="college-branding" class="';
 				echo get_theme_mod('courses_branding_college_affil', 'default_value') . ' ';
-				echo get_theme_mod('courses_branding_tint', 'default_value');
 				echo '"></div>';
 			?>
 			<div id="intro-banner-content">

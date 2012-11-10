@@ -29,14 +29,31 @@
     });
 
     // Branding
-    wp.customize( 'courses_branding_tint', function( value ) {
-        value.bind( function( to ) {
-            if (to == 'light') {
-                $('#intro-banner').css('background-color', '#EBEBEB');
-            } else {
-                $('#intro-banner').css('background-color', '#1B1B1B');
-            }
-        });
+    // wp.customize( 'courses_branding_tint', function( value ) {
+    //     value.bind( function( to ) {
+    //         if (to == 'light') {
+    //             $('#intro-banner').css('background-color', '#EBEBEB');
+    //         } else {
+    //             $('#intro-banner').css('background-color', '#1B1B1B');
+    //         }
+    //     });
+    // });
+
+    //Layout
+    wp.customize( 'courses_layout_ia', function( value ) {
+      value.bind( function( to ) {
+        //var courseTemplate = $('input[data-customize-setting-link=courses_layout_template]:checked').val();
+        console.log($('body'));
+        var courseTemplate = $('li#customize-control-courses_layouts_visual input[type=radio]:checked').val();
+        if(courseTemplate == 'singular') {
+          alert('singular');
+        } else if (courseTemplate == 'nested') {
+          alert('nested');
+        } else {
+          alert('fail');
+          alert(courseTemplate);
+        }
+      });
     });
 
 } )( jQuery )

@@ -39,21 +39,28 @@ function courses_customize_register($wp_customize) {
 			'default'        => 'A short description/welcome piece for my new online course.',
 		  'transport'      => 'postMessage'
 		));
-		// SETTING: Layout
-		$wp_customize->add_setting( 'courses_layout', array(
+		
+		// SETTING: Layout: IA
+		$wp_customize->add_setting( 'courses_layout_ia', array(
+		  'default'        => 'modulesLessons',
+		  'transport'      => 'postMessage'
+		));
+		// SETTING: Layout: Visual
+		$wp_customize->add_setting( 'courses_layout_template', array(
 		  'default'        => 'singular',
 		  'transport'      => 'postMessage'
 		));
+
 		// SETTING: Branding[College Affiliation]
 		$wp_customize->add_setting( 'courses_branding_college_affil', array(
 			'default'        => 'system',
 		  'transport'      => 'postMessage'
 		));
-		// SETTING: Branding[College Affiliation Color]
-		$wp_customize->add_setting( 'courses_branding_tint', array(
-			'default'        => 'dark',
-		  'transport'      => 'postMessage'
-		));
+		// // SETTING: Branding[College Affiliation Color]
+		// $wp_customize->add_setting( 'courses_branding_tint', array(
+		// 	'default'        => 'dark',
+		//   'transport'      => 'postMessage'
+		// ));
 
 	// CONTROLS
 		// CONTROL: Course Description
@@ -62,11 +69,23 @@ function courses_customize_register($wp_customize) {
     	'section' 	 => 'courses_desc',
     	'settings'   => 'courses_short_desc'
 		)));
-		// CONTROL: Layout
-		$wp_customize->add_control( 'courses_layouts', array(
+
+		// CONTROL: Layout: IA
+		$wp_customize->add_control( 'courses_layouts_ia', array(
 	    'label'      => __( 'Select a Course Layout', 'courses' ),
 	    'section'    => 'courses_layouts',
-	    'settings'   => 'courses_layout',
+	    'settings'   => 'courses_layout_ia',
+	    'type'       => 'radio',
+	    'choices'    => array(
+	      'modulesLessons' => 'Modules & Lessons',
+	      'unitsModulesLessons' => 'Units, Modules & Lessons',
+			),
+		));
+		// CONTROL: Layout: Visual
+		$wp_customize->add_control( 'courses_layouts_visual', array(
+	    'label'      => __( 'Select a Course Layout', 'courses' ),
+	    'section'    => 'courses_layouts',
+	    'settings'   => 'courses_layout_template',
 	    'type'       => 'radio',
 	    'choices'    => array(
 	      'singular' => 'Single Module Layout',
@@ -74,6 +93,7 @@ function courses_customize_register($wp_customize) {
 	      'custom' => 'Custom Layout',
 			),
 		));
+
 		// CONTROL: Branding
 		$wp_customize->add_control( 'courses_branding_affil', array(
 	    'label'      => __( 'Select Your Affiliated College', 'courses' ),
@@ -86,17 +106,17 @@ function courses_customize_register($wp_customize) {
 	      'hcc' => 'Honolulu Community College',
 			),
 		));
-		// CONTROL: Branding
-		$wp_customize->add_control( 'courses_branding_tint', array(
-	    'label'      => __( 'Select a Tint', 'courses' ),
-	    'section'    => 'courses_branding',
-	    'settings'   => 'courses_branding_tint',
-	    'type'       => 'radio',
-	    'choices'    => array(
-	      'dark' => 'Dark',
-				'light' => 'Light',
-			),
-		));
+		// // CONTROL: Branding
+		// $wp_customize->add_control( 'courses_branding_tint', array(
+	 //    'label'      => __( 'Select a Tint', 'courses' ),
+	 //    'section'    => 'courses_branding',
+	 //    'settings'   => 'courses_branding_tint',
+	 //    'type'       => 'radio',
+	 //    'choices'    => array(
+	 //      'dark' => 'Dark',
+		// 		'light' => 'Light',
+		// 	),
+		// ));
 
 	// Enable instant preview results for out-of-box settings
   $wp_customize->get_setting('blogname')->transport='postMessage';
@@ -108,7 +128,13 @@ add_action( 'customize_register', 'courses_customize_register' );
 
 // Biting TwentyEleven: Add Layout options to body class
 function courses_layout_classes( $existing_classes ) {
-	$current_layout = get_theme_mod('courses_layout');
+	$current_ia = get_theme_mod('courses_layout_ia');
+	$current_layout = get_theme_mod('courses_layout_template');
+
+	if('modulesLessons' == $current_ia)
+		$classes[] = 'modules-lessons';
+	elseif('unitsModulesLessons' == $current_ia)
+		$classes[] = 'units-modules-lessons';
 
 	if('singular' == $current_layout)
 		$classes[] = 'single-layout';
@@ -119,7 +145,7 @@ function courses_layout_classes( $existing_classes ) {
 	else
 		$classes[] = 'single-layout';
 
-	$classes = apply_filters( 'courses_layout_classes', $classes, $current_layout );
+	$classes = apply_filters( 'courses_layout_classes', $classes, $current_layout, $current_ia );
 	return array_merge( $existing_classes, $classes );
 }
 add_filter( 'body_class', 'courses_layout_classes' );
