@@ -43,9 +43,9 @@
   wp.customize( 'courses_layout_ia', function( value ) {
     value.bind( function( to ) {
       // Update the combined value storing the two layout values
-      if (!$('#hiddenLayoutSettings').length) {
-        $('body').append("<input type='hidden' id='hiddenLayoutSettings' value='default,default' />");
-      }
+      // if (!$('#hiddenLayoutSettings').length) {
+      //   $('body').append("<input type='hidden' id='hiddenLayoutSettings' value='default,default' />");
+      // }
       var hiddenLayoutSettingsArray = $('#hiddenLayoutSettings').val().split(',');
       hiddenLayoutSettingsArray[0] = to;
       $('#hiddenLayoutSettings').val(hiddenLayoutSettingsArray.join(','));
@@ -60,9 +60,9 @@
   wp.customize( 'courses_layout_template', function( value ) {
     value.bind( function( to ) {
       // Update the combined value storing the two layout values
-      if (!$('#hiddenLayoutSettings').length) {
-        $('body').append("<input type='hidden' id='hiddenLayoutSettings' value='default,default' />");
-      }
+      // if (!$('#hiddenLayoutSettings').length) {
+      //   $('body').append("<input type='hidden' id='hiddenLayoutSettings' value='default,default' />");
+      // }
       var hiddenLayoutSettingsArray = $('#hiddenLayoutSettings').val().split(',');
       hiddenLayoutSettingsArray[1] = to;
       $('#hiddenLayoutSettings').val(hiddenLayoutSettingsArray.join(','));
@@ -75,17 +75,36 @@
 
   // Helper function: modify body classes based on two layout options (info architecture, visual layout)
   function updateLayout(ia, visual) {
-    if (ia=='modulesLessons')
-      $('body').toggleClass('modules-lessons', true).toggleClass('units-modules-lessons', false);
-    else if (ia=='unitsModulesLessons')
-      $('body').toggleClass('modules-lessons', false).toggleClass('units-modules-lessons', true);
 
-    if (visual=='singular')
+    if ((ia=='modulesLessons') && (visual=='singular')) {
+      $('body').toggleClass('modules-lessons', true).toggleClass('units-modules-lessons', false);
       $('body').toggleClass('single-layout', true).toggleClass('nested-layout', false).toggleClass('custom-layout', false);
-    else if (visual=='nested')
+      $('#singularModulesLessons').toggleClass('hidden',false);
+      $('#nestedModulesLessons').toggleClass('hidden',true);
+      $('#unitsModulesLessons').toggleClass('hidden',true);
+      $('body.modules-lessons.single-layout #main ol.modules').equalHeights(); // Makes all the module blocks even heights based on title
+    } else if ((ia=='modulesLessons') && (visual=='nested')) {
+      $('body').toggleClass('modules-lessons', true).toggleClass('units-modules-lessons', false);
       $('body').toggleClass('single-layout', false).toggleClass('nested-layout', true).toggleClass('custom-layout', false);
-    else
+      $('#singularModulesLessons').toggleClass('hidden',true);
+      $('#nestedModulesLessons').toggleClass('hidden',false);
+      $('#unitsModulesLessons').toggleClass('hidden',true);
+    } else if (ia=='unitsModulesLessons') {
+      $('body').toggleClass('modules-lessons', false).toggleClass('units-modules-lessons', true);
       $('body').toggleClass('single-layout', false).toggleClass('nested-layout', false).toggleClass('custom-layout', true);
+      $('#singularModulesLessons').toggleClass('hidden',true);
+      $('#nestedModulesLessons').toggleClass('hidden',true);
+      $('#unitsModulesLessons').toggleClass('hidden',false);
+    }
+    //else if ((ia=='unitsModulesLessons') && )
+    //  $('body').toggleClass('modules-lessons', false).toggleClass('units-modules-lessons', true);
+
+    // if (visual=='singular')
+    //   $('body').toggleClass('single-layout', true).toggleClass('nested-layout', false).toggleClass('custom-layout', false);
+    // else if (visual=='nested')
+    //   $('body').toggleClass('single-layout', false).toggleClass('nested-layout', true).toggleClass('custom-layout', false);
+    // else
+    //   $('body').toggleClass('single-layout', false).toggleClass('nested-layout', false).toggleClass('custom-layout', true);
   }
 
 } )( jQuery )
