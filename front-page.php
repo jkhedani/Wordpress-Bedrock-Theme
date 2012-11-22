@@ -7,6 +7,7 @@
  * @since _s 1.0
  */
 
+global $wp_customize;
 get_header(); ?>
 
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
@@ -16,7 +17,11 @@ get_header(); ?>
 				<?php // DCDC Module List
 
 				// Modules & Lessons with Singular Layout (FSHN)
-				if (get_theme_mod('courses_layout_template') == 'singular' && get_theme_mod('courses_layout_ia') == 'modulesLessons') { 
+				if (($isCurrentLayout = (
+					get_theme_mod('courses_layout_template') == 'singular' &&
+					get_theme_mod('courses_layout_ia') == 'modulesLessons'
+					)) || isset($wp_customize)) {
+
 					$moduleListContent = new WP_Query ( array(
 						'post_type' => 'modules',
 						'order' => 'ASC',
@@ -24,7 +29,8 @@ get_header(); ?>
 					));
 					if ($moduleListContent->have_posts()) {
 						$i = 1;
-						echo '<ol class="modules row-fluid">';
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						echo "<ol id='singularModulesLessons' class='modules row-fluid $isHidden'>";
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							echo '<li class="module span5"><a href="#" title="Go to this module.">';
 							echo 		'<div class="module-count">Module '.$i.'</div>';
@@ -65,9 +71,14 @@ get_header(); ?>
 						echo '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
 						echo '</div>';
 					}
+				}
 
 				// Modules & Lessons with Nested Layout (PEPS)
-				} elseif (get_theme_mod('courses_layout_template') == 'nested' && get_theme_mod('courses_layout_ia') == 'modulesLessons') {
+				if (($isCurrentLayout = (
+					get_theme_mod('courses_layout_template') == 'nested' && 
+					get_theme_mod('courses_layout_ia') == 'modulesLessons'
+					)) || isset($wp_customize)) {
+
 					$moduleListContent = new WP_Query ( array(
 						'post_type' => 'modules',
 						'order' => 'ASC',
@@ -77,7 +88,8 @@ get_header(); ?>
 					
 					if ($moduleListContent->have_posts()) {
 						$i = 1;
-						echo '<ol class="modules row-fluid">';
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						echo "<ol id='nestedModulesLessons' class='modules row-fluid $isHidden'>";
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							echo '<li class="module span10">';
 							echo 	'<div class="module-count">Module '.$i.'</div>';
@@ -105,8 +117,13 @@ get_header(); ?>
 						echo '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
 						echo '</div>';
 					}
+				}
+				
 				// Units, Modules & Lessons (ART)
-				} elseif (get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') {
+				if (($isCurrentLayout = (
+					get_theme_mod('courses_layout_ia') == 'unitsModulesLessons'
+					)) || isset($wp_customize)) {
+
 					$moduleListContent = new WP_Query ( array(
 						'post_type' => 'units',
 						'order' => 'ASC',
@@ -116,7 +133,8 @@ get_header(); ?>
 					p2p_type( 'units_to_modules' )->each_connected( $moduleListContent, array(), 'modules' );
 					if ($moduleListContent->have_posts()) {
 						$i = 1;
-						echo '<ol class="units row-fluid">';
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						echo "<ol id='unitsModulesLessons' class='units row-fluid $isHidden'>";
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							//p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
 							$unitTitle = get_the_title();
@@ -164,44 +182,48 @@ get_header(); ?>
 						echo '</div>';
 					} // endif
 
-				} elseif (get_theme_mod('courses_layout_template') == 'custom') { // Home Page with Custom Layout
-					echo "Custom Option";
+				}
 
-					$moduleListContent = new WP_Query ( array(
-						'post_type' => 'units',
-						'order' => 'ASC',
-						'orderby' => 'menu_order'
-					));
-					p2p_type( 'units_to_modules' )->each_connected( $moduleListContent, array(), 'modules' );
-					if ($moduleListContent->have_posts()) {
-						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
+				// elseif (get_theme_mod('courses_layout_template') == 'custom') { // Home Page with Custom Layout
+				// 	echo "Custom Option";
+
+				// 	$moduleListContent = new WP_Query ( array(
+				// 		'post_type' => 'units',
+				// 		'order' => 'ASC',
+				// 		'orderby' => 'menu_order'
+				// 	));
+				// 	p2p_type( 'units_to_modules' )->each_connected( $moduleListContent, array(), 'modules' );
+				// 	if ($moduleListContent->have_posts()) {
+				// 		while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							
-							p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
-							$unitTitle = get_the_title();
-							echo '<ol class="units"><li>' . $unitTitle;
-							echo '<ol class="modules">';
-								foreach ( $post->modules as $post ) : setup_postdata( $post );
-								$moduleTitle = get_the_title();
-								echo '<li>' . $moduleTitle;
-								echo '<ol class="lessons">';
-								foreach ( $post->lessons as $post ) : setup_postdata( $post );
-								$lessonTitle = get_the_title();
-								echo 				'<li>' . $lessonTitle . '</li>';
-							endforeach; // end Lessons
-							echo 			'</ol>'; // .lesson
-							endforeach; // end Modules
-							echo '</li></ol>'; // .module
-							echo '</li></ol>'; // .unit
-							wp_reset_postdata();
+				// 			p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
+				// 			$unitTitle = get_the_title();
+				// 			echo '<ol class="units"><li>' . $unitTitle;
+				// 			echo '<ol class="modules">';
+				// 				foreach ( $post->modules as $post ) : setup_postdata( $post );
+				// 				$moduleTitle = get_the_title();
+				// 				echo '<li>' . $moduleTitle;
+				// 				echo '<ol class="lessons">';
+				// 				foreach ( $post->lessons as $post ) : setup_postdata( $post );
+				// 				$lessonTitle = get_the_title();
+				// 				echo 				'<li>' . $lessonTitle . '</li>';
+				// 			endforeach; // end Lessons
+				// 			echo 			'</ol>'; // .lesson
+				// 			endforeach; // end Modules
+				// 			echo '</li></ol>'; // .module
+				// 			echo '</li></ol>'; // .unit
+				// 			wp_reset_postdata();
 
-						endwhile;
-						wp_reset_postdata();
-					}
-				} // endif
+				// 		endwhile;
+				// 		wp_reset_postdata();
+				// 	}
+				// } // endif
 				
-
+				// Hidden form element for Customizer
+				if (isset($wp_customize)) {
+					echo '<input type="hidden" id="hiddenLayoutSettings" value="'.get_theme_mod('courses_layout_ia').','.get_theme_mod('courses_layout_template').'"/>';
+				}
 				?>
-
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->
 	</div><!-- .row -->
