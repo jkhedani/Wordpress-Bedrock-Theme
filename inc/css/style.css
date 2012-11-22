@@ -4997,6 +4997,9 @@ ul.link-list li a {
   text-decoration: none;
   color: #222222;
 }
+.hidden {
+  display: none;
+}
 body.modules-lessons.single-layout #main ol.modules {
   margin: 0;
 }
