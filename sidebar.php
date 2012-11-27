@@ -19,6 +19,7 @@
 				<?php echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>'; ?>
 			</div>
 			<div id="alternate-brand"></div>
+			<?php echo '<a class="edit-post-link" href="'.get_edit_post_link().'" title="Edit the '.get_the_title().' module">Edit this module</a>'; ?>
 		</div>
 	<?php } else { ?>
 		<div id="secondary" class="widget-area span4" role="complementary">
