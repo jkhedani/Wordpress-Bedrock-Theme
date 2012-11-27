@@ -17,6 +17,7 @@
 #intro-banner {
 	padding: 25px;
 	background-color: #1B1B1B; color: #FFF;
+	position: relative;
 	#college-branding {
 		min-height: 39px;
 		margin-bottom: 20px;
@@ -33,7 +34,7 @@
 		//&.kcc.light { background-position: 0 5px; border-bottom-color: #000; height: 78px }
 	}
 }
-#no-content {
+.no-content {
 	//height: 200px;
 	padding: 20px 15px;
 	text-align: center;
@@ -49,25 +50,36 @@
 		}
 	}
 }
+a.edit-post-link {
+	min-height: 0;
+	width: 25px;
+	height: 25px;
+	display: none;
+	position: absolute;
+	top: 7px;
+	right: 10px;
+	text-indent: -9999px;
+	background: url('../images/edit-gear.png') no-repeat;
+}
 
 // Course Template Styles: Modules & Lessons
-.hidden { display: none; }
 body.modules-lessons {
 	// FSHN
 	&.single-layout {
 		#main { // Increase specificity
 			ol.modules {
 				margin: 0;
-				li.module { list-style: none; margin-bottom: 20px; background-color: @gray;
+				li.module { list-style: none; margin-bottom: 20px; background-color: @gray; position: relative;
+					a.edit-post-link { display: none; min-height: 0; }
 					a { color: @white; display: block; min-height: 184px; padding: 0 0 10px 0;
-						.module-count { padding: 10px; background-color: @grayDarker; font-size: 13px; }
-						.module-title { font-size: 18px; margin: 10px; line-height: 1.2; display: block; }
-						.module-image { margin: 10px; }
-						.module-content { margin: 10px; }
+						.module-count { padding: 10px 15px; background-color: @grayDarker; }
+						.module-title { font-size: 22px; margin: 10px 15px; line-height: 1.3; display: block; }
+						.module-image { margin: 10px 15px; }
+						.module-content { margin: 10px 15px; }
 					}
 					&:nth-child(3n+1) { margin-left: 0; }
 					&.last { background: none; } // Clear background color for "+ Content" list item
-					#no-content {
+					.no-content {
 						a { background: none; min-height: 0; margin: 20px 0 22px 0; color: @grayDark;
 							&:hover { color: @grayDarker; }
 						}
@@ -82,10 +94,29 @@ body.modules-lessons {
 		#main {
 			ol.modules {
 				margin: 0;
-				li.module { list-style: none; margin: 0 0 20px 0; color: @gray; display: block; min-height: 184px; background-color: @grayLighter;
-					.module-count { padding: 10px 15px; color: @grayLighter; background-color: @grayDarker; }
-					.module-title { font-size: 26px; margin: 10px; }
-					.module-content { margin: 10px; }
+				li.module { list-style: none; margin: 0 0 20px 0; color: @gray; display: block; min-height: 184px; position: relative;
+					.module-count { padding: 10px 15px; color: @grayLighter; background-color: @grayDarker; position: absolute; width: 538px; }
+					.module-image { position: absolute; z-index: -1; background-color: @grayLighter; color: @gray; width: 568px; height: 100%;
+						img { position: absolute; z-index: -1; }
+						.module-image-placeholder { position: absolute; z-index: -1; width: 200px; right: 32px; text-align: center; top: 80px; }
+					}
+					.module-content-wrapper {
+						background: url('../images/bg-transparent-80.png')
+						repeat-y;
+						max-width: 278px;
+						min-height: 122px;
+						margin: 40px 0 0 0;
+						padding: 12px 15px 10px 15px;
+						hr { border-top: none; border-bottom: none; }
+						.module-title { font-size: 22px; line-height: 1.3; margin: 0 0 10px 0; color: #FFF; }
+						.module-content { margin: 10px 0; color: #FFF; }
+					}
+					ol.lessons {
+						margin: 0;
+						li.lesson { list-style: none; position: relative;
+							a.edit-post-link { top: 0; right: 0; }
+						}
+					}
 				}
 			}
 		}
@@ -104,7 +135,7 @@ body.units-modules-lessons {
 		ol.modules {
 			margin: 10px;
 			li.module { list-style: none;
-				#no-content {
+				.no-content {
 					a { background: none; min-height: 0; margin: 0 0 42px 0; color: @grayDark;
 						&:hover { color: @grayDarker; }
 					}

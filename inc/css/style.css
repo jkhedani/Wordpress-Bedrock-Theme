@@ -4942,6 +4942,7 @@ ul.link-list li a {
   padding: 25px;
   background-color: #1B1B1B;
   color: #FFF;
+  position: relative;
 }
 #intro-banner #college-branding {
   min-height: 39px;
@@ -4964,7 +4965,7 @@ ul.link-list li a {
   background-position: 0 -755px;
   height: 78px;
 }
-#no-content {
+.no-content {
   padding: 20px 15px;
   text-align: center;
   border: 6px dashed #CCC;
@@ -4974,17 +4975,17 @@ ul.link-list li a {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-#no-content a {
+.no-content a {
   background: none;
 }
-#no-content a span.large-icon {
+.no-content a span.large-icon {
   display: block;
   clear: both;
   font-size: 120px;
   line-height: 0;
   margin: 35px 0 48px;
 }
-#no-content a.create-new {
+.no-content a.create-new {
   margin: 12px 0;
   color: #333333;
   font-size: 27px;
@@ -4993,12 +4994,20 @@ ul.link-list li a {
   clear: both;
   margin: 0 0 20px 0;
 }
-#no-content a.create-new:hover {
+.no-content a.create-new:hover {
   text-decoration: none;
   color: #222222;
 }
-.hidden {
+a.edit-post-link {
+  min-height: 0;
+  width: 25px;
+  height: 25px;
   display: none;
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  text-indent: -9999px;
+  background: url('../images/edit-gear.png') no-repeat;
 }
 body.modules-lessons.single-layout #main ol.modules {
   margin: 0;
@@ -5007,6 +5016,11 @@ body.modules-lessons.single-layout #main ol.modules li.module {
   list-style: none;
   margin-bottom: 20px;
   background-color: #555555;
+  position: relative;
+}
+body.modules-lessons.single-layout #main ol.modules li.module a.edit-post-link {
+  display: none;
+  min-height: 0;
 }
 body.modules-lessons.single-layout #main ol.modules li.module a {
   color: #ffffff;
@@ -5015,21 +5029,20 @@ body.modules-lessons.single-layout #main ol.modules li.module a {
   padding: 0 0 10px 0;
 }
 body.modules-lessons.single-layout #main ol.modules li.module a .module-count {
-  padding: 10px;
+  padding: 10px 15px;
   background-color: #222222;
-  font-size: 13px;
 }
 body.modules-lessons.single-layout #main ol.modules li.module a .module-title {
-  font-size: 18px;
-  margin: 10px;
-  line-height: 1.2;
+  font-size: 22px;
+  margin: 10px 15px;
+  line-height: 1.3;
   display: block;
 }
 body.modules-lessons.single-layout #main ol.modules li.module a .module-image {
-  margin: 10px;
+  margin: 10px 15px;
 }
 body.modules-lessons.single-layout #main ol.modules li.module a .module-content {
-  margin: 10px;
+  margin: 10px 15px;
 }
 body.modules-lessons.single-layout #main ol.modules li.module:nth-child(3n+1) {
   margin-left: 0;
@@ -5037,13 +5050,13 @@ body.modules-lessons.single-layout #main ol.modules li.module:nth-child(3n+1) {
 body.modules-lessons.single-layout #main ol.modules li.module.last {
   background: none;
 }
-body.modules-lessons.single-layout #main ol.modules li.module #no-content a {
+body.modules-lessons.single-layout #main ol.modules li.module .no-content a {
   background: none;
   min-height: 0;
   margin: 20px 0 22px 0;
   color: #333333;
 }
-body.modules-lessons.single-layout #main ol.modules li.module #no-content a:hover {
+body.modules-lessons.single-layout #main ol.modules li.module .no-content a:hover {
   color: #222222;
 }
 body.modules-lessons.nested-layout #main ol.modules {
@@ -5055,19 +5068,66 @@ body.modules-lessons.nested-layout #main ol.modules li.module {
   color: #555555;
   display: block;
   min-height: 184px;
-  background-color: #eeeeee;
+  position: relative;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-count {
   padding: 10px 15px;
   color: #eeeeee;
   background-color: #222222;
+  position: absolute;
+  width: 538px;
 }
-body.modules-lessons.nested-layout #main ol.modules li.module .module-title {
-  font-size: 26px;
-  margin: 10px;
+body.modules-lessons.nested-layout #main ol.modules li.module .module-image {
+  position: absolute;
+  z-index: -1;
+  background-color: #eeeeee;
+  color: #555555;
+  width: 568px;
+  height: 100%;
 }
-body.modules-lessons.nested-layout #main ol.modules li.module .module-content {
-  margin: 10px;
+body.modules-lessons.nested-layout #main ol.modules li.module .module-image img {
+  position: absolute;
+  z-index: -1;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-image .module-image-placeholder {
+  position: absolute;
+  z-index: -1;
+  width: 200px;
+  right: 32px;
+  text-align: center;
+  top: 80px;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper {
+  background: url('../images/bg-transparent-80.png') repeat-y;
+  max-width: 278px;
+  min-height: 122px;
+  margin: 40px 0 0 0;
+  padding: 12px 15px 10px 15px;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper hr {
+  border-top: none;
+  border-bottom: none;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper .module-title {
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0 0 10px 0;
+  color: #FFF;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper .module-content {
+  margin: 10px 0;
+  color: #FFF;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons {
+  margin: 0;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons li.lesson {
+  list-style: none;
+  position: relative;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons li.lesson a.edit-post-link {
+  top: 0;
+  right: 0;
 }
 body.units-modules-lessons #main ol.units {
   margin: 0;
@@ -5096,13 +5156,13 @@ body.units-modules-lessons #main ol.modules {
 body.units-modules-lessons #main ol.modules li.module {
   list-style: none;
 }
-body.units-modules-lessons #main ol.modules li.module #no-content a {
+body.units-modules-lessons #main ol.modules li.module .no-content a {
   background: none;
   min-height: 0;
   margin: 0 0 42px 0;
   color: #333333;
 }
-body.units-modules-lessons #main ol.modules li.module #no-content a:hover {
+body.units-modules-lessons #main ol.modules li.module .no-content a:hover {
   color: #222222;
 }
 body.units-modules-lessons #main ol.modules li.module a {
