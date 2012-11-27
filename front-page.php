@@ -28,12 +28,12 @@ get_header(); ?>
 						'orderby' => 'menu_order'
 					));
 					if ($moduleListContent->have_posts()) {
-						$i = 1;
-						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						$moduleCounter = 1;
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<ol id='singularModulesLessons' class='modules row-fluid $isHidden'>";
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
-							echo '<li class="module span5"><a href="#" title="Go to this module.">';
-							echo 		'<div class="module-count">Module '.$i.'</div>';
+							echo '<li class="module span5"><a href="'.get_permalink().'" title="Go to this module.">';
+							echo 		'<div class="module-count">Module '.$moduleCounter.'</div>';
 							echo 		'<h2 class="module-title">'.get_the_title().'</h2>';
 							echo 		'<div class="module-image">';
 							if (get_the_post_thumbnail()) {
@@ -49,13 +49,16 @@ get_header(); ?>
 							echo 		'<p>You don&#39;t have a module blurb yet.</p>';
 							} // endif
 							echo 		'</div>';
-							echo '</a></li>'; //.unit
-							$i++;
+							if (is_user_logged_in()) {
+								echo '<a class="edit-post-link" href="'.get_edit_post_link().'" title="Edit the '.get_the_title().' module">Edit this module</a>';
+							}
+							echo '</a></li>'; //.module
+							$moduleCounter++;
 						endwhile;
 						// Add more content item if logged in
 						if (is_user_logged_in()) {
 						echo 	 '<li class="module span5 last">';
-						echo 	 	 '<div id="no-content">';
+						echo 	 	 '<div class="no-content">';
 						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><a href="';
 						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 						echo 	 	 '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
@@ -65,7 +68,8 @@ get_header(); ?>
 						echo '</ol>'; // .modules
 						wp_reset_postdata();
 					} else { // If no required posts for this template exists...
-						echo '<div class="span5" id="no-content">';
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
+						echo "<div id='singularModulesLessons' class='span5 no-content $isHidden'>";
 						echo '<p>It seems you don&#39;t have any Modules published.</p><a href="';
 						echo 	admin_url( 'post-new.php?post_type=modules' );
 						echo '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
@@ -87,31 +91,63 @@ get_header(); ?>
 					p2p_type( 'modules_to_lessons' )->each_connected( $moduleListContent, array(), 'lessons' );
 					
 					if ($moduleListContent->have_posts()) {
-						$i = 1;
-						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						$moduleCounter = 1;
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<ol id='nestedModulesLessons' class='modules row-fluid $isHidden'>";
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							echo '<li class="module span10">';
-							echo 	'<div class="module-count">Module '.$i.'</div>';
+							echo 		'<div class="module-image">';
+							if (get_the_post_thumbnail()) {
+							echo 			get_the_post_thumbnail();
+							} else {
+							echo 			'<div class="module-image-placeholder">This image will be a full background image. Minimum dimensions: 568x288</div>';
+							}
+							echo 		'</div>';
+							echo 	'<div class="module-count">Module '.$moduleCounter.'</div>';
+							echo 	'<div class="module-content-wrapper">';
 							echo 	'<h2 class="module-title">'.get_the_title().'</h2>';
-							echo 	'<div class="module-image">'.get_the_post_thumbnail().'</div>';
-							echo 	'<div class="module-content">' . get_the_content() . '<hr />';
+							echo 	'<div class="module-content">';
+							if (get_the_content()) {
+								echo 		'<p>'.get_the_content().'</p>';
+							} else {
+								echo 		'<p>You don&#39;t have a module blurb yet.</p>';
+							}
+							echo 	'<hr />';
 								if ($post->lessons) {
+									echo '<ol class="lessons">';
 									foreach ( $post->lessons as $post ) : setup_postdata( $post );
-										the_title();
+									echo 	'<li class="lesson">';
+									echo 		'<a href="'.get_permalink().'" title="Go to the '.get_the_title().' lesson">' . get_the_title() . '</a>';
+									echo 		'<a class="edit-post-link" href="'.get_edit_post_link().'" title="Edit the '.get_the_title().' module">Edit this lesson</a>';
+									echo 	'</li>';
 									endforeach;
+									echo '</ol>'; // end lessons
 								} else { // If there are no lessons
 									echo '<p><a href="'.admin_url( 'post-new.php?post_type=lessons' ).'" title="Create a lesson in this module.">Create</a> or ';
 									echo '<a href="'.admin_url('edit.php?post_type=lessons').'" title="Attach a lesson to this module.">attach</a> a lesson.</p>';
 								}
 							echo '</div>'; // .module-content 
+							echo '</div>'; // .module-content-wrapper
+							if (is_user_logged_in()) {
+								echo '<a class="edit-post-link" href="'.get_edit_post_link().'" title="Edit the '.get_the_title().' module">Edit this module</a>';
+							}
 							echo '</li>'; // .module
-							$i++;
+							$moduleCounter++;
 						endwhile;
+						if (is_user_logged_in()) {
+						echo 	 '<li class="module span10 last">';
+						echo 	 	 '<div class="no-content">';
+						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><a href="';
+						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
+						echo 	 	 '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
+						echo 	 	 '</div>';
+						echo 	 '</li>';
+						}
 						echo '</ol>'; // .modules
 						wp_reset_postdata();
 					} else { // If no required posts for this template exists...
-						echo '<div class="span10" id="no-content">';
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
+						echo "<div id='nestedModulesLessons' class='span10 no-content $isHidden'>";
 						echo '<p>It seems you don&#39;t have any Modules published.</p><a href="';
 						echo 	admin_url( 'post-new.php?post_type=modules' );
 						echo '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
@@ -132,29 +168,30 @@ get_header(); ?>
 
 					p2p_type( 'units_to_modules' )->each_connected( $moduleListContent, array(), 'modules' );
 					if ($moduleListContent->have_posts()) {
-						$i = 1;
-						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						$unitCounter = 1;
+						$moduleCounter = 1;
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<ol id='unitsModulesLessons' class='units row-fluid $isHidden'>";
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							//p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
 							$unitTitle = get_the_title();
 							echo '<li class="unit span15">';
-							echo 	'<div class="unit-count">Unit '.$i.'</div>';
+							echo 	'<div class="unit-count">Unit '.$unitCounter.'</div>';
 							echo 	'<h2 class="unit-title">'.get_the_title().'</h2>';
 								if ($post->modules) {
 									echo '<ol class="modules">';
 									foreach ( $post->modules as $post ) : setup_postdata( $post );
 										echo '<li class="module span5"><a href="'.get_permalink().'" title="Go to this module.">';
-										echo 	'<div class="module-count">Module '.$i.'</div>';
+										echo 	'<div class="module-count">Module '.$moduleCounter.'</div>';
 										echo 	'<h2 class="module-title">'.get_the_title().'</h2>';
 										echo 	'<div class="module-image">'.get_the_post_thumbnail().'</div>';
 										echo '</a></li>';
-										$i++;
+										$moduleCounter++;
 									endforeach; // end Modules
 									
 									// Add more content item
 									echo '<li class="module span5">';
-									echo 	'<div class="" id="no-content">';
+									echo 	'<div class="no-content">';
 									echo 	'<a href="';
 									echo 		admin_url( 'post-new.php?post_type=modules' );
 									echo 	'" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
@@ -162,7 +199,7 @@ get_header(); ?>
 									echo '</li>';
 									echo '</ol>'; // .module
 								} else { // If no modules exist...
-									echo '<div class="span5" id="no-content">';
+									echo '<div class="span5 no-content">';
 									echo '<p>It seems you don&#39;t have any Modules published.</p><a href="';
 									echo 	admin_url( 'post-new.php?post_type=modules' );
 									echo '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
@@ -170,12 +207,14 @@ get_header(); ?>
 								}
 							echo '</li>'; // .unit
 							wp_reset_postdata();
+							$unitCounter++;
 						endwhile;
 						echo '</ol>'; // .units
 						wp_reset_postdata();
 					
 					} else { // If no required posts for this template exists...
-						echo '<div class="span15" id="no-content">';
+						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
+						echo "<div id='unitsModulesLessons' class='no-content span15 $isHidden'>";
 						echo 	'<p>It seems you don&#39;t have any Units published.</p><a href="';
 						echo 	admin_url( 'post-new.php?post_type=units' );
 						echo 	'" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Unit</span></a>';
