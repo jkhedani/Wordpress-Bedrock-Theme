@@ -79,22 +79,22 @@
     if ((ia=='modulesLessons') && (visual=='singular')) {
       $('body').toggleClass('modules-lessons', true).toggleClass('units-modules-lessons', false);
       $('body').toggleClass('single-layout', true).toggleClass('nested-layout', false).toggleClass('custom-layout', false);
-      $('#singularModulesLessons').toggleClass('hidden',false);
-      $('#nestedModulesLessons').toggleClass('hidden',true);
-      $('#unitsModulesLessons').toggleClass('hidden',true);
-      $('body.modules-lessons.single-layout #main ol.modules').equalHeights(); // Makes all the module blocks even heights based on title
+      $('#singularModulesLessons').toggleClass('hide',false);
+      $('#nestedModulesLessons').toggleClass('hide',true);
+      $('#unitsModulesLessons').toggleClass('hide',true);
+      $('body.modules-lessons.single-layout #main ol#singularModulesLessons').equalHeights(); // Makes all the module blocks even heights based on title
     } else if ((ia=='modulesLessons') && (visual=='nested')) {
       $('body').toggleClass('modules-lessons', true).toggleClass('units-modules-lessons', false);
       $('body').toggleClass('single-layout', false).toggleClass('nested-layout', true).toggleClass('custom-layout', false);
-      $('#singularModulesLessons').toggleClass('hidden',true);
-      $('#nestedModulesLessons').toggleClass('hidden',false);
-      $('#unitsModulesLessons').toggleClass('hidden',true);
+      $('#singularModulesLessons').toggleClass('hide',true);
+      $('#nestedModulesLessons').toggleClass('hide',false);
+      $('#unitsModulesLessons').toggleClass('hide',true);
     } else if (ia=='unitsModulesLessons') {
       $('body').toggleClass('modules-lessons', false).toggleClass('units-modules-lessons', true);
       $('body').toggleClass('single-layout', false).toggleClass('nested-layout', false).toggleClass('custom-layout', true);
-      $('#singularModulesLessons').toggleClass('hidden',true);
-      $('#nestedModulesLessons').toggleClass('hidden',true);
-      $('#unitsModulesLessons').toggleClass('hidden',false);
+      $('#singularModulesLessons').toggleClass('hide',true);
+      $('#nestedModulesLessons').toggleClass('hide',true);
+      $('#unitsModulesLessons').toggleClass('hide',false);
     }
     //else if ((ia=='unitsModulesLessons') && )
     //  $('body').toggleClass('modules-lessons', false).toggleClass('units-modules-lessons', true);
