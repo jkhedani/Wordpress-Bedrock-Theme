@@ -187,7 +187,7 @@ add_action ('admin_menu', 'themedemo_admin');
 
 // Enqueue instant preview javascript
 function twentyeleven_customize_preview_js() {
-  wp_enqueue_script( 'courses-customizer', get_template_directory_uri() . '/inc/theme-options/theme-instant-preview-options.js', array( 'customize-preview' ), '20121126', true );
+  wp_enqueue_script( 'courses-customizer', get_template_directory_uri() . '/inc/theme-options/theme-instant-preview-options.js', array( 'customize-preview' ), '20121204', true );
 }
 add_action( 'customize_preview_init', 'twentyeleven_customize_preview_js' );
 
