@@ -31,6 +31,24 @@ get_header(); ?>
 						$moduleCounter = 1;
 						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<ol id='singularModulesLessons' class='modules row-fluid $isHidden'>";
+
+						// Banner Module
+						echo '<li class="module span5 first">';
+						echo  '<div id="inline-intro-banner" class="intro-banner span4" role="complementary">';
+						echo 	'<div class="college-branding '.get_theme_mod('courses_branding_college_affil', 'default_value') .'"></div>';
+						echo '<div id="intro-banner-content">';
+						echo '<span class="welcome">Welcome To</span>';
+						echo '<h1>'.get_bloginfo('name').'</h1>';
+						//echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>';
+						//echo '<img src="http://placehold.it/250x275" alt="placeholder" />';
+						echo '</div>';
+						echo '<div id="alternate-brand"></div>';
+						if (is_user_logged_in())
+							echo '<a class="edit-post-link" href="'.site_url().'/wp-admin/customize.php" title="Edit the '.get_the_title().' module">Edit this module</a>';
+						echo '</div>';
+						echo '</li>';
+
+
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
 							echo '<li class="module span5"><a href="'.get_permalink().'" title="Go to this module.">';
 							echo 		'<div class="module-count">Module '.$moduleCounter.'</div>';
@@ -44,7 +62,7 @@ get_header(); ?>
 							echo 		'</div>';
 							echo 		'<div class="module-content">';
 							if (get_the_content()) {
-							echo 		'<p>'.get_the_content().'</p>';
+							echo 		'<p>'.get_the_content('', true).'</p>';
 							} else {
 							echo 		'<p>You don&#39;t have a module blurb yet.</p>';
 							} // endif
@@ -108,7 +126,7 @@ get_header(); ?>
 							echo 	'<h2 class="module-title">'.get_the_title().'</h2>';
 							echo 	'<div class="module-content">';
 							if (get_the_content()) {
-								echo 		'<p>'.get_the_content().'</p>';
+								echo 		'<p>'.get_the_content('', true).'</p>';
 							} else {
 								echo 		'<p>You don&#39;t have a module blurb yet.</p>';
 							}
@@ -176,27 +194,42 @@ get_header(); ?>
 							//p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
 							$unitTitle = get_the_title();
 							echo '<li class="unit span15">';
-							echo 	'<div class="unit-count">Unit '.$unitCounter.'</div>';
-							echo 	'<h2 class="unit-title">'.get_the_title().'</h2>';
+							echo 	'<div class="unit-title-wrapper">';
+							echo 		'<div class="unit-count">Unit '.$unitCounter.'</div>';
+							echo 		'<h2 class="unit-title">'.get_the_title().'</h2>';
+							echo 	'</div>';
 								if ($post->modules) {
 									echo '<ol class="modules">';
 									foreach ( $post->modules as $post ) : setup_postdata( $post );
 										echo '<li class="module span5"><a href="'.get_permalink().'" title="Go to this module.">';
-										echo 	'<div class="module-count">Module '.$moduleCounter.'</div>';
-										echo 	'<h2 class="module-title">'.get_the_title().'</h2>';
-										echo 	'<div class="module-image">'.get_the_post_thumbnail().'</div>';
+										echo 		'<div class="module-title-wrapper">';
+										echo 			'<div class="module-count">Module '.$moduleCounter.'</div>';
+										echo 			'<h2 class="module-title">'.get_the_title().'</h2>';
+										echo 		'</div>';
+										echo 		'<div class="module-image">';
+										if (get_the_post_thumbnail()) {
+										echo 			get_the_post_thumbnail();
+										} else {
+										echo 			'<div class="module-image-placeholder">This image will be a full background image. Minimum dimensions: 568x288</div>';
+										}
+										echo 		'</div>';
+										if (is_user_logged_in()) {
+											echo '<a class="edit-post-link" href="'.get_edit_post_link().'" title="Edit the '.get_the_title().' module">Edit this module</a>';
+										}
 										echo '</a></li>';
 										$moduleCounter++;
 									endforeach; // end Modules
 									
 									// Add more content item
-									echo '<li class="module span5">';
-									echo 	'<div class="no-content">';
-									echo 	'<a href="';
-									echo 		admin_url( 'post-new.php?post_type=modules' );
-									echo 	'" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
-									echo 	'</div>';
-									echo '</li>';
+									if (is_user_logged_in()) {
+									echo 	 '<li class="module span5 last">';
+									echo 	 	 '<div class="no-content">';
+									echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><a href="';
+									echo 	 	 admin_url( 'post-new.php?post_type=modules' );
+									echo 	 	 '" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Module</span></a>';
+									echo 	 	 '</div>';
+									echo 	 '</li>';
+									}
 									echo '</ol>'; // .module
 								} else { // If no modules exist...
 									echo '<div class="span5 no-content">';
@@ -209,6 +242,15 @@ get_header(); ?>
 							wp_reset_postdata();
 							$unitCounter++;
 						endwhile;
+						if (is_user_logged_in()) {
+							echo '<li class="unit span15 last">';
+							echo "<div id='unitsModulesLessons' class='no-content span15 $isHidden'>";
+							echo 	'<p>It seems you don&#39;t have any Units published.</p><a href="';
+							echo 	admin_url( 'post-new.php?post_type=units' );
+							echo 	'" title="Go to admin and create a module." class="create-new"><span class="large-icon">+</span><span>Create a new Unit</span></a>';
+							echo '</div>';
+							echo '</li>';
+						}
 						echo '</ol>'; // .units
 						wp_reset_postdata();
 					
@@ -223,41 +265,6 @@ get_header(); ?>
 
 				}
 
-				// elseif (get_theme_mod('courses_layout_template') == 'custom') { // Home Page with Custom Layout
-				// 	echo "Custom Option";
-
-				// 	$moduleListContent = new WP_Query ( array(
-				// 		'post_type' => 'units',
-				// 		'order' => 'ASC',
-				// 		'orderby' => 'menu_order'
-				// 	));
-				// 	p2p_type( 'units_to_modules' )->each_connected( $moduleListContent, array(), 'modules' );
-				// 	if ($moduleListContent->have_posts()) {
-				// 		while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
-							
-				// 			p2p_type( 'modules_to_lessons' )->each_connected( $post->modules, array(), 'lessons' );
-				// 			$unitTitle = get_the_title();
-				// 			echo '<ol class="units"><li>' . $unitTitle;
-				// 			echo '<ol class="modules">';
-				// 				foreach ( $post->modules as $post ) : setup_postdata( $post );
-				// 				$moduleTitle = get_the_title();
-				// 				echo '<li>' . $moduleTitle;
-				// 				echo '<ol class="lessons">';
-				// 				foreach ( $post->lessons as $post ) : setup_postdata( $post );
-				// 				$lessonTitle = get_the_title();
-				// 				echo 				'<li>' . $lessonTitle . '</li>';
-				// 			endforeach; // end Lessons
-				// 			echo 			'</ol>'; // .lesson
-				// 			endforeach; // end Modules
-				// 			echo '</li></ol>'; // .module
-				// 			echo '</li></ol>'; // .unit
-				// 			wp_reset_postdata();
-
-				// 		endwhile;
-				// 		wp_reset_postdata();
-				// 	}
-				// } // endif
-				
 				// Hidden form element for Customizer
 				if (isset($wp_customize)) {
 					echo '<input type="hidden" id="hiddenLayoutSettings" value="'.get_theme_mod('courses_layout_ia').','.get_theme_mod('courses_layout_template').'"/>';
