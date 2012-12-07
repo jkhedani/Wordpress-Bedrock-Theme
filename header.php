@@ -46,7 +46,7 @@
   // logged in but not in the theme customizer previewer
   global $wp_customize;
   if(is_user_logged_in() && ! isset( $wp_customize ))
-    echo '<style type="text/css"> #navbar { margin-top: 28px; } </style>';
+    echo '<style type="text/css"> #navbar { margin-top: 28px; } @media (max-width: 979px) { #navbar {margin-top: 0px;} } </style>';
 ?>
 
 </head>
