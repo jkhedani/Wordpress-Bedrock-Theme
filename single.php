@@ -9,16 +9,16 @@
 get_header(); ?>
 
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
-		<div id="primary" class="content-area span8">
+		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php _s_content_nav( 'nav-above' ); ?>
+				<?php //_s_content_nav( 'nav-above' ); ?>
 
 				<?php get_template_part( 'content', 'single' ); ?>
 
-				<?php _s_content_nav( 'nav-below' ); ?>
+				<?php //_s_content_nav( 'nav-below' ); ?>
 
 				<?php
 					// If comments are open or we have at least one comment, load up the comment template
