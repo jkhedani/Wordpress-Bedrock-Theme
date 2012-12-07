@@ -5093,6 +5093,9 @@ h1.site-title a:visited {
   }
 }
 @media (min-width: 1200px) {
+  #content {
+    padding: 0 50px 0 0;
+  }
   body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
     display: none;
   }
