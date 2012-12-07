@@ -4935,37 +4935,51 @@ ul.link-list li a {
     padding-top: 60px;
   }
 }
+h1.site-title a:visited {
+  color: #0088cc;
+}
 #main {
   min-height: 600px;
 }
-#intro-banner {
+#main .intro-banner {
   padding: 25px;
   background-color: #1B1B1B;
   color: #FFF;
   position: relative;
 }
-#intro-banner #college-branding {
+#main .intro-banner .college-branding {
   min-height: 39px;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #FFF;
   background: url('../images/college-logos.png') no-repeat;
 }
-#intro-banner #college-branding.system {
+#main .intro-banner .college-branding.system {
   background-position: 0 -521px;
 }
-#intro-banner #college-branding.manoa {
+#main .intro-banner .college-branding.manoa {
   background-position: 0 -423px;
 }
-#intro-banner #college-branding.hcc {
+#main .intro-banner .college-branding.hcc {
   background-position: 0 -620px;
   height: 78px;
 }
-#intro-banner #college-branding.kcc {
+#main .intro-banner .college-branding.kcc {
   background-position: 0 -755px;
   height: 78px;
 }
-.no-content {
+#main .intro-banner .welcome {
+  font-size: 25px;
+}
+#main .intro-banner h1 {
+  font-size: 56px;
+  font-weight: bold;
+  margin: 10px 0 19px 0;
+}
+#main .intro-banner img {
+  margin: 10px 0 0 0;
+}
+#main .no-content {
   padding: 20px 15px;
   text-align: center;
   border: 6px dashed #CCC;
@@ -4975,17 +4989,17 @@ ul.link-list li a {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-.no-content a {
+#main .no-content a {
   background: none;
 }
-.no-content a span.large-icon {
+#main .no-content a span.large-icon {
   display: block;
   clear: both;
   font-size: 120px;
   line-height: 0;
   margin: 35px 0 48px;
 }
-.no-content a.create-new {
+#main .no-content a.create-new {
   margin: 12px 0;
   color: #333333;
   font-size: 27px;
@@ -4994,11 +5008,11 @@ ul.link-list li a {
   clear: both;
   margin: 0 0 20px 0;
 }
-.no-content a.create-new:hover {
+#main .no-content a.create-new:hover {
   text-decoration: none;
   color: #222222;
 }
-a.edit-post-link {
+#main a.edit-post-link {
   min-height: 0;
   width: 25px;
   height: 25px;
@@ -5008,6 +5022,83 @@ a.edit-post-link {
   right: 10px;
   text-indent: -9999px;
   background: url('../images/edit-gear.png') no-repeat;
+}
+@media (max-width: 320px) {
+  
+}
+@media (max-width: 480px) {
+  body.modules-lessons.single-layout #intro-banner {
+    display: none;
+  }
+  body.modules-lessons.single-layout #inline-intro-banner {
+    width: 100%;
+    height: 100%;
+  }
+  body.modules-lessons.single-layout #primary {
+    width: 100%;
+    margin: 0;
+  }
+  body.modules-lessons.single-layout ol.modules li.module {
+    width: 100%;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  body.modules-lessons.single-layout #intro-banner {
+    display: none;
+  }
+  body.modules-lessons.single-layout #inline-intro-banner {
+    width: 100%;
+    height: 100%;
+  }
+  body.modules-lessons.single-layout #primary {
+    width: 100%;
+    margin: 0;
+  }
+  body.modules-lessons.single-layout ol.modules li.module {
+    width: 47%;
+    float: left;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(2n+2) {
+    margin-left: 15px;
+  }
+}
+@media (max-width: 979px) and (min-width: 768px) {
+  body.modules-lessons.single-layout #intro-banner {
+    display: none;
+  }
+  body.modules-lessons.single-layout #inline-intro-banner {
+    width: 100%;
+    height: 100%;
+  }
+  body.modules-lessons.single-layout #primary {
+    width: 100%;
+    margin: 0;
+  }
+  #main .intro-banner h1 {
+    font-size: 45px;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+1) {
+    margin-left: 0;
+  }
+}
+@media (max-width: 1200px) and (min-width: 979px) {
+  #main .intro-banner h1 {
+    font-size: 48px;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
+    display: none;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
+    margin-left: 0;
+  }
+}
+@media (min-width: 1200px) {
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
+    display: none;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
+    margin-left: 0;
+  }
 }
 body.modules-lessons.single-layout #main ol.modules {
   margin: 0;
@@ -5022,30 +5113,31 @@ body.modules-lessons.single-layout #main ol.modules li.module a.edit-post-link {
   display: none;
   min-height: 0;
 }
-body.modules-lessons.single-layout #main ol.modules li.module a {
+body.modules-lessons.single-layout #main ol.modules li.module > a {
   color: #ffffff;
   display: block;
   min-height: 184px;
   padding: 0 0 10px 0;
 }
-body.modules-lessons.single-layout #main ol.modules li.module a .module-count {
+body.modules-lessons.single-layout #main ol.modules li.module > a:hover {
+  text-decoration: none;
+}
+body.modules-lessons.single-layout #main ol.modules li.module > a .module-count {
   padding: 10px 15px;
   background-color: #222222;
 }
-body.modules-lessons.single-layout #main ol.modules li.module a .module-title {
+body.modules-lessons.single-layout #main ol.modules li.module > a .module-title {
   font-size: 22px;
   margin: 10px 15px;
   line-height: 1.3;
   display: block;
 }
-body.modules-lessons.single-layout #main ol.modules li.module a .module-image {
+body.modules-lessons.single-layout #main ol.modules li.module > a .module-image {
   margin: 10px 15px;
+  max-height: 128px;
 }
-body.modules-lessons.single-layout #main ol.modules li.module a .module-content {
+body.modules-lessons.single-layout #main ol.modules li.module > a .module-content {
   margin: 10px 15px;
-}
-body.modules-lessons.single-layout #main ol.modules li.module:nth-child(3n+1) {
-  margin-left: 0;
 }
 body.modules-lessons.single-layout #main ol.modules li.module.last {
   background: none;
@@ -5069,6 +5161,7 @@ body.modules-lessons.nested-layout #main ol.modules li.module {
   display: block;
   min-height: 184px;
   position: relative;
+  padding: 0 0 10px 0;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-count {
   padding: 10px 15px;
@@ -5093,9 +5186,12 @@ body.modules-lessons.nested-layout #main ol.modules li.module .module-image .mod
   position: absolute;
   z-index: -1;
   width: 200px;
+  height: 98px;
   right: 32px;
+  top: 62px;
   text-align: center;
-  top: 80px;
+  background: url('../images/image-icon.png') center -5px no-repeat;
+  padding: 18px 0 0 0;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper {
   background: url('../images/bg-transparent-80.png') repeat-y;
@@ -5115,7 +5211,7 @@ body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wr
   color: #FFF;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper .module-content {
-  margin: 10px 0;
+  margin: 10px 0 0;
   color: #FFF;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons {
@@ -5141,46 +5237,86 @@ body.units-modules-lessons #main ol.units li.unit {
   background-color: #eeeeee;
   padding-bottom: 10px;
 }
-body.units-modules-lessons #main ol.units li.unit .unit-count {
+body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper {
   padding: 10px 15px;
   color: #eeeeee;
   background-color: #222222;
+  overflow: hidden;
 }
-body.units-modules-lessons #main ol.units li.unit .unit-title {
-  font-size: 26px;
-  margin: 10px;
+body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper .unit-count {
+  float: left;
+  margin: 0 10px 0 0;
+}
+body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper .unit-title {
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0px;
+  float: left;
+  clear: none;
+}
+body.units-modules-lessons #main ol.units li.unit.last {
+  background: none;
 }
 body.units-modules-lessons #main ol.modules {
   margin: 10px;
 }
 body.units-modules-lessons #main ol.modules li.module {
   list-style: none;
+  margin-bottom: 20px;
+  background-color: #555555;
+  position: relative;
+  min-height: 250px;
 }
-body.units-modules-lessons #main ol.modules li.module .no-content a {
-  background: none;
+body.units-modules-lessons #main ol.modules li.module a.edit-post-link {
+  display: none;
   min-height: 0;
-  margin: 0 0 42px 0;
-  color: #333333;
-}
-body.units-modules-lessons #main ol.modules li.module .no-content a:hover {
-  color: #222222;
+  z-index: 3;
 }
 body.units-modules-lessons #main ol.modules li.module a {
   color: #ffffff;
   display: block;
   min-height: 184px;
-  background-color: #555555;
+  padding: 0 0 10px 0;
 }
-body.units-modules-lessons #main ol.modules li.module a .module-count {
-  padding: 10px;
-  background-color: #222222;
+body.units-modules-lessons #main ol.modules li.module a:hover {
+  text-decoration: none;
 }
-body.units-modules-lessons #main ol.modules li.module a .module-title {
-  font-size: 26px;
-  margin: 10px;
+body.units-modules-lessons #main ol.modules li.module a .module-title-wrapper {
+  position: absolute;
+  z-index: 2;
+  width: 240px;
+  padding: 10px 15px;
+  background: url('../images/bg-transparent-80.png') repeat-y;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-title-wrapper .module-title {
+  font-size: 22px;
+  line-height: 1.3;
+  display: block;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-image .module-image-placeholder {
+  position: absolute;
+  background: url('../images/image-icon.png') center 45px no-repeat;
+  height: 100%;
+  padding: 170px 15px 0;
+  text-align: center;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-content {
+  margin: 10px 15px;
 }
 body.units-modules-lessons #main ol.modules li.module:nth-child(3n+1) {
   margin-left: 0;
+}
+body.units-modules-lessons #main ol.modules li.module.last {
+  background: none;
+}
+body.units-modules-lessons #main ol.modules li.module .no-content a {
+  background: none;
+  min-height: 0;
+  margin: 20px 0 22px 0;
+  color: #333333;
+}
+body.units-modules-lessons #main ol.modules li.module .no-content a:hover {
+  color: #222222;
 }
 @media (max-width: 979px) and (min-width: 768px) {
   .container {
