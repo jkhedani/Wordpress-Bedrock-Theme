@@ -32,4 +32,7 @@ get_header(); ?>
 		</div><!-- #primary .content-area -->
 		<?php get_sidebar(); ?>
 	</div><!-- .row-fluid -->
+
+	<?php dcdc_get_pager(); ?>
+
 <?php get_footer(); ?>

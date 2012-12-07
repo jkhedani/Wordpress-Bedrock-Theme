@@ -173,3 +173,50 @@ function _s_category_transient_flusher() {
 }
 add_action( 'edit_category', '_s_category_transient_flusher' );
 add_action( 'save_post', '_s_category_transient_flusher' );
+
+
+if ( ! function_exists( 'dcdc_get_pager') ) :
+/**
+ * Prints an HTML pager based on p2p connections.
+ */
+function dcdc_get_pager() {
+	global $wp_query, $post;
+	$currentPageID = $post->ID;
+	if((get_post_type() == 'lessons')) {
+		$p2pConnectedParent = new WP_Query ( array(
+			'connected_type' => 'modules_to_lessons',
+			'connected_items' => get_queried_object_id(),
+			'nopaging' => true,
+		));
+		if ($p2pConnectedParent->have_posts()) {
+			while($p2pConnectedParent->have_posts()) : $p2pConnectedParent->the_post();
+				echo 'Parent: <a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+				$p2pConnectedParentsChildren = new WP_Query( array(
+					'connected_type' => 'modules_to_lessons',
+					'connected_items' => $post->ID,
+					'nopaging' => true,
+				));
+				if($getConnectedToParent->have_posts()) {
+					echo '<ol class="pager">';
+					
+					$lastChildPageID = -1;
+					$thisChildPageID = -1;
+					while($getConnectedToParent->have_posts()) : $getConnectedToParent->the_post();
+						$thisChildPageID = $post->ID;
+						if ($thisChildPageID == $currentPageID) {
+							echo '<li class="prev">Previous: <a href="' . get_permalink($lastChildPageID) . '">' . get_the_title($lastChildPageID) . '</a></li>';
+						} else if ($lastChildPageID == $currentPageID) {
+							echo '<li class="prev">Next: <a href="' . get_permalink($currentPageID) . '">' . get_the_title($currentPageID) . '</a></li>';
+						}
+						$lastChildPageID = $post->ID;
+					endwhile;
+					wp_reset_postdata();
+					
+					echo '</ol>';
+				}
+			endwhile;
+			wp_reset_postdata();
+		}
+	}
+}
+endif;
