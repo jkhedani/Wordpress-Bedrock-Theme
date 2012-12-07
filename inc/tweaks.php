@@ -28,6 +28,7 @@ function custom_scripts() {
 	$stylesheetDir = get_stylesheet_directory_uri();
 	// Bootstrap scripts
 	wp_enqueue_style( 'bootstrap-custom-style', "$stylesheetDir/inc/css/style.css" );
+	wp_enqueue_style('open-sans-google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700', array(), false, 'all');
 
 	wp_enqueue_script('bootstrap-dropdown', "$stylesheetDir/inc/bootstrap/js/bootstrap-dropdown.js", array(), false, true);
 	wp_enqueue_script('bootstrap-popover', "$stylesheetDir/inc/add-ons/js/bootstrap-collapse.js", array(), false, true);
@@ -111,7 +112,7 @@ add_action("after_switch_theme", "myactivationfunction", 10 ,  2);
 
 // Create custom post types for courses
 function course_page_types() {
-	$supportedMetaboxes = array('title', 'editor', 'page-attributes');
+	$supportedMetaboxes = array('title', 'editor', 'page-attributes', 'thumbnail');
 	
 	// "Units"
 	$labels = array(
@@ -127,7 +128,8 @@ function course_page_types() {
 	register_post_type( 'units',
 		array(
 		'menu_position' => 5,
-		'public' => true,	
+		'public' => true,
+		'capability_type' => 'page',
 		'hierarchical' => true,
 		'supports' => $supportedMetaboxes,
 		'labels' => $labels,
@@ -148,9 +150,11 @@ function course_page_types() {
 	register_post_type( 'modules',
 		array(
 		'menu_position' => 6,
-		'public' => true,	
+		'public' => true,
+		'capability_type' => 'page',
+		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
-		'supports' => $supportedMetaboxes,
+		'supports' => array('title', 'editor', 'thumbnail'),
 		'labels' => $labels,
 		)
 	);
@@ -169,7 +173,9 @@ function course_page_types() {
 	register_post_type( 'lessons',
 		array(
 		'menu_position' => 7,
-		'public' => true,	
+		'public' => true,
+		'capability_type' => 'page',
+		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
 		'supports' => $supportedMetaboxes,
 		'labels' => $labels,
