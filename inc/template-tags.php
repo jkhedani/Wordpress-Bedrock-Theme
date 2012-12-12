@@ -190,23 +190,24 @@ function dcdc_get_pager() {
 		));
 		if ($p2pConnectedParent->have_posts()) {
 			while($p2pConnectedParent->have_posts()) : $p2pConnectedParent->the_post();
-				echo 'Parent: <a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+			echo '<ol class="pager">';
+				echo '<li class="previous"><a href="' . get_permalink() . '">&larr; Module: ' . get_the_title() . '</a></li>';
 				$p2pConnectedParentsChildren = new WP_Query( array(
 					'connected_type' => 'modules_to_lessons',
 					'connected_items' => $post->ID,
 					'nopaging' => true,
 				));
-				if($getConnectedToParent->have_posts()) {
-					echo '<ol class="pager">';
+				if($p2pConnectedParentsChildren->have_posts()) {
+					
 					
 					$lastChildPageID = -1;
 					$thisChildPageID = -1;
-					while($getConnectedToParent->have_posts()) : $getConnectedToParent->the_post();
+					while($p2pConnectedParentsChildren->have_posts()) : $p2pConnectedParentsChildren->the_post();
 						$thisChildPageID = $post->ID;
-						if ($thisChildPageID == $currentPageID) {
-							echo '<li class="prev">Previous: <a href="' . get_permalink($lastChildPageID) . '">' . get_the_title($lastChildPageID) . '</a></li>';
+						if ($thisChildPageID == $currentPageID && $lastChildPageID >= 0) {
+							echo '<li class="previous"><a href="' . get_permalink($lastChildPageID) . '">&larr; ' . get_the_title($lastChildPageID) . '</a></li>';
 						} else if ($lastChildPageID == $currentPageID) {
-							echo '<li class="prev">Next: <a href="' . get_permalink($currentPageID) . '">' . get_the_title($currentPageID) . '</a></li>';
+							echo '<li class="next"><a href="' . get_permalink($thisChildPageID) . '">' . get_the_title($thisChildPageID) . ' &rarr;</a></li>';
 						}
 						$lastChildPageID = $post->ID;
 					endwhile;
@@ -217,6 +218,86 @@ function dcdc_get_pager() {
 			endwhile;
 			wp_reset_postdata();
 		}
+	} elseif((get_post_type() == 'modules')) {
+		$i = 0;
+		$p2pConnectedParent = new WP_Query ( array(
+			'connected_type' => 'modules_to_lessons',
+			'connected_items' => get_queried_object_id(),
+			'nopaging' => true,
+		));
+		echo 	'<ol class="pager">';
+		while($p2pConnectedParent->have_posts()) : $p2pConnectedParent->the_post();
+			// Only spit out the first 'child' connection
+			if ($i == 0) {
+				echo '<li class="next"><a href="'.get_permalink().'">Start '.get_the_title().' &rarr;</a></li>';
+			}
+			$i++;
+		endwhile;
+		echo 	'</ol>';
+		wp_reset_postdata();
 	}
 }
 endif;
+
+/**
+ * Prints breadcrumbs based on p2p connections.
+ */
+if ( ! function_exists( 'dcdc_get_breadcrumbs') ) :
+function dcdc_get_breadcrumbs() {
+
+	global $wp_query, $post;
+	$currentPostType = get_post_type();
+
+	echo '<ul class="breadcrumb">';
+	echo 	'<li><a href="'.get_home_url().'">Home</a> <span class="divider">/</span></li>';
+
+		// Unit Page Breadcrumb
+		if ($currentPostType == 'units') {
+			echo '<li class="active">'.get_the_title().'</li>';
+		// Unit Page Breadcrumb
+		} else if ($currentPostType == 'modules') {
+			// Only Show Unit Page in Breadcrumb if unitsModulesLessons are selected
+			if(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') {
+				$getUnitConnection = new WP_Query ( array(
+					'connected_type' => 'units_to_modules',
+					'connected_items' => get_queried_object(),
+				));
+				while ($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
+					echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>';
+				endwhile;
+				wp_reset_postdata();
+			}
+			echo '<li class="active">'.get_the_title().'</li>';
+
+		// Lesson Page Breadcrumb
+		} else if ($currentPostType == 'lessons') {
+			$getModuleConnection = new WP_Query ( array(
+				'connected_type' => 'modules_to_lessons',
+				'connected_items' => $post->ID,
+			));
+			while ($getModuleConnection->have_posts()) : $getModuleConnection->the_post();
+				
+				// Only Show Unit Page in Breadcrumb if unitsModulesLessons are selected
+				if(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') {
+					$getNewUnitConnection = new WP_Query ( array(
+						'connected_type' => 'units_to_modules',
+						'connected_items' => $post->ID,
+						'nopaging' => true
+					));			
+					while ($getNewUnitConnection->have_posts()) : $getNewUnitConnection->the_post();
+						echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>';
+					endwhile;
+					wp_reset_postdata();
+				}
+				echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>';
+			endwhile;
+			wp_reset_postdata();
+			
+			// Lesson module
+			echo '<li class="active">'.get_the_title().'</li>';
+
+		}
+	echo '</ul>'; // .breadcrumbs
+}
+endif;
+
