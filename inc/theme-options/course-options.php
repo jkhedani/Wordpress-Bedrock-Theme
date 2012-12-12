@@ -37,6 +37,9 @@ function courses_customize_register($wp_customize) {
     'priority'       => 35,
   ));
 
+  // SECTION: Remove some default sections
+  $wp_customize->remove_section( 'static_front_page');
+
 
   // SETTINGS
 
@@ -63,12 +66,6 @@ function courses_customize_register($wp_customize) {
     'default'        => 'system',
     'transport'      => 'postMessage'
   ));
-  // // SETTING: Branding[College Affiliation Color]
-  // $wp_customize->add_setting( 'courses_branding_tint', array(
-  //  'default'        => 'dark',
-  //   'transport'      => 'postMessage'
-  // ));
-
 
   // CONTROLS
 
@@ -111,23 +108,13 @@ function courses_customize_register($wp_customize) {
     'settings'   => 'courses_branding_college_affil',
     'type'       => 'radio',
     'choices'    => array(
+      'default' => 'Default',
       'system' => 'UH System',
       'manoa' => 'UH Manoa',
       'hcc' => 'Honolulu Community College',
     ),
   ));
 
-  // // CONTROL: Branding
-  // $wp_customize->add_control( 'courses_branding_tint', array(
-  //   'label'      => __( 'Select a Tint', 'courses' ),
-  //   'section'    => 'courses_branding',
-  //   'settings'   => 'courses_branding_tint',
-  //   'type'       => 'radio',
-  //   'choices'    => array(
-  //     'dark' => 'Dark',
-  //     'light' => 'Light',
-  //   ),
-  // ));
 }
 add_action( 'customize_register', 'courses_customize_register' );
 
@@ -136,6 +123,7 @@ add_action( 'customize_register', 'courses_customize_register' );
 function courses_layout_classes( $existing_classes ) {
   $current_ia = get_theme_mod('courses_layout_ia');
   $current_layout = get_theme_mod('courses_layout_template');
+  $current_affil = get_theme_mod('courses_branding_college_affil');
 
   if('modulesLessons' == $current_ia)
     $classes[] = 'modules-lessons';
@@ -151,7 +139,9 @@ function courses_layout_classes( $existing_classes ) {
   else
     $classes[] = 'single-layout';
 
-  $classes = apply_filters( 'courses_layout_classes', $classes, $current_layout, $current_ia );
+    $classes[] = $current_affil;
+
+  $classes = apply_filters( 'courses_layout_classes', $classes, $current_layout, $current_ia, $current_affil );
   return array_merge( $existing_classes, $classes );
 }
 add_filter( 'body_class', 'courses_layout_classes' );
@@ -187,7 +177,7 @@ add_action ('admin_menu', 'themedemo_admin');
 
 // Enqueue instant preview javascript
 function twentyeleven_customize_preview_js() {
-  wp_enqueue_script( 'courses-customizer', get_template_directory_uri() . '/inc/theme-options/theme-instant-preview-options.js', array( 'customize-preview' ), '20121205', true );
+  wp_enqueue_script( 'courses-customizer', get_template_directory_uri() . '/inc/theme-options/theme-instant-preview-options.js', array( 'customize-preview' ), '20121213', true );
 }
 add_action( 'customize_preview_init', 'twentyeleven_customize_preview_js' );
 
