@@ -23,6 +23,35 @@ function get_current_user_role() {
 
 //		 END HELPER UTILITY FUNCTIONS 		//
 
+// Login page scripts
+function login_scripts() {
+	$stylesheetDir = get_stylesheet_directory_uri();
+
+	wp_enqueue_style( 'login-custom-style', "$stylesheetDir/inc/css/login-style.css" );
+}
+add_action('login_head','login_scripts');
+
+// Admin theme scripts
+function admin_scripts() {
+	$stylesheetDir = get_stylesheet_directory_uri();
+	wp_enqueue_style( 'admin-custom-style', "$stylesheetDir/inc/css/admin-style.css" );
+	wp_enqueue_script('admin-custom-scripts', "$stylesheetDir/inc/js/admin-scripts.js", array(), false, true); ////// HACK! (just for now)
+}
+add_action('admin_enqueue_scripts','admin_scripts');
+
+// Dashboard widgets
+// http://codex.wordpress.org/Dashboard_Widgets_API
+function DCDC_remove_dashboard_widgets() {
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
+	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+	remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+} 
+add_action('wp_dashboard_setup', 'DCDC_remove_dashboard_widgets' );
+
 // Load resources and hook in bootstrap
 function custom_scripts() {
 	$stylesheetDir = get_stylesheet_directory_uri();
@@ -76,8 +105,8 @@ function my_remove_menu_pages() {
 	get_currentuserinfo();
 	if ( $userdata->user_level < 2 ) {
 		remove_menu_page('plugins.php'); // "Plugins"
-		remove_menu_page('users.php'); // "Users"
 		remove_menu_page('tools.php'); // "Tools"
+		remove_menu_page('users.php'); // "Users"
 		remove_menu_page('options-general.php'); // "Settings"
 	}
 }
@@ -98,7 +127,38 @@ function myactivationfunction($oldname, $oldtheme=false) {
 		'delete_published_posts' => true,
 		'publish_posts' => true,
 		'read' => true,
-		'upload_files' => true
+		'upload_files' => true,
+	));
+
+	// Add Instructor User Role
+	// http://codex.wordpress.org/Function_Reference/add_role
+	add_role('instructional_designer', 'Instructional Designer', array(
+    'delete_others_pages' => true,
+		'delete_others_posts' => true,
+		'delete_pages' => true,
+		'delete_posts' => true,
+		'delete_private_pages' => true,
+		'delete_private_posts' => true,
+		'delete_published_pages' => true,
+		'delete_published_posts' => true,
+		'edit_others_pages' => true,
+		'edit_others_posts' => true,
+		'edit_pages' => true,
+		'edit_posts' => true,
+		'edit_private_pages' => true,
+		'edit_private_posts' => true,
+		'edit_published_pages' => true,
+		'edit_published_posts' => true,
+		'manage_categories' => true,
+		'manage_links' => true,
+		'moderate_comments' => true,
+		'publish_pages' => true,
+		'publish_posts' => true,
+		'read' => true,
+		'read_private_pages' => true,
+		'read_private_posts' => true,
+		'upload_files' => true,
+		'edit_users' => true,
 	));
 
 }
@@ -112,7 +172,11 @@ add_action("after_switch_theme", "myactivationfunction", 10 ,  2);
 
 // Create custom post types for courses
 function course_page_types() {
-	$supportedMetaboxes = array('title', 'editor', 'page-attributes', 'thumbnail');
+	if (!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
+		$supportedMetaboxes = array('title', 'editor', 'page-attributes', 'thumbnail');
+	} else {
+		$supportedMetaboxes = array('title', 'editor', 'thumbnail');
+	}
 	
 	// "Units"
 	$labels = array(
@@ -131,7 +195,7 @@ function course_page_types() {
 		'public' => true,
 		'capability_type' => 'page',
 		'hierarchical' => true,
-		'supports' => $supportedMetaboxes,
+		'supports' => array('title', 'editor', 'page-attributes', 'thumbnail'),
 		'labels' => $labels,
 		)
 	);
@@ -177,7 +241,7 @@ function course_page_types() {
 		'capability_type' => 'page',
 		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
-		'supports' => $supportedMetaboxes,
+		'supports' => array('title', 'editor', 'thumbnail'),
 		'labels' => $labels,
 		)
 	);
@@ -246,7 +310,8 @@ add_action( 'p2p_init', 'course_connection_types' );
 function addFooterCredits() {
 	// Display specific fields for course instructors
 	$users = get_users('role=course_instructor');
-	if (isset($users)) {
+	$courseAffil = get_theme_mod('courses_branding_college_affil', 'default_value');
+	if (get_users('role=course_instructor')) {
 		foreach ($users as $user) {
 			$userID = $user->ID;
 			echo '<div class="instructor-contact">';
@@ -261,8 +326,28 @@ function addFooterCredits() {
 			echo '</div>';
 		}
 	} else {
-		
+		echo '<span>We need an instructor for our course! </span><a href="'.site_url().'/wp-admin/users.php">Assign an instructor here.</a>';
 	}
+	echo '<div class="course-footer-credits">&copy; '.date('Y');
+	echo '<span> '; // Yes, there is a space here.
+	if ($courseAffil == 'default') {
+		echo 'University of Hawai&#699;i';
+	} elseif($courseAffil == 'system') {
+		echo 'University of Hawai&#699;i System';
+	} elseif($courseAffil == 'manoa') {
+		echo 'University of Hawai&#699;i at Manoa';
+	} elseif($courseAffil == 'hcc') {
+		echo 'University of Hawai&#699;i at HCC';
+	} elseif($courseAffil == 'kcc') {
+		echo 'University of Hawai&#699;i at KCC';
+	}
+	echo '</span>';
+
+	// course secondary brand
+
+	echo ' | Made by <a href="http://www.hawaii.edu/coe/dcdc/" title="Visit the makers of this course">DCDC</a>';
+	echo ' | <a href="#" title="Help us improve the quality of our courses">Rate This Course</a>';
+	echo '</div>';
 }
 add_action('footerCredits','addFooterCredits');
 
