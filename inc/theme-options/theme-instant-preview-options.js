@@ -24,7 +24,15 @@
   // Courses Description
   wp.customize( 'courses_short_desc', function( value ) {
     value.bind( function( to ) {
-      $('#intro-banner-content p').html(to);
+      $('.intro-banner-content p').html(to);
+    });
+  }); 
+
+  // Course Affiliations
+  wp.customize('courses_branding_college_affil',function( value ) {
+    value.bind(function(to) {
+      $('#navbar .site-affiliation').attr('data-affil',to);
+      $('.college-branding').attr('data-affil',to);
     });
   });
 
