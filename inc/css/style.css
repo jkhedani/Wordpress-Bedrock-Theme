@@ -3792,6 +3792,52 @@ input[type="submit"].btn.btn-mini {
 .breadcrumb .active {
   color: #999999;
 }
+.pager {
+  margin: 20px 0;
+  list-style: none;
+  text-align: center;
+  *zoom: 1;
+}
+.pager:before,
+.pager:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.pager:after {
+  clear: both;
+}
+.pager li {
+  display: inline;
+}
+.pager a,
+.pager span {
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+.pager a:hover {
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.pager .next a,
+.pager .next span {
+  float: right;
+}
+.pager .previous a {
+  float: left;
+}
+.pager .disabled a,
+.pager .disabled a:hover,
+.pager .disabled span {
+  color: #999999;
+  background-color: #fff;
+  cursor: default;
+}
 /*!
  * Bootstrap Responsive v2.1.1
  *
@@ -4936,13 +4982,102 @@ ul.link-list li a {
   }
 }
 h1.site-title a:visited {
-  color: #0088cc;
+  color: #eeeeee;
+}
+.crumbSpacer {
+  margin: 0 10px;
+  color: #555555;
+}
+header#navbar {
+  -webkit-box-shadow: 0 0 8px 1px #aaaaaa;
+  -moz-box-shadow: 0 0 8px 1px #aaaaaa;
+  box-shadow: 0 0 8px 1px #aaaaaa;
+}
+header#navbar .btn-primary {
+  padding: 2px 14px;
+  margin-top: 7px;
+}
+header#navbar .navbar-inner {
+  border: none;
+}
+header#navbar .navbar-inner .site-affiliation {
+  width: 45px;
+  height: 40px;
+  float: left;
+  margin: 0 15px 0 0;
+}
+header#navbar .navbar-inner .site-affiliation .site-logo {
+  background: url('../images/uh-logo.png') no-repeat;
+  width: 45px;
+  height: 40px;
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=default] {
+  background-color: #333333;
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=system] {
+  background: #b3995d;
+  background-image: url('@fallback');
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c7b07b), to(#b3995d));
+  background-image: -webkit-linear-gradient(top, #c7b07b, #b3995d);
+  background-image: -moz-linear-gradient(top, #c7b07b, #b3995d);
+  background-image: -ms-linear-gradient(top, #c7b07b, #b3995d);
+  background-image: -o-linear-gradient(top, #c7b07b, #b3995d);
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=system] a,
+header#navbar .navbar-inner .site-affiliation[data-affil=system] h2 {
+  color: #ffffff;
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=manoa] {
+  background: #0f4d2f;
+  background-image: url('@fallback');
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2f663f), to(#0f4d2f));
+  background-image: -webkit-linear-gradient(top, #2f663f, #0f4d2f);
+  background-image: -moz-linear-gradient(top, #2f663f, #0f4d2f);
+  background-image: -ms-linear-gradient(top, #2f663f, #0f4d2f);
+  background-image: -o-linear-gradient(top, #2f663f, #0f4d2f);
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=manoa] a,
+header#navbar .navbar-inner .site-affiliation[data-affil=manoa] h2 {
+  color: #ffffff;
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=hcc] {
+  background: #016a7a;
+  background-image: url('@fallback');
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3d8893), to(#016a7a));
+  background-image: -webkit-linear-gradient(top, #3d8893, #016a7a);
+  background-image: -moz-linear-gradient(top, #3d8893, #016a7a);
+  background-image: -ms-linear-gradient(top, #3d8893, #016a7a);
+  background-image: -o-linear-gradient(top, #3d8893, #016a7a);
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=hcc] a,
+header#navbar .navbar-inner .site-affiliation[data-affil=hcc] h2 {
+  color: #ffffff;
+}
+header#navbar .navbar-inner .site-affiliation[data-affil=kcc] {
+  /* Nothing for now */
+}
+header#navbar .navbar-inner nav .nav {
+  margin: 0;
+}
+header#navbar .navbar-inner nav ul.dropdown-menu a {
+  color: #333333;
+}
+header#navbar .navbar-inner nav ul.dropdown-menu a:hover {
+  color: #ffffff;
+}
+header#navbar .navbar-inner nav a.empty-top-nav {
+  color: #ffffff;
+}
+header#navbar .navbar-inner nav .caret {
+  border-top: 4px solid #ffffff;
+  margin: 0 0 0 9px;
+  vertical-align: middle;
 }
 #main {
   min-height: 600px;
 }
 #main .intro-banner {
-  padding: 25px;
+  padding: 20px;
   background-color: #1B1B1B;
   color: #FFF;
   position: relative;
@@ -4950,31 +5085,34 @@ h1.site-title a:visited {
 #main .intro-banner .college-branding {
   min-height: 39px;
   margin-bottom: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
   border-bottom: 1px solid #FFF;
   background: url('../images/college-logos.png') no-repeat;
 }
-#main .intro-banner .college-branding.system {
-  background-position: 0 -521px;
+#main .intro-banner .college-branding[data-affil=default] {
+  background-position: 0 -588px;
 }
-#main .intro-banner .college-branding.manoa {
-  background-position: 0 -423px;
+#main .intro-banner .college-branding[data-affil=system] {
+  background-position: 0 -588px;
 }
-#main .intro-banner .college-branding.hcc {
-  background-position: 0 -620px;
-  height: 78px;
+#main .intro-banner .college-branding[data-affil=manoa] {
+  background-position: 0 -478px;
 }
-#main .intro-banner .college-branding.kcc {
-  background-position: 0 -755px;
-  height: 78px;
+#main .intro-banner .college-branding[data-affil=hcc] {
+  background-position: 0 -700px;
+  height: 86px;
+}
+#main .intro-banner .college-branding[data-affil=kcc] {
+  background-position: 0 -854px;
+  height: 86px;
 }
 #main .intro-banner .welcome {
   font-size: 25px;
 }
 #main .intro-banner h1 {
-  font-size: 56px;
-  font-weight: bold;
-  margin: 10px 0 19px 0;
+  font-size: 51px;
+  font-weight: normal;
+  margin: 11px 0 19px 0;
 }
 #main .intro-banner img {
   margin: 10px 0 0 0;
@@ -4989,15 +5127,16 @@ h1.site-title a:visited {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-#main .no-content a {
-  background: none;
-}
-#main .no-content a span.large-icon {
+#main .no-content span.plus {
   display: block;
   clear: both;
   font-size: 120px;
   line-height: 0;
   margin: 35px 0 48px;
+}
+#main .no-content a {
+  color: #ffffff;
+  margin: 10px 0;
 }
 #main .no-content a.create-new {
   margin: 12px 0;
@@ -5010,7 +5149,7 @@ h1.site-title a:visited {
 }
 #main .no-content a.create-new:hover {
   text-decoration: none;
-  color: #222222;
+  color: #ffffff;
 }
 #main a.edit-post-link {
   min-height: 0;
@@ -5023,10 +5162,83 @@ h1.site-title a:visited {
   text-indent: -9999px;
   background: url('../images/edit-gear.png') no-repeat;
 }
+#main #content span.moduleCount {
+  color: #999999;
+  font-weight: bold;
+  font-size: 16px;
+}
+#main #content h1.entry-title {
+  margin: 2px 0 7px;
+}
+#main #content .entry-content h1 {
+  font-size: 30px;
+  line-height: 40px;
+}
+#main #content .entry-content h2 {
+  font-size: 24px;
+  line-height: 40px;
+}
+#main #content .entry-content h3 {
+  font-size: 18px;
+  line-height: 40px;
+}
+#main #content .entry-content blockquote {
+  border-left: 5px solid #CCC;
+}
+#main #secondary h3.sidebar-nav-title {
+  margin: 0;
+  padding: 3px 15px 5px;
+  color: #ffffff;
+  background-color: #333333;
+}
+#main #secondary h3.sidebar-nav-title a {
+  color: #ffffff;
+}
+#main #secondary ol.lessons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#main #secondary ol.lessons li.lesson.no-content {
+  margin: 10px 0 0 0;
+}
+#main #secondary ol.lessons li.lesson.no-content a {
+  display: inline;
+  padding: 5px;
+}
+#main #secondary ol.lessons li.lesson a.lesson-link {
+  display: block;
+  background-color: #555555;
+  padding: 15px;
+  color: #ffffff;
+}
+#main #secondary ol.lessons li.lesson a.lesson-link:hover {
+  background-color: #999999;
+  color: #333333;
+}
+#main footer.entry-meta {
+  margin: 0;
+}
+#main footer.entry-meta ol.pager li a {
+  background-color: #3A87AD;
+  color: #ffffff;
+}
+#main footer.entry-meta ol.pager li a:hover {
+  background-color: #296887;
+}
+footer {
+  margin: 10px 0 0 0;
+}
 @media (max-width: 320px) {
   
 }
 @media (max-width: 480px) {
+  #navbar .navbar-inner {
+    padding: 0;
+  }
+  .module-image {
+    display: none;
+  }
   body.modules-lessons.single-layout #intro-banner {
     display: none;
   }
@@ -5043,6 +5255,32 @@ h1.site-title a:visited {
   }
 }
 @media (min-width: 480px) and (max-width: 768px) {
+  #navbar .navbar-inner {
+    padding: 0;
+  }
+  #main .intro-banner h1 {
+    font-size: 42px;
+  }
+  #main .intro-banner .college-branding {
+    background-size: auto;
+  }
+  #main .intro-banner .college-branding[data-affil=default] {
+    background-position: 0 -587px;
+  }
+  #main .intro-banner .college-branding[data-affil=system] {
+    background-position: 0 -587px;
+  }
+  #main .intro-banner .college-branding[data-affil=manoa] {
+    background-position: 0 -478px;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] {
+    background-position: 0 -700px;
+    height: 78px;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] {
+    background-position: 0 -700px;
+    height: 78px;
+  }
   body.modules-lessons.single-layout #intro-banner {
     display: none;
   }
@@ -5052,7 +5290,7 @@ h1.site-title a:visited {
   }
   body.modules-lessons.single-layout #primary {
     width: 100%;
-    margin: 0;
+    margin: 0 0 0 10px;
   }
   body.modules-lessons.single-layout ol.modules li.module {
     width: 47%;
@@ -5074,8 +5312,31 @@ h1.site-title a:visited {
     width: 100%;
     margin: 0;
   }
+  #navbar .navbar-inner {
+    padding: 0;
+  }
   #main .intro-banner h1 {
     font-size: 45px;
+  }
+  #main .intro-banner .college-branding {
+    background-size: auto;
+  }
+  #main .intro-banner .college-branding[data-affil=default] {
+    background-position: 0 -587px;
+  }
+  #main .intro-banner .college-branding[data-affil=system] {
+    background-position: 0 -587px;
+  }
+  #main .intro-banner .college-branding[data-affil=manoa] {
+    background-position: 0 -478px;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] {
+    background-position: 0 -700px;
+    height: 78px;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] {
+    background-position: 0 -700px;
+    height: 78px;
   }
   body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+1) {
     margin-left: 0;
@@ -5085,6 +5346,26 @@ h1.site-title a:visited {
   #main .intro-banner h1 {
     font-size: 48px;
   }
+  #main .intro-banner .college-branding {
+    background-size: 210px auto;
+  }
+  #main .intro-banner .college-branding[data-affil=default] {
+    background-position: 0 -472px;
+  }
+  #main .intro-banner .college-branding[data-affil=system] {
+    background-position: 0 -472px;
+  }
+  #main .intro-banner .college-branding[data-affil=manoa] {
+    background-position: 0 -381px;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] {
+    background-position: 0 -567px;
+    height: 78px;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] {
+    background-position: 0 -567px;
+    height: 78px;
+  }
   body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
     display: none;
   }
@@ -5093,8 +5374,8 @@ h1.site-title a:visited {
   }
 }
 @media (min-width: 1200px) {
-  #content {
-    padding: 0 50px 0 0;
+  #main .intro-banner .college-branding {
+    background-size: auto;
   }
   body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
     display: none;
@@ -5130,6 +5411,7 @@ body.modules-lessons.single-layout #main ol.modules li.module > a .module-count 
   background-color: #222222;
 }
 body.modules-lessons.single-layout #main ol.modules li.module > a .module-title {
+  font-weight: normal;
   font-size: 22px;
   margin: 10px 15px;
   line-height: 1.3;
@@ -5138,6 +5420,7 @@ body.modules-lessons.single-layout #main ol.modules li.module > a .module-title 
 body.modules-lessons.single-layout #main ol.modules li.module > a .module-image {
   margin: 10px 15px;
   max-height: 128px;
+  overflow: hidden;
 }
 body.modules-lessons.single-layout #main ol.modules li.module > a .module-content {
   margin: 10px 15px;
@@ -5146,13 +5429,8 @@ body.modules-lessons.single-layout #main ol.modules li.module.last {
   background: none;
 }
 body.modules-lessons.single-layout #main ol.modules li.module .no-content a {
-  background: none;
   min-height: 0;
   margin: 20px 0 22px 0;
-  color: #333333;
-}
-body.modules-lessons.single-layout #main ol.modules li.module .no-content a:hover {
-  color: #222222;
 }
 body.modules-lessons.nested-layout #main ol.modules {
   margin: 0;
@@ -5164,7 +5442,6 @@ body.modules-lessons.nested-layout #main ol.modules li.module {
   display: block;
   min-height: 184px;
   position: relative;
-  padding: 0 0 10px 0;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-count {
   padding: 10px 15px;
@@ -5180,10 +5457,12 @@ body.modules-lessons.nested-layout #main ol.modules li.module .module-image {
   color: #555555;
   width: 568px;
   height: 100%;
+  overflow: hidden;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-image img {
   position: absolute;
   z-index: -1;
+  width: 100%;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-image .module-image-placeholder {
   position: absolute;
@@ -5208,6 +5487,7 @@ body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wr
   border-bottom: none;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper .module-title {
+  font-weight: normal;
   font-size: 22px;
   line-height: 1.3;
   margin: 0 0 10px 0;
@@ -5217,12 +5497,18 @@ body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wr
   margin: 10px 0 0;
   color: #FFF;
 }
+body.modules-lessons.nested-layout #main ol.modules li.module .module-content-wrapper .module-content a {
+  color: #0088cc;
+}
 body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons {
   margin: 0;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons li.lesson {
   list-style: none;
   position: relative;
+}
+body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons li.lesson a {
+  color: #ffffff;
 }
 body.modules-lessons.nested-layout #main ol.modules li.module ol.lessons li.lesson a.edit-post-link {
   top: 0;
@@ -5251,6 +5537,7 @@ body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper .unit-coun
   margin: 0 10px 0 0;
 }
 body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper .unit-title {
+  font-weight: normal;
   font-size: 18px;
   line-height: 20px;
   margin: 0px;
@@ -5277,9 +5564,7 @@ body.units-modules-lessons #main ol.modules li.module a.edit-post-link {
 }
 body.units-modules-lessons #main ol.modules li.module a {
   color: #ffffff;
-  display: block;
   min-height: 184px;
-  padding: 0 0 10px 0;
 }
 body.units-modules-lessons #main ol.modules li.module a:hover {
   text-decoration: none;
@@ -5292,9 +5577,17 @@ body.units-modules-lessons #main ol.modules li.module a .module-title-wrapper {
   background: url('../images/bg-transparent-80.png') repeat-y;
 }
 body.units-modules-lessons #main ol.modules li.module a .module-title-wrapper .module-title {
+  font-weight: normal;
   font-size: 22px;
   line-height: 1.3;
   display: block;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-image {
+  overflow: hidden;
+  max-width: none;
+}
+body.units-modules-lessons #main ol.modules li.module a .module-image img {
+  height: 100%;
 }
 body.units-modules-lessons #main ol.modules li.module a .module-image .module-image-placeholder {
   position: absolute;
@@ -5313,13 +5606,8 @@ body.units-modules-lessons #main ol.modules li.module.last {
   background: none;
 }
 body.units-modules-lessons #main ol.modules li.module .no-content a {
-  background: none;
   min-height: 0;
-  margin: 20px 0 22px 0;
-  color: #333333;
-}
-body.units-modules-lessons #main ol.modules li.module .no-content a:hover {
-  color: #222222;
+  margin: 28px 0 22px 0;
 }
 @media (max-width: 979px) and (min-width: 768px) {
   .container {

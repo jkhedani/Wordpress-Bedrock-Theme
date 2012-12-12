@@ -64,15 +64,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
+        <div class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></div>
         <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
         <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
-        <nav class="nav-collapse collapse pull-left">
+        <nav class="nav-collapse collapse pull-right">
         	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
 					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
         	<?php
 
           if (is_user_logged_in() && !(has_nav_menu( 'primary' ))) { // Add link to Menus page if no menu exists
-            echo '<a href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
+            echo '<a class="empty-top-nav btn btn-primary" href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
           } else {
             wp_nav_menu( array(
               'theme_location' => 'primary',
