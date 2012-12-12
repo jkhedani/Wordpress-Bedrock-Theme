@@ -57,13 +57,13 @@ jQuery(document).ready(function($){
 	    $(window).resize(function() {
 	      delay(function() {
 	      	var windowWidth = $(window).width();
-	      	if (windowWidth > '767') {
+	      	//if (windowWidth > '767') {
 						if ($('body').hasClass('modules-lessons') && $('body').hasClass('single-layout'))
 							$('body.modules-lessons.single-layout #main ol#singularModulesLessons').equalHeights();
 		
 						if ($('body').hasClass('units-modules-lessons'))
 							$('body.units-modules-lessons #main ol#unitsModulesLessons ol.modules').equalHeights();
-	      	}
+	      	//}
 	      }, pause );
 	  	});
 	    $(window).resize();
