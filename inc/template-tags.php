@@ -185,7 +185,7 @@ function dcdc_get_pager() {
 	if((get_post_type() == 'lessons')) {
 		$p2pConnectedParent = new WP_Query ( array(
 			'connected_type' => 'modules_to_lessons',
-			'connected_items' => get_queried_object_id(),
+			'connected_items' => get_queried_object(),
 			'nopaging' => true,
 		));
 		if ($p2pConnectedParent->have_posts()) {
@@ -301,3 +301,125 @@ function dcdc_get_breadcrumbs() {
 }
 endif;
 
+if ( ! function_exists( 'dcdc_footer_credits') ) :
+/**
+ * Footer Credits
+ */
+function dcdc_footer_credits() {
+	// Display specific fields for course instructors
+	$users = get_users('role=course_instructor');
+	$courseAffil = get_theme_mod('courses_branding_college_affil', 'default_value');
+	if (get_users('role=course_instructor')) {
+		foreach ($users as $user) {
+			$userID = $user->ID;
+			echo '<div class="instructor-contact">';
+			echo 	get_the_author_meta('first_name',$userID) . ' ';
+			echo 	get_the_author_meta('last_name',$userID);
+			echo '<span class="sep"> | </span>';
+			echo 	get_the_author_meta('user_email',$userID);
+			echo '<span class="sep"> | </span>';
+			echo 	get_the_author_meta('office_hours',$userID);
+			echo '<span class="sep"> | </span>';
+			echo '<a href="' .get_the_author_meta('voffice_link',$userID). '">V-Office Link</a>';
+			echo '</div>';
+		}
+	} else {
+		echo '<span>We need an instructor for our course! </span><a href="'.site_url().'/wp-admin/users.php">Assign an instructor here.</a>';
+	}
+	echo '<div class="course-footer-credits">&copy; '.date('Y');
+	echo '<span> '; // Yes, there is a space here.
+	if ($courseAffil == 'default') {
+		echo 'University of Hawai&#699;i';
+	} elseif($courseAffil == 'system') {
+		echo 'University of Hawai&#699;i System';
+	} elseif($courseAffil == 'manoa') {
+		echo 'University of Hawai&#699;i at Manoa';
+	} elseif($courseAffil == 'hcc') {
+		echo 'University of Hawai&#699;i at HCC';
+	} elseif($courseAffil == 'kcc') {
+		echo 'University of Hawai&#699;i at KCC';
+	}
+	echo '</span>';
+
+	// course secondary brand
+
+	echo ' | Made by <a href="http://www.hawaii.edu/coe/dcdc/" title="Visit the makers of this course">DCDC</a>';
+	echo ' | <a href="#" title="Help us improve the quality of our courses">Rate This Course</a>';
+	echo '</div>';
+}
+endif;
+
+if ( ! function_exists( 'dcdc_get_module_count') ) :
+/**
+ * Footer Credits
+ */
+function dcdc_get_module_count() {
+	// Construct Sidebar Menu
+	if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
+		$currentPostType = get_post_type();
+		$currentPostID = $post->ID;
+		// Count Modules or Lessons
+		if ($currentPostType == 'modules') {
+			$getUnitConnection = new WP_Query ( array(
+				'connected_type' => 'units_to_modules',
+				'connected_items' => get_queried_object(),
+			));
+
+			while($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
+				$i = 0;
+				$moduleCount = new WP_Query ( array(
+					'connected_type' => 'units_to_modules',
+					'connected_items' => $post->ID,
+				));
+
+				while($moduleCount->have_posts()) : $moduleCount->the_post();
+					$postID = $post->ID;
+					if($currentPostID == $postID) {
+						echo '<span class="moduleCount">Module ' .$i. '</span>';
+					}
+					$i++;
+				endwhile;
+				wp_reset_postdata();
+
+			endwhile;
+			wp_reset_postdata();
+
+		} else if ($currentPostType == 'lessons') {
+			// if lessons
+		}
+	} else {
+		// If unitsModulesLessons
+		$currentPostType = get_post_type();
+		$currentPostID = $post->ID;
+		// Count Modules or Lessons
+		if ($currentPostType == 'modules') {
+			$getUnitConnection = new WP_Query ( array(
+				'connected_type' => 'units_to_modules',
+				'connected_items' => get_queried_object(),
+			));
+
+			while($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
+				$i = 0;
+				$moduleCount = new WP_Query ( array(
+					'connected_type' => 'units_to_modules',
+					'connected_items' => $post->ID,
+				));
+
+				while($moduleCount->have_posts()) : $moduleCount->the_post();
+					$postID = $post->ID;
+					if($currentPostID == $postID) {
+						echo 'Module' . $i;
+					}
+					$i++;
+				endwhile;
+				wp_reset_postdata();
+
+			endwhile;
+			wp_reset_postdata();
+
+		} else if ($currentPostType == 'lessons') {
+			// if lessons
+		}
+	}
+} // dcdc_get_module_count());
+endif;
