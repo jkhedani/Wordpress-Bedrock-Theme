@@ -7,6 +7,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+		<?php dcdc_get_module_count(); ?>
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<hr />
 		<div class="entry-meta">

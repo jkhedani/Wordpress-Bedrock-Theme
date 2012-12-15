@@ -4981,6 +4981,9 @@ ul.link-list li a {
     padding-top: 60px;
   }
 }
+/**
+ * Core Template Styles
+ */
 h1.site-title a:visited {
   color: #eeeeee;
 }
@@ -5083,28 +5086,32 @@ header#navbar .navbar-inner nav .caret {
   position: relative;
 }
 #main .intro-banner .college-branding {
-  min-height: 39px;
+  height: 39px;
+  overflow: hidden;
   margin-bottom: 20px;
   padding-bottom: 24px;
   border-bottom: 1px solid #FFF;
-  background: url('../images/college-logos.png') no-repeat;
 }
-#main .intro-banner .college-branding[data-affil=default] {
-  background-position: 0 -588px;
+#main .intro-banner .college-branding[data-affil=default] img {
+  margin: -588px 0 0 0;
 }
-#main .intro-banner .college-branding[data-affil=system] {
-  background-position: 0 -588px;
+#main .intro-banner .college-branding[data-affil=system] img {
+  margin: -588px 0 0 0;
 }
-#main .intro-banner .college-branding[data-affil=manoa] {
-  background-position: 0 -478px;
+#main .intro-banner .college-branding[data-affil=manoa] img {
+  margin: -478px 0 0 0;
 }
 #main .intro-banner .college-branding[data-affil=hcc] {
-  background-position: 0 -700px;
   height: 86px;
 }
+#main .intro-banner .college-branding[data-affil=hcc] img {
+  margin: -702px 0 0 0;
+}
 #main .intro-banner .college-branding[data-affil=kcc] {
-  background-position: 0 -854px;
   height: 86px;
+}
+#main .intro-banner .college-branding[data-affil=kcc] img {
+  margin: -702px 0 0 0;
 }
 #main .intro-banner .welcome {
   font-size: 25px;
@@ -5229,8 +5236,124 @@ header#navbar .navbar-inner nav .caret {
 footer {
   margin: 10px 0 0 0;
 }
-@media (max-width: 320px) {
-  
+/**
+ * Media Queries
+ */
+@media (min-width: 1200px) {
+  #main .intro-banner .college-branding {
+    background-size: auto;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
+    display: none;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
+    margin-left: 0;
+  }
+}
+@media (max-width: 1200px) and (min-width: 979px) {
+  #main .intro-banner h1 {
+    font-size: 48px;
+  }
+  #main .intro-banner .college-branding[data-affil=default] img {
+    margin: -448px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=system] img {
+    margin: -448px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=manoa] img {
+    margin: -363px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] {
+    height: 86px;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] img {
+    margin: -539px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] {
+    height: 86px;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] img {
+    margin: -539px 0 0 0;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
+    display: none;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
+    margin-left: 0;
+  }
+}
+@media (max-width: 979px) and (min-width: 768px) {
+  body.modules-lessons.single-layout #intro-banner {
+    display: none;
+  }
+  body.modules-lessons.single-layout #inline-intro-banner {
+    width: 100%;
+    height: 100%;
+  }
+  body.modules-lessons.single-layout #primary {
+    width: 100%;
+    margin: 0;
+  }
+  #navbar .navbar-inner {
+    padding: 0;
+  }
+  #main #primary {
+    width: 720px;
+    margin: 0 auto;
+    float: none;
+  }
+  #main .intro-banner h1 {
+    font-size: 45px;
+  }
+  #main .intro-banner .college-branding[data-affil=default] img {
+    margin: -423px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=system] img {
+    margin: -423px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=manoa] img {
+    margin: -344px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] {
+    height: 86px;
+  }
+  #main .intro-banner .college-branding[data-affil=hcc] img {
+    margin: -511px 0 0 0;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] {
+    height: 86px;
+  }
+  #main .intro-banner .college-branding[data-affil=kcc] img {
+    margin: -511px 0 0 0;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+1) {
+    margin-left: 0;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  #navbar .navbar-inner {
+    padding: 0;
+  }
+  #main .intro-banner h1 {
+    font-size: 42px;
+  }
+  body.modules-lessons.single-layout #intro-banner {
+    display: none;
+  }
+  body.modules-lessons.single-layout #inline-intro-banner {
+    width: 100%;
+    height: 100%;
+  }
+  body.modules-lessons.single-layout #primary {
+    width: 100%;
+  }
+  body.modules-lessons.single-layout ol.modules li.module {
+    width: 47%;
+    float: left;
+  }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(2n+2) {
+    margin-left: 15px;
+  }
 }
 @media (max-width: 480px) {
   #navbar .navbar-inner {
@@ -5254,135 +5377,8 @@ footer {
     width: 100%;
   }
 }
-@media (min-width: 480px) and (max-width: 768px) {
-  #navbar .navbar-inner {
-    padding: 0;
-  }
-  #main .intro-banner h1 {
-    font-size: 42px;
-  }
-  #main .intro-banner .college-branding {
-    background-size: auto;
-  }
-  #main .intro-banner .college-branding[data-affil=default] {
-    background-position: 0 -587px;
-  }
-  #main .intro-banner .college-branding[data-affil=system] {
-    background-position: 0 -587px;
-  }
-  #main .intro-banner .college-branding[data-affil=manoa] {
-    background-position: 0 -478px;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] {
-    background-position: 0 -700px;
-    height: 78px;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] {
-    background-position: 0 -700px;
-    height: 78px;
-  }
-  body.modules-lessons.single-layout #intro-banner {
-    display: none;
-  }
-  body.modules-lessons.single-layout #inline-intro-banner {
-    width: 100%;
-    height: 100%;
-  }
-  body.modules-lessons.single-layout #primary {
-    width: 100%;
-    margin: 0 0 0 10px;
-  }
-  body.modules-lessons.single-layout ol.modules li.module {
-    width: 47%;
-    float: left;
-  }
-  body.modules-lessons.single-layout ol.modules li.module:nth-child(2n+2) {
-    margin-left: 15px;
-  }
-}
-@media (max-width: 979px) and (min-width: 768px) {
-  body.modules-lessons.single-layout #intro-banner {
-    display: none;
-  }
-  body.modules-lessons.single-layout #inline-intro-banner {
-    width: 100%;
-    height: 100%;
-  }
-  body.modules-lessons.single-layout #primary {
-    width: 100%;
-    margin: 0;
-  }
-  #navbar .navbar-inner {
-    padding: 0;
-  }
-  #main .intro-banner h1 {
-    font-size: 45px;
-  }
-  #main .intro-banner .college-branding {
-    background-size: auto;
-  }
-  #main .intro-banner .college-branding[data-affil=default] {
-    background-position: 0 -587px;
-  }
-  #main .intro-banner .college-branding[data-affil=system] {
-    background-position: 0 -587px;
-  }
-  #main .intro-banner .college-branding[data-affil=manoa] {
-    background-position: 0 -478px;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] {
-    background-position: 0 -700px;
-    height: 78px;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] {
-    background-position: 0 -700px;
-    height: 78px;
-  }
-  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+1) {
-    margin-left: 0;
-  }
-}
-@media (max-width: 1200px) and (min-width: 979px) {
-  #main .intro-banner h1 {
-    font-size: 48px;
-  }
-  #main .intro-banner .college-branding {
-    background-size: 210px auto;
-  }
-  #main .intro-banner .college-branding[data-affil=default] {
-    background-position: 0 -472px;
-  }
-  #main .intro-banner .college-branding[data-affil=system] {
-    background-position: 0 -472px;
-  }
-  #main .intro-banner .college-branding[data-affil=manoa] {
-    background-position: 0 -381px;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] {
-    background-position: 0 -567px;
-    height: 78px;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] {
-    background-position: 0 -567px;
-    height: 78px;
-  }
-  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
-    display: none;
-  }
-  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
-    margin-left: 0;
-  }
-}
-@media (min-width: 1200px) {
-  #main .intro-banner .college-branding {
-    background-size: auto;
-  }
-  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
-    display: none;
-  }
-  body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
-    margin-left: 0;
-  }
+@media (max-width: 320px) {
+  
 }
 body.modules-lessons.single-layout #main ol.modules {
   margin: 0;

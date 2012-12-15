@@ -7,85 +7,14 @@
  */
 
 get_header(); ?>
-
+	<div class="row-fluid">
+			<?php dcdc_get_breadcrumbs(); ?>
+	</div>
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
 		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
-
-				<?php dcdc_get_breadcrumbs(); ?>
-
-				<?php
-
-					if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
-						$currentPostType = get_post_type();
-						$currentPostID = $post->ID;
-						// Count Modules or Lessons
-						if ($currentPostType == 'modules') {
-							$getUnitConnection = new WP_Query ( array(
-								'connected_type' => 'units_to_modules',
-								'connected_items' => get_queried_object(),
-							));
-
-							while($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
-								$i = 0;
-								$moduleCount = new WP_Query ( array(
-									'connected_type' => 'units_to_modules',
-									'connected_items' => $post->ID,
-								));
-
-								while($moduleCount->have_posts()) : $moduleCount->the_post();
-									$postID = $post->ID;
-									if($currentPostID == $postID) {
-										echo '<span class="moduleCount">Module ' .$i. '</span>';
-									}
-									$i++;
-								endwhile;
-								wp_reset_postdata();
-
-							endwhile;
-							wp_reset_postdata();
-
-						} else if ($currentPostType == 'lessons') {
-							// if lessons
-						}
-					} else {
-						// If unitsModulesLessons
-						$currentPostType = get_post_type();
-						$currentPostID = $post->ID;
-						// Count Modules or Lessons
-						if ($currentPostType == 'modules') {
-							$getUnitConnection = new WP_Query ( array(
-								'connected_type' => 'units_to_modules',
-								'connected_items' => get_queried_object(),
-							));
-
-							while($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
-								$i = 0;
-								$moduleCount = new WP_Query ( array(
-									'connected_type' => 'units_to_modules',
-									'connected_items' => $post->ID,
-								));
-
-								while($moduleCount->have_posts()) : $moduleCount->the_post();
-									$postID = $post->ID;
-									if($currentPostID == $postID) {
-										echo 'Module' . $i;
-									}
-									$i++;
-								endwhile;
-								wp_reset_postdata();
-
-							endwhile;
-							wp_reset_postdata();
-
-						} else if ($currentPostType == 'lessons') {
-							// if lessons
-						}
-					}
-
-				?>
 
 				<?php get_template_part( 'content', 'single' ); ?>
 
