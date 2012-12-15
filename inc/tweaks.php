@@ -248,6 +248,82 @@ function course_page_types() {
 }
 add_action( 'init', 'course_page_types' );
 
+
+
+
+// Create pages to sort the custom post types above via drag-and-drop.
+// http://soulsizzle.com/jquery/create-an-ajax-sorter-for-wordpress-custom-post-types/
+function course_enable_sort() {
+	$sortable_post_types = array(
+		'modules',
+	);
+	foreach ($sortable_post_types as $type) {
+		add_submenu_page("edit.php?post_type=$type", "Sort ".ucwords($type), "Sort", "edit_posts", basename(__FILE__), "course_sort_$type");
+	}
+}
+add_action('admin_menu', 'course_enable_sort');
+
+// Display function for each sortable custom post type
+// @see $sortable_post_types (one function for each item in array above)
+function course_sort_modules() {
+	$posts = new WP_Query(array(
+		'post_type' => 'modules',
+		'posts_per_page' => '-1',
+		'orderby' => 'menu_order',
+		'order' => 'ASC',
+	));
+?>
+	<div class="wrap">
+		<h3>Sort Modules <img src="<?php bloginfo('url'); ?>/wp-admin/images/loading.gif" id="loading-animation" /></h3>
+		<ul id="module-list">
+		<?php while ( $posts->have_posts() ) : $posts->the_post(); ?>
+			<li id="<?php the_id(); ?>"><?php the_title(); ?></li>
+		<?php endwhile; ?>
+	</div><!-- End div#wrap //-->
+<?php
+}
+
+// Queue admin javascript for sorting custom post types
+function course_sortable_scripts() {
+	global $pagenow;
+	$pages = array("edit.php");
+	if (in_array($pagenow, $pages)) {
+		wp_enqueue_script('jquery-ui-sortable');
+		wp_enqueue_script('course_sortable', get_bloginfo('template_url').'/inc/js/course_sortable.js');
+	}
+}
+add_action('admin_print_scripts', 'course_sortable_scripts');
+
+// Queue admin css for sorting custom post types
+function course_sortable_styles() {
+	global $pagenow;
+	$pages = array("edit.php");
+	if (in_array($pagenow, $pages)) {
+		wp_enqueue_style('course_sortable', get_bloginfo('template_url').'/inc/css/course_sortable.css');
+	}
+}
+add_action('admin_print_styles', 'course_sortable_styles');
+
+// Event handler: save new sort order for sortable custom post type
+function course_save_sort_order() {
+	global $wpdb;
+	$order = explode(',', $_POST['order']);
+	$counter = 0;
+	foreach ($order as $post_id) {
+		$wpdb->update(
+			$wpdb->posts, 
+			array('menu_order' => $counter),
+			array('ID' => $post_id)
+		);
+		$counter++;
+	}
+	die(1);
+}
+add_action('wp_ajax_course_sortable', 'course_save_sort_order');
+
+
+
+
 // Create connection types for course structure
 // https://github.com/scribu/wp-posts-to-posts/wiki
 function course_connection_types() {
