@@ -305,6 +305,8 @@ function course_sortable_styles() {
 add_action('admin_print_styles', 'course_sortable_styles');
 
 // Event handler: save new sort order for sortable custom post type
+// @todo: use wp_update_post instead of wpdb->update: 
+// http://wordpress.stackexchange.com/questions/23012/control-attachments-menu-order-with-jquery-sortable
 function course_save_sort_order() {
 	global $wpdb;
 	$order = explode(',', $_POST['order']);
