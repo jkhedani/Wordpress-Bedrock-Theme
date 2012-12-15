@@ -14,7 +14,7 @@
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="container">
 			<div class="site-info">
-				<?php do_action( 'footerCredits' ); ?>
+				<?php dcdc_footer_credits(); ?>
 			</div><!-- .site-info -->
 		</div><!-- .container -->
 	</footer><!-- #colophon .site-footer -->
