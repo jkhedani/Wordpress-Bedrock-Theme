@@ -195,7 +195,7 @@ function course_page_types() {
 		'public' => true,
 		'capability_type' => 'page',
 		'hierarchical' => true,
-		'supports' => array('title', 'editor', 'page-attributes', 'thumbnail'),
+		'supports' => array('title', 'page-attributes', 'thumbnail'),
 		'labels' => $labels,
 		)
 	);
@@ -382,50 +382,6 @@ function course_connection_types() {
 }
 add_action( 'p2p_init', 'course_connection_types' );
 
-// Footer Credits
-function addFooterCredits() {
-	// Display specific fields for course instructors
-	$users = get_users('role=course_instructor');
-	$courseAffil = get_theme_mod('courses_branding_college_affil', 'default_value');
-	if (get_users('role=course_instructor')) {
-		foreach ($users as $user) {
-			$userID = $user->ID;
-			echo '<div class="instructor-contact">';
-			echo 	get_the_author_meta('first_name',$userID) . ' ';
-			echo 	get_the_author_meta('last_name',$userID);
-			echo '<span class="sep"> | </span>';
-			echo 	get_the_author_meta('user_email',$userID);
-			echo '<span class="sep"> | </span>';
-			echo 	get_the_author_meta('office_hours',$userID);
-			echo '<span class="sep"> | </span>';
-			echo '<a href="' .get_the_author_meta('voffice_link',$userID). '">V-Office Link</a>';
-			echo '</div>';
-		}
-	} else {
-		echo '<span>We need an instructor for our course! </span><a href="'.site_url().'/wp-admin/users.php">Assign an instructor here.</a>';
-	}
-	echo '<div class="course-footer-credits">&copy; '.date('Y');
-	echo '<span> '; // Yes, there is a space here.
-	if ($courseAffil == 'default') {
-		echo 'University of Hawai&#699;i';
-	} elseif($courseAffil == 'system') {
-		echo 'University of Hawai&#699;i System';
-	} elseif($courseAffil == 'manoa') {
-		echo 'University of Hawai&#699;i at Manoa';
-	} elseif($courseAffil == 'hcc') {
-		echo 'University of Hawai&#699;i at HCC';
-	} elseif($courseAffil == 'kcc') {
-		echo 'University of Hawai&#699;i at KCC';
-	}
-	echo '</span>';
-
-	// course secondary brand
-
-	echo ' | Made by <a href="http://www.hawaii.edu/coe/dcdc/" title="Visit the makers of this course">DCDC</a>';
-	echo ' | <a href="#" title="Help us improve the quality of our courses">Rate This Course</a>';
-	echo '</div>';
-}
-add_action('footerCredits','addFooterCredits');
 
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
