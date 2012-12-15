@@ -9,7 +9,26 @@
 	<?php if( is_home() ) { ?>
 		<div id="intro-banner" class="intro-banner span4" role="complementary">
 			<?php
-				echo '<div class="college-branding" data-affil="'.get_theme_mod('courses_branding_college_affil', 'default_value').'"></div>';
+				$collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_value');
+				echo '<div class="college-branding" data-affil="'.$collegeAffilOption.'">';
+				switch ($collegeAffilOption) {
+					case 'default':
+						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii System logo" />';
+					break;
+					case 'system':
+						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii System logo" />';
+					break;
+					case 'manoa':
+						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Manoa logo" />';
+					break;
+					case 'hcc':
+						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Honolulu Community College logo" />';
+					break;
+					case 'kcc':
+						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Kapiolani Community College logo" />';
+					break;
+				}
+				echo '</div>'; // .college-branding
 			?>
 			<div class="intro-banner-content">
 				<span class="welcome">Welcome to</span>
