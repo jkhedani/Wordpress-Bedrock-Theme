@@ -14,11 +14,11 @@ require( get_template_directory() . '/inc/theme-options/course-options.php' );
 //		 HELPER UTILITY FUNCTIONS 		//
 
 function get_current_user_role() {
-    global $current_user;
-    get_currentuserinfo();
-    $user_roles = $current_user->roles;
-    $user_role = array_shift($user_roles);
-    return $user_role;
+		global $current_user;
+		get_currentuserinfo();
+		$user_roles = $current_user->roles;
+		$user_role = array_shift($user_roles);
+		return $user_role;
 };
 
 //		 END HELPER UTILITY FUNCTIONS 		//
@@ -112,63 +112,173 @@ function my_remove_menu_pages() {
 }
 add_action( 'admin_menu', 'my_remove_menu_pages' );
 
+
 // Theme activated functions
 // http://www.krishnakantsharma.com/2011/01/activationdeactivation-hook-for-wordpress-theme/
-// On theme activation, do the following...
-function myactivationfunction($oldname, $oldtheme=false) {
-	
-	// Add Instructor User Role
-	// http://codex.wordpress.org/Function_Reference/add_role
-	add_role('course_instructor', 'Course Instructor', array(
-    'read' => true,
-    'edit_posts' => true,
-    'edit_published_posts' => true,
-    'delete_posts' => true,
-		'delete_published_posts' => true,
-		'publish_posts' => true,
-		'read' => true,
-		'upload_files' => true,
-	));
 
-	// Add Instructor User Role
-	// http://codex.wordpress.org/Function_Reference/add_role
+// On theme activation, do the following...
+function course_theme_activate_enable_roles($old_name, $old_theme = false) {
+	// Declare user roles
+	// See: http://codex.wordpress.org/Roles_and_Capabilities
+	// See: http://codex.wordpress.org/Function_Reference/add_role
+
+	// Role: Super Admin (default)
+
+	// Role: Admin (default)
+
+	// Role: Editor (default)
+	remove_role("editor");
+
+	// Role: Author (default)
+	remove_role("author");
+
+	// Role: Contributor (default)
+	remove_role("contributor");
+
+	// Role: Subscriber (default)
+	remove_role("subscriber");
+
+	// Role: Instructional Designer (based on Editor)
 	add_role('instructional_designer', 'Instructional Designer', array(
-    'delete_others_pages' => true,
-		'delete_others_posts' => true,
-		'delete_pages' => true,
-		'delete_posts' => true,
-		'delete_private_pages' => true,
-		'delete_private_posts' => true,
-		'delete_published_pages' => true,
-		'delete_published_posts' => true,
-		'edit_others_pages' => true,
-		'edit_others_posts' => true,
-		'edit_pages' => true,
-		'edit_posts' => true,
-		'edit_private_pages' => true,
-		'edit_private_posts' => true,
-		'edit_published_pages' => true,
-		'edit_published_posts' => true,
+		// Administrator permissions:
+		'create_users' => true,
+		'delete_users' => true,
+		'edit_users' => true,
+		'list_users' => true,
+		'remove_users' => true,
+		//'promote_users' => true,
+		'edit_dashboard' => true,
+		'manage_options' => true,
+		'edit_theme_options' => true,
+
+		// Editor permissions:
+		'moderate_comments' => true,
 		'manage_categories' => true,
 		'manage_links' => true,
-		'moderate_comments' => true,
+		'edit_others_posts' => true,
+		'edit_pages' => true,
+		'edit_others_pages' => true,
+		'edit_published_pages' => true,
 		'publish_pages' => true,
-		'publish_posts' => true,
-		'read' => true,
-		'read_private_pages' => true,
+		'delete_pages' => true,
+		'delete_others_pages' => true,
+		'delete_published_pages' => true,
+		'delete_others_posts' => true,
+		'delete_private_posts' => true,
+		'edit_private_posts' => true,
 		'read_private_posts' => true,
+		'delete_private_pages' => true,
+		'edit_private_pages' => true,
+		'read_private_pages' => true,
+
+		// Author/Editor permissions:
+		'edit_published_posts' => true,
 		'upload_files' => true,
-		'edit_users' => true,
+		'publish_posts' => true,
+		'delete_published_posts' => true,
+
+		// Contributor permissions:
+		'edit_posts' => true,
+		'delete_posts' => true,
+
+		// Subscriber permissions:
+		'read' => true,
 	));
 
+	// Role: Instructor (based on Editor)
+	add_role('course_instructor', 'Course Instructor', array(
+		// Author/Editor permissions:
+		'edit_published_posts' => true,
+		'upload_files' => true,
+		'publish_posts' => true,
+		'delete_published_posts' => true,
+
+		// Contributor permissions:
+		'edit_posts' => true,
+		'delete_posts' => true,
+
+		// Subscriber permissions:
+		'read' => true,
+	));
+
+	// Role: Teaching Assistant (based on Subscriber)
+	add_role('teaching_assistant', 'Teaching Assistant', array(
+		// Subscriber permissions:
+		'read' => true,
+	));
+
+	// Role: Student (based on Subscriber)
+	add_role('student', 'Student', array(
+		// Subscriber permissions:
+		'read' => true,
+	));
 }
-add_action("after_switch_theme", "myactivationfunction", 10 ,  2);
+add_action("after_switch_theme", "course_theme_activate_enable_roles", 10, 2);
 
 // On theme deactivation, do the following...
-//function mydeactivationfunction($newname, $newtheme) {
-//
-//}
-//add_action("switch_theme", "mydeactivationfunction", 10 , 2);
+function course_theme_deactivate_disable_roles($newname, $newtheme) {
+	// Role: Editor (default)
+	add_role('editor', 'Editor', array(
+		// Author/Editor permissions:
+		'edit_published_posts' => true,
+		'upload_files' => true,
+		'publish_posts' => true,
+		'delete_published_posts' => true,
+
+		// Contributor permissions:
+		'edit_posts' => true,
+		'delete_posts' => true,
+
+		// Subscriber permissions:
+		'read' => true,
+	));
+
+	// Role: Author (default)
+	add_role('author', 'Author', array(
+		// Author/Editor permissions:
+		'edit_published_posts' => true,
+		'upload_files' => true,
+		'publish_posts' => true,
+		'delete_published_posts' => true,
+
+		// Contributor permissions:
+		'edit_posts' => true,
+		'delete_posts' => true,
+
+		// Subscriber permissions:
+		'read' => true,
+	));
+
+	// Role: Contributor (default)
+	add_role('contributor', 'Contributor', array(
+		// Contributor permissions:
+		'edit_posts' => true,
+		'delete_posts' => true,
+
+		// Subscriber permissions:
+		'read' => true,
+	));
+
+	// Role: Subscriber (default)
+	add_role('subscriber', 'Subscriber', array(
+		// Subscriber permissions:
+		'read' => true,
+	));
+
+	// Role: Instructional Designer (based on Editor)
+	remove_role('instructional_designer');
+
+	// Role: Instructor (based on Editor)
+	remove_role('course_instructor');
+
+	// Role: Teaching Assistant (based on Subscriber)
+	remove_role('teaching_assistant');
+
+	// Role: Student (based on Subscriber)
+	remove_role('student');
+}
+add_action("switch_theme", "course_theme_deactivate_disable_roles", 10 , 2);
+
 
 // Create custom post types for courses
 function course_page_types() {
@@ -343,17 +453,17 @@ function course_connection_types() {
 		'admin_column' => 'any',
 		'title' => array( 'from' => __( 'Connected Modules', 'my-textdomain' ), 'to' => __( 'Connected Unit', 'my-textdomain' ) ),
 		'from_labels' => array(
-      'singular_name' => __( 'Unit', 'my-textdomain' ),
-      'search_items' => __( 'Search Units', 'my-textdomain' ),
-      'not_found' => __( 'No Units found.', 'my-textdomain' ),
-      'create' => __( 'Connect to a Unit', 'my-textdomain' ),
-  	),
+			'singular_name' => __( 'Unit', 'my-textdomain' ),
+			'search_items' => __( 'Search Units', 'my-textdomain' ),
+			'not_found' => __( 'No Units found.', 'my-textdomain' ),
+			'create' => __( 'Connect to a Unit', 'my-textdomain' ),
+		),
 		'to_labels' => array(
-      'singular_name' => __( 'Module', 'my-textdomain' ),
-      'search_items' => __( 'Search Modules', 'my-textdomain' ),
-      'not_found' => __( 'No Modules found.', 'my-textdomain' ),
-      'create' => __( 'Connect a Module', 'my-textdomain' ),
-  	),
+			'singular_name' => __( 'Module', 'my-textdomain' ),
+			'search_items' => __( 'Search Modules', 'my-textdomain' ),
+			'not_found' => __( 'No Modules found.', 'my-textdomain' ),
+			'create' => __( 'Connect a Module', 'my-textdomain' ),
+		),
 	));
 
 	// Connect Lessons to Modules
@@ -369,17 +479,17 @@ function course_connection_types() {
 		'admin_column' => 'any',
 		'title' => array( 'from' => __( 'Connected Lessons', 'my-textdomain' ), 'to' => __( 'Connected Module', 'my-textdomain' ) ),
 		'from_labels' => array(
-      'singular_name' => __( 'Module', 'my-textdomain' ),
-      'search_items' => __( 'Search Modules', 'my-textdomain' ),
-      'not_found' => __( 'No Modules found.', 'my-textdomain' ),
-      'create' => __( 'Connect to a Module', 'my-textdomain' ),
-  	),
+			'singular_name' => __( 'Module', 'my-textdomain' ),
+			'search_items' => __( 'Search Modules', 'my-textdomain' ),
+			'not_found' => __( 'No Modules found.', 'my-textdomain' ),
+			'create' => __( 'Connect to a Module', 'my-textdomain' ),
+		),
 		'to_labels' => array(
-      'singular_name' => __( 'Lesson', 'my-textdomain' ),
-      'search_items' => __( 'Search Lessons', 'my-textdomain' ),
-      'not_found' => __( 'No Lessons found.', 'my-textdomain' ),
-      'create' => __( 'Connect a Lesson', 'my-textdomain' ),
-  	),
+			'singular_name' => __( 'Lesson', 'my-textdomain' ),
+			'search_items' => __( 'Search Lessons', 'my-textdomain' ),
+			'not_found' => __( 'No Lessons found.', 'my-textdomain' ),
+			'create' => __( 'Connect a Lesson', 'my-textdomain' ),
+		),
 	));
 }
 add_action( 'p2p_init', 'course_connection_types' );
