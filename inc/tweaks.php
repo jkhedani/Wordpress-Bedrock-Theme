@@ -171,7 +171,7 @@ function course_theme_activate_enable_roles($old_name, $old_theme = false) {
 		'edit_private_pages' => true,
 		'read_private_pages' => true,
 
-		// Author/Editor permissions:
+		// Author permissions:
 		'edit_published_posts' => true,
 		'upload_files' => true,
 		'publish_posts' => true,
@@ -187,7 +187,7 @@ function course_theme_activate_enable_roles($old_name, $old_theme = false) {
 
 	// Role: Instructor (based on Editor)
 	add_role('course_instructor', 'Course Instructor', array(
-		// Author/Editor permissions:
+		// Author permissions:
 		'edit_published_posts' => true,
 		'upload_files' => true,
 		'publish_posts' => true,
@@ -219,7 +219,27 @@ add_action("after_switch_theme", "course_theme_activate_enable_roles", 10, 2);
 function course_theme_deactivate_disable_roles($newname, $newtheme) {
 	// Role: Editor (default)
 	add_role('editor', 'Editor', array(
-		// Author/Editor permissions:
+		// Editor permissions:
+		'moderate_comments' => true,
+		'manage_categories' => true,
+		'manage_links' => true,
+		'edit_others_posts' => true,
+		'edit_pages' => true,
+		'edit_others_pages' => true,
+		'edit_published_pages' => true,
+		'publish_pages' => true,
+		'delete_pages' => true,
+		'delete_others_pages' => true,
+		'delete_published_pages' => true,
+		'delete_others_posts' => true,
+		'delete_private_posts' => true,
+		'edit_private_posts' => true,
+		'read_private_posts' => true,
+		'delete_private_pages' => true,
+		'edit_private_pages' => true,
+		'read_private_pages' => true,
+
+		// Author permissions:
 		'edit_published_posts' => true,
 		'upload_files' => true,
 		'publish_posts' => true,
@@ -235,7 +255,7 @@ function course_theme_deactivate_disable_roles($newname, $newtheme) {
 
 	// Role: Author (default)
 	add_role('author', 'Author', array(
-		// Author/Editor permissions:
+		// Author permissions:
 		'edit_published_posts' => true,
 		'upload_files' => true,
 		'publish_posts' => true,
