@@ -244,59 +244,55 @@ endif;
  */
 if ( ! function_exists( 'dcdc_get_breadcrumbs') ) :
 function dcdc_get_breadcrumbs() {
-
 	global $wp_query, $post;
 	$currentPostType = get_post_type();
-
 	echo '<ul class="breadcrumb">';
 	echo 	'<li><a href="'.get_home_url().'">Home</a> <span class="divider">/</span></li>';
+	if ($currentPostType == 'units') {
+		echo '<li class="active">'.get_the_title().'</li>';														// Unit Page Breadcrumb
+	} else if ($currentPostType == 'modules') {
+		
+		if(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') {							// Only Show Unit Page in Breadcrumb if unitsModulesLessons are selected
+			$getUnitConnection = new WP_Query ( array(
+				'connected_type' => 'units_to_modules',
+				'connected_items' => get_queried_object(),
+			));
+			while ($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
+				echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>'; 	// Module Page Breadcrumb
+			endwhile;
+			wp_reset_postdata();
+		}
+		echo '<li class="active">'.get_the_title().'</li>';
 
-		// Unit Page Breadcrumb
-		if ($currentPostType == 'units') {
-			echo '<li class="active">'.get_the_title().'</li>';
-		// Unit Page Breadcrumb
-		} else if ($currentPostType == 'modules') {
+	// Lesson Page Breadcrumb
+	} else if ($currentPostType == 'lessons') {
+		$getModuleConnection = new WP_Query ( array(
+			'connected_type' => 'modules_to_lessons',
+			'connected_items' => $post->ID,
+		));
+		while ($getModuleConnection->have_posts()) : $getModuleConnection->the_post();
+			$currentModuleTitle = get_the_title();
+			$currentModulePermalink = get_permalink();
 			// Only Show Unit Page in Breadcrumb if unitsModulesLessons are selected
 			if(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') {
-				$getUnitConnection = new WP_Query ( array(
+				$getNewUnitConnection = new WP_Query ( array(
 					'connected_type' => 'units_to_modules',
-					'connected_items' => get_queried_object(),
-				));
-				while ($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
+					'connected_items' => $post->ID,
+					'nopaging' => true
+				));			
+				while ($getNewUnitConnection->have_posts()) : $getNewUnitConnection->the_post();
 					echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>';
 				endwhile;
 				wp_reset_postdata();
 			}
-			echo '<li class="active">'.get_the_title().'</li>';
+			echo '<li><a href="'.$currentModulePermalink.'">'.$currentModuleTitle .'</a> <span class="divider">/</span></li>';
+		endwhile;
+		wp_reset_postdata();
+		
+		// Lesson module
+		echo '<li class="active">'.get_the_title().'</li>';
 
-		// Lesson Page Breadcrumb
-		} else if ($currentPostType == 'lessons') {
-			$getModuleConnection = new WP_Query ( array(
-				'connected_type' => 'modules_to_lessons',
-				'connected_items' => $post->ID,
-			));
-			while ($getModuleConnection->have_posts()) : $getModuleConnection->the_post();
-				
-				// Only Show Unit Page in Breadcrumb if unitsModulesLessons are selected
-				if(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') {
-					$getNewUnitConnection = new WP_Query ( array(
-						'connected_type' => 'units_to_modules',
-						'connected_items' => $post->ID,
-						'nopaging' => true
-					));			
-					while ($getNewUnitConnection->have_posts()) : $getNewUnitConnection->the_post();
-						echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>';
-					endwhile;
-					wp_reset_postdata();
-				}
-				echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a> <span class="divider">/</span></li>';
-			endwhile;
-			wp_reset_postdata();
-			
-			// Lesson module
-			echo '<li class="active">'.get_the_title().'</li>';
-
-		}
+	}
 	echo '</ul>'; // .breadcrumbs
 }
 endif;
@@ -342,7 +338,6 @@ function dcdc_footer_credits() {
 	echo '</span>';
 
 	// course secondary brand
-
 	echo ' | Made by <a href="http://www.hawaii.edu/coe/dcdc/" title="Visit the makers of this course">DCDC</a>';
 	echo ' | <a href="#" title="Help us improve the quality of our courses">Rate This Course</a>';
 	echo '</div>';
@@ -350,76 +345,82 @@ function dcdc_footer_credits() {
 endif;
 
 if ( ! function_exists( 'dcdc_get_module_count') ) :
-/**
- * Footer Credits
- */
-function dcdc_get_module_count() {
-	// Construct Sidebar Menu
-	if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
-		$currentPostType = get_post_type();
-		$currentPostID = $post->ID;
-		// Count Modules or Lessons
-		if ($currentPostType == 'modules') {
-			$getUnitConnection = new WP_Query ( array(
-				'connected_type' => 'units_to_modules',
-				'connected_items' => get_queried_object(),
-			));
+	/**
+	 * Module Count
+	 */
+	function dcdc_get_module_count() {
+		if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
+			global $post;
+			echo '<span class="moduleCount">Module ' .$post->menu_order. '</span>';
 
-			while($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
-				$i = 0;
-				$moduleCount = new WP_Query ( array(
-					'connected_type' => 'units_to_modules',
-					'connected_items' => $post->ID,
+		} elseif (get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') { 					// If unitsModulesLessons
+			global $post;
+			$currentPostType = get_post_type();
+
+			if ($currentPostType == 'modules'):
+				$currentPostID = $post->ID;
+				$getUnits = new WP_Query ( array(																							// Query all the units from first to last
+					'post_type' => 'units',
+					'order' => 'ASC',
+					'orderby' => 'menu_order'
 				));
-
-				while($moduleCount->have_posts()) : $moduleCount->the_post();
-					$postID = $post->ID;
-					if($currentPostID == $postID) {
-						echo '<span class="moduleCount">Module ' .$i. '</span>';
-					}
-					$i++;
+				p2p_type( 'units_to_modules' )->each_connected( $getUnits, array(), 'modules' );
+				$moduleCount = 1;
+				while ($getUnits->have_posts()) : $getUnits->the_post();																	
+					foreach ( $post->modules as $post ) : setup_postdata( $post );							// Get all Modules connected to said units
+					if ($currentPostID == $post->ID):
+						echo '<span class="moduleCount">Module ' .$moduleCount. '</span>';				// When iteration lands on current module, print $i
+					endif;
+					$moduleCount++;
+					endforeach;
+					endwhile;
+				wp_reset_postdata();
+			elseif ($currentPostType == 'lessons'):	
+				$currentPostID = $post->ID;
+				$getCurrentLesson = new WP_Query ( array( 																		// Query connected module (there can be only one!)
+					'post_type' => 'lessons',
+					'connected_type' => 'modules_to_lessons',
+	  			'connected_items' => get_queried_object(),
+				));
+				while ($getCurrentLesson->have_posts()) : $getCurrentLesson->the_post();
+					$parentModuleID = $post->ID;																								// Set connected module's ID as the "parent" ID
 				endwhile;
 				wp_reset_postdata();
 
-			endwhile;
-			wp_reset_postdata();
-
-		} else if ($currentPostType == 'lessons') {
-			// if lessons
-		}
-	} else {
-		// If unitsModulesLessons
-		$currentPostType = get_post_type();
-		$currentPostID = $post->ID;
-		// Count Modules or Lessons
-		if ($currentPostType == 'modules') {
-			$getUnitConnection = new WP_Query ( array(
-				'connected_type' => 'units_to_modules',
-				'connected_items' => get_queried_object(),
-			));
-
-			while($getUnitConnection->have_posts()) : $getUnitConnection->the_post();
-				$i = 0;
-				$moduleCount = new WP_Query ( array(
-					'connected_type' => 'units_to_modules',
-					'connected_items' => $post->ID,
+				$getUnits = new WP_Query ( array(																							// Query all the units from first to last
+					'post_type' => 'units',
+					'order' => 'ASC',
+					'orderby' => 'menu_order'
 				));
-
-				while($moduleCount->have_posts()) : $moduleCount->the_post();
-					$postID = $post->ID;
-					if($currentPostID == $postID) {
-						echo 'Module' . $i;
-					}
-					$i++;
+				p2p_type( 'units_to_modules' )->each_connected( $getUnits, array(), 'modules' );
+				$moduleCount = 1;																															// Start our module count at one
+				while ($getUnits->have_posts()) : $getUnits->the_post();
+					if ($post->modules):																												// Get all Modules connected to said units
+						foreach ( $post->modules as $post ) : setup_postdata( $post );								
+							if ($parentModuleID == $post->ID):																			// If module is current parent Module
+							echo '<span class="moduleCount">Module ' .$moduleCount. '</span>';			// GET MODULE COUNT
+							$lessonCount = 1;																												// Now that the query is on the "parent" post
+							$getLessons = new WP_Query ( array( 																		// Query all lessons associated with this (the parent Module)
+								'post_type' => 'modules',
+								'page_id' => $post->ID, 
+							));
+							p2p_type( 'modules_to_lessons' )->each_connected( $getLessons, array(), 'lessons' );
+							while ($getLessons->have_posts()) : $getLessons->the_post();
+								foreach ( $post->lessons as $post ) : setup_postdata( $post );				// Iterate through all lessons of the parent Module
+								if($currentPostID == $post->ID):
+								echo '<span class="lessonCount">Lesson ' .$lessonCount. '</span>';		// GET LESSON COUNT
+								endif;
+								$lessonCount++;
+								endforeach;
+							endwhile;
+							wp_reset_postdata();
+							endif; // current post module
+							$moduleCount++;
+						endforeach;
+					endif; // $post->modules
 				endwhile;
 				wp_reset_postdata();
-
-			endwhile;
-			wp_reset_postdata();
-
-		} else if ($currentPostType == 'lessons') {
-			// if lessons
-		}
-	}
-} // dcdc_get_module_count());
-endif;
+			endif; // currentPostType lessons/modules
+		} // If unitsModulesLessons
+	} // dcdc_get_module_count());
+endif; // Function exists
