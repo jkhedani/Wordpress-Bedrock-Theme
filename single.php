@@ -7,13 +7,12 @@
  */
 
 get_header(); ?>
-	<div class="row-fluid">
-			<?php dcdc_get_breadcrumbs(); ?>
-	</div>
+	<div class="row-fluid"></div>
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
 		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">
 
+			<?php dcdc_get_breadcrumbs(); ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php get_template_part( 'content', 'single' ); ?>

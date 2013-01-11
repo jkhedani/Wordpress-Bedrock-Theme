@@ -51,73 +51,66 @@
 			} else {
 				echo '<img src="http://placehold.it/300x171" alt="placeholder" />';
 			}
-			
-			//echo '<hr />';
 
-			if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
+			// Sidebar Menu
+			if(get_post_type() == 'modules') {
+				echo '<h3 class="sidebar-nav-title">'.get_the_title().'</h3>';
+				$sidebarNavContent = new WP_Query ( array(
+					'connected_type' => 'modules_to_lessons',
+					'connected_items' => get_queried_object(),
+				));
 
-				if(get_post_type() == 'modules') {
-					echo '<h3 class="sidebar-nav-title">'.get_the_title().'</h3>';
-					$sidebarNavContent = new WP_Query ( array(
-						'connected_type' => 'modules_to_lessons',
-						'connected_items' => get_queried_object(),
-					));
-
-					echo '<ol class="lessons">';
-					if ($sidebarNavContent->have_posts()) {
-						while($sidebarNavContent->have_posts()) : $sidebarNavContent->the_post();
-							echo '<li class="lesson"><a class="lesson-link" href="'.get_permalink().'">'.get_the_title().'</a></li>';
-						endwhile;
-						wp_reset_postdata();
-						
-					}
-					if (is_user_logged_in()) {
-						echo '<li class="lesson no-content"><a class="btn btn-primary" href="'.admin_url( 'post-new.php?post_type=lessons' ).'" title="Create a lesson in this module.">Create</a> or ';
-						echo '<a class="btn btn-primary" href="'.admin_url('edit.php?post_type=lessons').'" title="Attach a lesson to this module.">attach</a> a lesson.</li>';
-					}
-					echo '</ol>'; // end lessons
-
-				} elseif (get_post_type() == 'lessons') {
-
-					$currentPostID = $post->ID;
-					$sidebarNavContent = new WP_Query ( array(
-						'connected_type' => 'modules_to_lessons',
-						'connected_items' => get_queried_object(),
-						'nopaging' => true,
-					));
-					if ($sidebarNavContent->have_posts()) {
-
-						while($sidebarNavContent->have_posts()) : $sidebarNavContent->the_post();
-							echo '<h3 class="sidebar-nav-title"><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
-							$parentID = $post->ID;
-							$getConnectedToParent = new WP_Query( array(
-								'connected_type' => 'modules_to_lessons',
-								'connected_items' => $parentID,
-								'nopaging' => true
-							));
-							if($getConnectedToParent->have_posts()) {
-								echo '<ol class="lessons">';
-								while($getConnectedToParent->have_posts()) : $getConnectedToParent->the_post();
-									$postID = $post->ID;
-									echo '<li class="lesson"><a class="lesson-link" ';
-									if ($currentPostID == $postID) {
-										$postType = get_post_type($postID);
-										$postTypeObject = get_post_type_object($postType);
-										echo 'class="current'.$postTypeObject->labels->singular_name.'"';
-									}
-									echo ' href="'.get_permalink().'">'.get_the_title().'</a></li>';
-								endwhile;
-								wp_reset_postdata();
-								echo '</ol>';
-							}
-						endwhile;
-						wp_reset_postdata();
-					 // end lessons
-					}
-			
+				echo '<ol class="lessons">';
+				if ($sidebarNavContent->have_posts()) {
+					while($sidebarNavContent->have_posts()) : $sidebarNavContent->the_post();
+						echo '<li class="lesson"><a class="lesson-link" href="'.get_permalink().'">'.get_the_title().'</a></li>';
+					endwhile;
+					wp_reset_postdata();
+					
 				}
-			} else {
-				// Units, Modules & Lessons call
+				if (is_user_logged_in()) {
+					echo '<li class="lesson no-content"><a class="btn btn-primary" href="'.admin_url( 'post-new.php?post_type=lessons' ).'" title="Create a lesson in this module.">Create</a> or ';
+					echo '<a class="btn btn-primary" href="'.admin_url('edit.php?post_type=lessons').'" title="Attach a lesson to this module.">attach</a> a lesson.</li>';
+				}
+				echo '</ol>'; // end lessons
+
+			} elseif (get_post_type() == 'lessons') {
+
+				$currentPostID = $post->ID;
+				$sidebarNavContent = new WP_Query ( array(
+					'connected_type' => 'modules_to_lessons',
+					'connected_items' => get_queried_object(),
+					'nopaging' => true,
+				));
+				if ($sidebarNavContent->have_posts()) {
+
+					while($sidebarNavContent->have_posts()) : $sidebarNavContent->the_post();
+						echo '<h3 class="sidebar-nav-title"><a href="'.get_permalink().'">'.get_the_title().'</a></h3>';
+						$parentID = $post->ID;
+						$getConnectedToParent = new WP_Query( array(
+							'connected_type' => 'modules_to_lessons',
+							'connected_items' => $parentID,
+							'nopaging' => true
+						));
+						if($getConnectedToParent->have_posts()) {
+							echo '<ol class="lessons">';
+							while($getConnectedToParent->have_posts()) : $getConnectedToParent->the_post();
+								$postID = $post->ID;
+								echo '<li class="lesson"><a class="lesson-link" ';
+								if ($currentPostID == $postID) {
+									$postType = get_post_type($postID);
+									$postTypeObject = get_post_type_object($postType);
+									echo 'class="current'.$postTypeObject->labels->singular_name.'"';
+								}
+								echo ' href="'.get_permalink().'">'.get_the_title().'</a></li>';
+							endwhile;
+							wp_reset_postdata();
+							echo '</ol>';
+						}
+					endwhile;
+					wp_reset_postdata();
+				 // end lessons
+				}
 			}
 
 
