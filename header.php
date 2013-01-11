@@ -64,7 +64,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <div class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></div>
+        <a href="<?php echo home_url(); ?>" class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></a>
         <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
         <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
         <nav class="nav-collapse collapse pull-right">
