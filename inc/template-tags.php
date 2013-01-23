@@ -312,7 +312,7 @@ function dcdc_footer_credits() {
 			echo 	get_the_author_meta('first_name',$userID) . ' ';
 			echo 	get_the_author_meta('last_name',$userID);
 			echo '<span class="sep"> | </span>';
-			echo 	get_the_author_meta('user_email',$userID);
+			echo '<a href="mailto:'.get_the_author_meta('user_email',$userID).'?Subject=Hello%20Professor" title="Send an email to your instructor">'.get_the_author_meta('user_email',$userID).'</a>';
 			echo '<span class="sep"> | </span>';
 			echo 	get_the_author_meta('office_hours',$userID);
 			echo '<span class="sep"> | </span>';
@@ -351,7 +351,8 @@ if ( ! function_exists( 'dcdc_get_module_count') ) :
 	function dcdc_get_module_count() {
 		if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
 			global $post;
-			echo '<span class="moduleCount">Module ' .$post->menu_order. '</span>';
+			$menuOrder = $post->menu_order;
+			echo '<span class="moduleCount">Module ' .++$menuOrder. '</span>'; // Increment needed as menu_order starts at 0
 
 		} elseif (get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') { 					// If unitsModulesLessons
 			global $post;
