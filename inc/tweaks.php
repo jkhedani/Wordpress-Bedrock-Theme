@@ -332,7 +332,7 @@ function course_page_types() {
 		'public' => true,
 		'capability_type' => 'page',
 		'hierarchical' => true,
-		'supports' => array('title', 'page-attributes', 'thumbnail'),
+		'supports' => array('title', 'page-attributes', 'thumbnail', 'revisions'),
 		'labels' => $labels,
 		)
 	);
@@ -355,7 +355,7 @@ function course_page_types() {
 		'capability_type' => 'page',
 		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
-		'supports' => array('title', 'editor', 'thumbnail'),
+		'supports' => array('title', 'editor', 'thumbnail','revisions'),
 		'labels' => $labels,
 		)
 	);
@@ -378,7 +378,7 @@ function course_page_types() {
 		'capability_type' => 'page',
 		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
-		'supports' => array('title', 'editor', 'thumbnail'),
+		'supports' => array('title', 'editor', 'thumbnail','revisions'),
 		'labels' => $labels,
 		)
 	);
