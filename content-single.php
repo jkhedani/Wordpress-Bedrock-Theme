@@ -16,7 +16,13 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php the_content(); ?>
+		<?php
+		if($post->post_content=="") {
+			echo '<p class="muted helper-text">You currently have no content. Add some <a href="'.get_edit_post_link().'" title="Edit this piece of content">here.</a></p>';
+		} else {
+			the_content();
+		}
+		?>
 		<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', '_s' ), 'after' => '</div>' ) ); ?>
 	</div><!-- .entry-content -->
 
