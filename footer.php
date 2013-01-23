@@ -10,7 +10,7 @@
 ?>
 
 	</div><!-- #main .site-main -->
-
+	</div><!-- #page .hfeed .site -->
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="container">
 			<div class="site-info">
@@ -18,7 +18,7 @@
 			</div><!-- .site-info -->
 		</div><!-- .container -->
 	</footer><!-- #colophon .site-footer -->
-</div><!-- #page .hfeed .site -->
+
 
 <?php wp_footer(); ?>
 
