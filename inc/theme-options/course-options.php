@@ -16,7 +16,6 @@ function courses_customize_register($wp_customize) {
     }
   }
 
-
   // SECTIONS
 
   // SECTION: Course Description
@@ -37,9 +36,15 @@ function courses_customize_register($wp_customize) {
     'priority'       => 35,
   ));
 
+  // SECTION: Home Representative Image
+  $wp_customize->add_section( 'home_representative_image', array(
+     'title'          => __( 'Course Home Image' ),
+     //'theme_supports' => 'custom-background',
+     'priority'       => 80,
+  ));
+
   // SECTION: Remove some default sections
   $wp_customize->remove_section( 'static_front_page');
-
 
   // SETTINGS
 
@@ -64,6 +69,18 @@ function courses_customize_register($wp_customize) {
   // SETTING: Branding[College Affiliation]
   $wp_customize->add_setting( 'courses_branding_college_affil', array(
     'default'        => 'system',
+    'transport'      => 'postMessage'
+  ));
+
+  // SETTING: Home Representative Image Uploader
+  $wp_customize->add_setting( 'courses_home_representative_image', array(
+    'default'        => '',
+    'transport'      => 'postMessage'
+  ));
+
+  // SETTING: Home Representative Image Options
+  $wp_customize->add_setting( 'courses_home_representative_image_options', array(
+    'default'        => 'normal',
     'transport'      => 'postMessage'
   ));
 
@@ -112,6 +129,26 @@ function courses_customize_register($wp_customize) {
       'system' => 'UH System',
       'manoa' => 'UH Manoa',
       'hcc' => 'Honolulu Community College',
+    ),
+  ));
+
+  // CONTROL: Home Representative Image Uploader
+  $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'courses_home_representative_image', array(
+    'label'      =>  __( 'Upload an image for the home page', 'courses' ),
+    'section'    => 'home_representative_image',
+    'settings'   => 'courses_home_representative_image',
+  )));
+
+  // CONTROL: Home Representative Image Options
+  $wp_customize->add_control( 'ourses_home_representative_image_options', array(
+    'label'      => __( 'Choose an image location', 'courses' ),
+    'section'    => 'home_representative_image',
+    'settings'   => 'courses_home_representative_image_options',
+    'type'       => 'radio',
+    'choices'    => array(
+      'normal'         => 'Normal',
+      'fullSidebar'    => 'Full Background in Sidebar',
+      'fullBackground' => 'Full Background Entire Page',
     ),
   ));
 
