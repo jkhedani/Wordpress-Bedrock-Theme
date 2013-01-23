@@ -31,8 +31,35 @@
   // Course Affiliations
   wp.customize('courses_branding_college_affil',function( value ) {
     value.bind(function(to) {
+      // Set color and logo in NAVBAR
       $('#navbar .site-affiliation').attr('data-affil',to);
-      $('.college-branding').attr('data-affil',to);
+      // Set logo in SIDEBAR on home page 
+      if (to=='default') {
+        $('.college-branding img[data-affil*="manoa"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="system"]').toggleClass('hide',false);
+        $('.college-branding img[data-affil*="kcc"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="hcc"]').toggleClass('hide',true);
+      } else if (to=='manoa') {
+        $('.college-branding img[data-affil*="manoa"]').toggleClass('hide',false);
+        $('.college-branding img[data-affil*="system"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="kcc"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="hcc"]').toggleClass('hide',true);
+      } else if (to=='system'){
+        $('.college-branding img[data-affil*="manoa"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="system"]').toggleClass('hide',false);
+        $('.college-branding img[data-affil*="kcc"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="hcc"]').toggleClass('hide',true);
+      } else if (to=='kcc') {
+        $('.college-branding img[data-affil*="manoa"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="system"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="kcc"]').toggleClass('hide',false);
+        $('.college-branding img[data-affil*="hcc"]').toggleClass('hide',true);
+      } else if (to=='hcc') {
+        $('.college-branding img[data-affil*="manoa"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="system"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="kcc"]').toggleClass('hide',true);
+        $('.college-branding img[data-affil*="hcc"]').toggleClass('hide',false);
+      }
     });
   });
 

@@ -6838,27 +6838,6 @@ header#navbar .navbar-inner nav .caret {
   padding-bottom: 24px;
   border-bottom: 1px solid #FFF;
 }
-#main .intro-banner .college-branding[data-affil=default] img {
-  margin: -588px 0 0 0;
-}
-#main .intro-banner .college-branding[data-affil=system] img {
-  margin: -588px 0 0 0;
-}
-#main .intro-banner .college-branding[data-affil=manoa] img {
-  margin: -478px 0 0 0;
-}
-#main .intro-banner .college-branding[data-affil=hcc] {
-  height: 86px;
-}
-#main .intro-banner .college-branding[data-affil=hcc] img {
-  margin: -702px 0 0 0;
-}
-#main .intro-banner .college-branding[data-affil=kcc] {
-  height: 86px;
-}
-#main .intro-banner .college-branding[data-affil=kcc] img {
-  margin: -702px 0 0 0;
-}
 #main .intro-banner .welcome {
   font-size: 25px;
 }
@@ -7259,27 +7238,6 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
   #main .intro-banner h1 {
     font-size: 48px;
   }
-  #main .intro-banner .college-branding[data-affil=default] img {
-    margin: -448px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=system] img {
-    margin: -448px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=manoa] img {
-    margin: -363px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] {
-    height: 86px;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] img {
-    margin: -539px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] {
-    height: 86px;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] img {
-    margin: -539px 0 0 0;
-  }
   body.modules-lessons.single-layout #main ol.modules li.module:nth-child(1) {
     display: none;
   }
@@ -7296,27 +7254,6 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
   }
   #main .intro-banner h1 {
     font-size: 45px;
-  }
-  #main .intro-banner .college-branding[data-affil=default] img {
-    margin: -423px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=system] img {
-    margin: -423px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=manoa] img {
-    margin: -344px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] {
-    height: 86px;
-  }
-  #main .intro-banner .college-branding[data-affil=hcc] img {
-    margin: -511px 0 0 0;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] {
-    height: 86px;
-  }
-  #main .intro-banner .college-branding[data-affil=kcc] img {
-    margin: -511px 0 0 0;
   }
   #main footer {
     width: 100%;
