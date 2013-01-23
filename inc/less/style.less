@@ -31,10 +31,40 @@
  */
 
 h1.site-title a:visited { color: @grayLighter; }
+.helper-text {
+	a,
+	a:link,
+	a:visited {
+		color: @linkColor;
+		text-decoration: underline;
+	}
+}
+.breadcrumb a { color: @linkColor; }
 .crumbSpacer { margin: 0 10px; color: @gray; }
 
+body > img.full-background-image {
+	/* Set rules to fill background */
+	min-height: 100%;
+	min-width: 1024px;
+	
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+	
+	/* Set up positioning */
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -9;
+}
+.alert.container {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+}
+
 header#navbar { 
-	#mixin > .shadow(0 0 8px 1px, #AAA, false);
+	#mixin > .shadow(0 0 8px 1px, #111, false);
 	.btn-primary { padding: 2px 14px; margin-top: 7px; } // "Add a Menu!" button
 	.navbar-inner {
 		border: none;
@@ -62,7 +92,8 @@ header#navbar {
 #main { min-height: 600px;
 	.intro-banner {
 		padding: 20px;
-		background-color: #1B1B1B; color: #FFF;
+		background-color: #1B1B1B;
+		color: #FFF;
 		position: relative;
 		.college-branding {
 			height: 39px;
@@ -79,12 +110,23 @@ header#navbar {
 		.welcome { font-size: 25px; }
 		h1 { font-size: 51px; font-weight: normal; margin: 11px 0 19px 0; } // Course Number
 		img { margin: 10px 0 0 0; }
+		&.full-background {
+			background: none;
+			min-height: 543px;
+			img.full-background-image {
+				position: absolute;
+				z-index: -1;
+				top: 0;
+				left: 0;
+				margin: 0;
+			}
+		}
 	}
 	.no-content {
 		//height: 200px;
 		padding: 20px 15px;
 		text-align: center;
-		border: 6px dashed #CCC;
+		border: 4px dashed #CCC;
 		font-size: 16px;
 		color: @gray;
 		.border-radius(4px); 
@@ -109,14 +151,16 @@ header#navbar {
 		background: url('../images/edit-gear.png') no-repeat;
 	}
 	#content {
-		span.moduleCount { color: @grayLight; font-weight: bold; font-size: 16px; }
+		span.moduleCount { color: @gray; font-size: 16px; }
 		h1.entry-title { margin: 2px 0 7px }
 		.entry-content {
+			min-height: 300px;
 			// Content typography
 			h1 { font-size: 30px; line-height: 40px; }
 			h2 { font-size: 24px; line-height: 40px; }
 			h3 { font-size: 18px; line-height: 40px; }
 			blockquote { border-left: 5px solid #CCC; }
+			iframe { margin: 10px 0; }
 		}
 	}
 	#secondary {
@@ -125,6 +169,7 @@ header#navbar {
 			padding: 3px 15px 5px;
 			color: @white;
 			background-color: @grayDark;
+			font-weight: normal;
 			a { color: @white; }
 		}// h3.sidebar-nav-title
 		ol.lessons {
@@ -153,130 +198,7 @@ header#navbar {
 		}
 	}
 }
-footer { margin: 10px 0 0 0; }
-
-/**
- * Media Queries
- */
-
-// And Beyond...
-@media (min-width: 1200px) {
-	#main {
-		.intro-banner {
-			.college-branding { background-size: auto; }
-		}
-	}
-	body.modules-lessons {
-		&.single-layout {
-			ol.modules li.module {
-				&:nth-child(1) { display: none; } //#inline-intro-banner
-				&:nth-child(3n+2) { margin-left: 0; }
-			}
-		}
-	}
-}
-
-// Largest
-@media (max-width: 1200px) and (min-width: 979px) {
-	#main {
-		.intro-banner {
-			h1 { font-size: 48px; }
-			.college-branding {
-				&[data-affil=default] { img { margin: -448px 0 0 0; } }
-				&[data-affil=system] { img { margin: -448px 0 0 0; } }
-				&[data-affil=manoa] { img { margin: -363px 0 0 0; } }
-				&[data-affil=hcc] { height: 86px; img { margin: -539px 0 0 0; } }
-				&[data-affil=kcc] { height: 86px; img { margin: -539px 0 0 0;} }
-			}
-		}
-	}
-	body.modules-lessons {
-		&.single-layout {
-			ol.modules li.module {
-				&:nth-child(1) { display: none; } //#inline-intro-banner
-				&:nth-child(3n+2) { margin-left: 0; }
-			}
-		}
-	}
-}
-
-// Normal
-@media (max-width: 979px) and (min-width: 768px) {
-	body.modules-lessons.single-layout {
-		#intro-banner { display: none; }
-		#inline-intro-banner { width: 100%; height: 100%; }
-		#primary { width: 100%; margin: 0; }
-	}
-	#navbar {
-		.navbar-inner { padding: 0; }
-	}
-	#main {
-		#primary {
-			width: 720px;
-			margin: 0 auto;
-			float: none;
-		}
-		.intro-banner {
-			h1 { font-size: 45px; }
-			.college-branding {
-				&[data-affil=default] { img { margin: -423px 0 0 0; } }
-				&[data-affil=system] { img { margin: -423px 0 0 0; } }
-				&[data-affil=manoa] { img { margin: -344px 0 0 0; } }
-				&[data-affil=hcc] { height: 86px; img { margin: -511px 0 0 0; } }
-				&[data-affil=kcc] { height: 86px; img { margin: -511px 0 0 0;} }
-			}
-		}
-	}
-	body.modules-lessons {
-		&.single-layout {
-			ol.modules li.module {
-				&:nth-child(3n+1) { margin-left: 0; }
-			}
-		}
-	}
-}
-
-// Tablet
-@media (min-width: 480px) and (max-width: 768px) {
-	#navbar {
-		.navbar-inner { padding: 0; }
-	}
-	#main {
-		.intro-banner {
-			h1 { font-size: 42px; }
-		}
-	}
-	body.modules-lessons.single-layout {
-		#intro-banner { display: none; }
-		#inline-intro-banner { width: 100%; height: 100%; }
-		#primary { width: 100%; }
-		ol.modules li.module {
-			width: 47%;
-			float: left;
-			&:nth-child(2n+2){ margin-left: 15px; }
-		}
-	}
-}
-
-// Phones
-@media (max-width: 480px) {
-	#navbar {
-		.navbar-inner { padding: 0; }
-	}
-	.module-image { display: none; }
-	body.modules-lessons.single-layout {
-		#intro-banner { display: none; }
-		#inline-intro-banner { width: 100%; height: 100%; }
-		#primary { width: 100%; margin: 0; }
-		ol.modules li.module {
-			width: 100%;
-		}
-	}
-}
-
-@media (max-width: 320px) {
-
-}
+footer { margin: 10px 0 0 0; background-color: @grayLighter; }
 
 // Course Template Styles: Modules & Lessons
 body.modules-lessons {
@@ -297,7 +219,6 @@ body.modules-lessons {
 						.module-image { margin: 10px 15px; max-height: 128px; overflow: hidden; }
 						.module-content { margin: 10px 15px; }
 					}
-					
 					&.last { background: none; } // Clear background color for "+ Content" list item
 					.no-content {
 						a { min-height: 0; margin: 20px 0 22px 0; }
@@ -335,7 +256,13 @@ body.modules-lessons {
 						margin: 40px 0 0 0;
 						padding: 12px 15px 10px 15px;
 						hr { border-top: none; border-bottom: none; }
-						.module-title { font-weight: normal; font-size: 22px; line-height: 1.3; margin: 0 0 10px 0; color: #FFF; }
+						.module-title {
+							font-weight: normal;
+							font-size: 22px;
+							line-height: 1.3;
+							margin: 0 0 10px 0;
+							a { color: #FFF; }
+						}
 						.module-content { margin: 10px 0 0; color: #FFF;
 							a { color: @linkColor; }
 						}
@@ -395,6 +322,190 @@ body.units-modules-lessons {
 	}
 }
 
+/**
+ * Media Queries
+ */
+
+// And Beyond...
+@media (min-width: 1200px) {
+	#main {
+		.intro-banner {
+			.college-branding { background-size: auto; }
+		}
+	}
+	body.modules-lessons {
+		&.single-layout {
+			ol.modules li.module {
+				&:nth-child(1) { display: none; } //#inline-intro-banner
+				&:nth-child(3n+2) { margin-left: 0; }
+			}
+		}
+	}
+}
+
+// Largest
+@media (max-width: 1200px) and (min-width: 979px) {
+	#main {
+		.intro-banner {
+			h1 { font-size: 48px; }
+			.college-branding {
+				&[data-affil=default] { img { margin: -448px 0 0 0; } }
+				&[data-affil=system] { img { margin: -448px 0 0 0; } }
+				&[data-affil=manoa] { img { margin: -363px 0 0 0; } }
+				&[data-affil=hcc] { height: 86px; img { margin: -539px 0 0 0; } }
+				&[data-affil=kcc] { height: 86px; img { margin: -539px 0 0 0;} }
+			}
+		}
+	}
+	body.modules-lessons {
+		&.single-layout {
+			#main {
+				ol.modules li.module {
+					&:nth-child(1) { display: none; } //#inline-intro-banner
+					&:nth-child(3n+2) { margin-left: 0; }
+				}
+			}
+		}
+	} // body.modules-lessons
+	body.units-modules-lessons {
+		#main {
+			ol.modules {
+				li.module a {
+					.module-title-wrapper { width: 186px; }
+				}
+			}
+		}
+	} // body.units-modules-lessons
+}
+
+// Normal
+@media (max-width: 979px) and (min-width: 768px) {
+	#navbar {
+		.navbar-inner { padding: 0; }
+	}
+	#main {
+		.intro-banner {
+			h1 { font-size: 45px; }
+			.college-branding {
+				&[data-affil=default] { img { margin: -423px 0 0 0; } }
+				&[data-affil=system] { img { margin: -423px 0 0 0; } }
+				&[data-affil=manoa] { img { margin: -344px 0 0 0; } }
+				&[data-affil=hcc] { height: 86px; img { margin: -511px 0 0 0; } }
+				&[data-affil=kcc] { height: 86px; img { margin: -511px 0 0 0;} }
+			}
+		}
+		//#secondary { display: none; }
+		footer { width: 100%; }
+	}
+	body.home.modules-lessons {
+		&.single-layout {
+			#main {
+				#intro-banner { display: none; }
+				#inline-intro-banner { width: 100%; height: 100%; }
+				#primary { width: 100%; margin: 0;
+					ol.modules li.module {
+						&:nth-child(3n+1) { margin-left: 0; }
+					}
+				}
+			}
+		}
+		&.nested-layout {
+			#main { min-width: 830px; }
+			#intro-banner {
+				min-width: 240px; // Prevent percentage shrinking (basically, disabling responsiveness)
+			}
+			#primary {
+				max-width: 568px;
+			}
+		}
+	} // body.modules-lessons
+	body.home.units-modules-lessons {
+		#main {
+			#primary {
+				width: 720px;
+				margin: 0 auto;
+				float: none;
+			}
+			#intro-banner {
+				display: none;
+			}
+			ol.modules {
+				li.module a {
+					.module-title-wrapper { width: 193px; }
+				}
+			}
+		}
+	} // body.units-modules-lessons
+} // @media max: 979, min: 768px;
+
+// Tablet
+@media (min-width: 480px) and (max-width: 768px) {
+	#navbar {
+		.navbar-inner { padding: 0; }
+	}
+	#main {
+		.intro-banner {
+			h1 { font-size: 42px; }
+		}
+		#secondary { display: none; }
+	}
+	body.modules-lessons {
+		&.single-layout {
+			#intro-banner { display: none; }
+			#inline-intro-banner { width: 100%; height: 100%; }
+			#primary { width: 100%; }
+			ol.modules li.module {
+				width: 47%;
+				float: left;
+				&:nth-child(2n+2){ margin-left: 15px; }
+			}
+		}
+		&.nested-layout {
+			#main { min-width: 830px; }
+			#intro-banner {
+				max-width: 240px; // Prevent percentage shrinking (basically, disabling responsiveness)
+			}
+			#primary {
+				max-width: 568px;
+			}
+		}
+	}
+	body.units-modules-lessons {
+		#main {
+			#intro-banner { display: none; }
+		}
+	}
+}
+
+// Phones
+@media (max-width: 480px) {
+	#navbar {
+		.navbar-inner { padding: 0; }
+	}
+	#main {
+		#secondary { display: none; }
+		footer {
+			.pager {
+				margin: 0;
+				a { float: left; margin-bottom: 5px; }
+			}
+		}
+	}
+	.module-image { display: none; }
+	body.modules-lessons.single-layout {
+		#intro-banner { display: none; }
+		#inline-intro-banner { width: 100%; height: 100%; }
+		#primary { width: 100%; margin: 0; }
+		ol.modules li.module {
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 320px) {
+
+}
+
 
 // Course Template Styles: Quick Fixes
 // FIX: Override some call somewhere that is miscalculating the width
@@ -406,5 +517,3 @@ body.units-modules-lessons {
 		padding-right: 20px;
 	}
 }
-
-// Custom Styles
