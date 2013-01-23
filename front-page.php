@@ -69,6 +69,7 @@ get_header(); ?>
 
 
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
+							$ismore = @strpos( $post->post_content, '<!--more-->');
 							echo '<li class="module span5"><a href="'.get_permalink().'" title="Go to this module.">';
 							echo 		'<div class="module-count">Module '.$moduleCounter.'</div>';
 							echo 		'<h2 class="module-title">'.get_the_title().'</h2>';
@@ -80,10 +81,10 @@ get_header(); ?>
 							}
 							echo 		'</div>';
 							echo 		'<div class="module-content">';
-							if (get_the_content()) {
+							if ((get_the_content()) && $ismore) { // There needs to be content as well as a <!--more--> tag
 							echo 		'<p>'.get_the_content('', true).'</p>';
 							} else {
-							echo 		'<p>You don&#39;t have a module blurb yet.</p>';
+							echo 		'<p class="muted helper-text">You don&#39;t have a module blurb yet.</p>';
 							} // endif
 							echo 		'</div>';
 							if (is_user_logged_in()) {
@@ -142,7 +143,7 @@ get_header(); ?>
 							echo 		'</div>';
 							echo 	'<div class="module-count">Module '.$moduleCounter.'</div>';
 							echo 	'<div class="module-content-wrapper">';
-							echo 	'<h2 class="module-title">'.get_the_title().'</h2>';
+							echo 	'<h2 class="module-title"><a href="'.get_permalink().'" title="Go the the '.get_the_title().' module">'.get_the_title().'</a></h2>';
 							echo 	'<div class="module-content">';
 							if (get_the_content()) {
 								echo 		'<p>'.get_the_content('', true).'</p>';
@@ -152,11 +153,13 @@ get_header(); ?>
 							echo 	'<hr />';
 								if ($post->lessons) {
 									echo '<ol class="lessons">';
+									$lessonCounter = 1;
 									foreach ( $post->lessons as $post ) : setup_postdata( $post );
 									echo 	'<li class="lesson">';
-									echo 		'<a href="'.get_permalink().'" title="Go to the '.get_the_title().' lesson">' . get_the_title() . '</a>';
+									echo 		'<a href="'.get_permalink().'" title="Go to the '.get_the_title().' lesson">Lesson '.$moduleCounter.'.'.$lessonCounter.' '.get_the_title(). '</a>';
 									echo 		'<a class="edit-post-link" href="'.get_edit_post_link().'" title="Edit the '.get_the_title().' module">Edit this lesson</a>';
 									echo 	'</li>';
+									$lessonCounter++;
 									endforeach;
 									echo '</ol>'; // end lessons
 								} else { // If there are no lessons
