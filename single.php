@@ -7,7 +7,7 @@
  */
 
 get_header(); ?>
-	<div class="row-fluid"></div>
+	<!-- <div class="row-fluid"></div> -->
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
 		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">

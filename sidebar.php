@@ -5,51 +5,82 @@
  * @package _s
  * @since _s 1.0
  */
+
+// Home Image URL
+$homeImage = get_theme_mod('courses_home_representative_image', 'normal');
+// Home Image Options
+$homeImageOptions = get_theme_mod('courses_home_representative_image_options','normal');
+// College Affiliation Options
+$collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_value');
+
 ?>
-	<?php if( is_home() ) { ?>
-		<div id="intro-banner" class="intro-banner span4" role="complementary">
-			<?php
-				$collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_value');
-				echo '<div class="college-branding" data-affil="'.$collegeAffilOption.'">';
-				switch ($collegeAffilOption) {
-					case 'default':
-						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii System logo" />';
-					break;
-					case 'system':
-						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii System logo" />';
-					break;
-					case 'manoa':
-						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Manoa logo" />';
-					break;
-					case 'hcc':
-						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Honolulu Community College logo" />';
-					break;
-					case 'kcc':
-						echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Kapiolani Community College logo" />';
-					break;
-				}
-				echo '</div>'; // .college-branding
-			?>
+	<?php if( is_home() ) {
+		echo '<div id="intro-banner" class="intro-banner span4 ';
+		if($homeImageOptions == 'fullSidebar'){
+			echo 'full-background';
+		}
+		echo '" role="complementary">';
+			echo '<div class="college-branding" data-affil="'.$collegeAffilOption.'">';
+			switch ($collegeAffilOption) {
+				case 'default':
+					echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii System logo" />';
+				break;
+				case 'system':
+					echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii System logo" />';
+				break;
+				case 'manoa':
+					echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Manoa logo" />';
+				break;
+				case 'hcc':
+					echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Honolulu Community College logo" />';
+				break;
+				case 'kcc':
+					echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/college-logos.png" alt="University of Hawaii Kapiolani Community College logo" />';
+				break;
+			}
+			echo '</div>'; // .college-branding ?>
+
 			<div class="intro-banner-content">
 				<span class="welcome">Welcome to</span>
 				<h1><?php bloginfo('name'); ?></h1>
 				<?php echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>'; ?>
-				<?php echo '<img src="http://placehold.it/260x275" alt="placeholder" />'; ?>
+				<?php
+					if ($homeImageOptions == 'normal') {
+						if ($homeImage):
+						echo '<img src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
+						else:
+						echo '<img src="http://placehold.it/260x275" alt="placeholder" />';
+						endif;
+					}
+				?>
 			</div>
+
+			<?php // If Full Sidebar Background, load appropriate image
+			if($homeImageOptions == 'fullSidebar'){
+				if ($homeImage):
+				echo '<img class="full-background-image" src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
+				else:
+				echo '<img class="full-background-image" src="http://placehold.it/300x543" alt="placeholder" />';
+				endif;
+			} ?>
+
 			<div class="alternate-brand"></div>
+			
 			<?php if (is_user_logged_in()) { echo '<a class="edit-post-link" href="'.site_url().'/wp-admin/customize.php" title="Edit the '.get_the_title().' module">Edit this module</a>'; } ?>
 		</div>
-	<?php } else { ?>
+	<?php } else { // End Sidebar for Home Page ?>
 		<div id="secondary" class="widget-area span4 offset1" role="complementary">
 			<?php do_action( 'before_sidebar' ); ?>
 			
 			<?php // Module/Lesson Sidebar
 
 			// Module/Lesson Image
-			if (get_the_post_thumbnail()) {
-				echo get_the_post_thumbnail();
-			} else {
-				echo '<img src="http://placehold.it/300x171" alt="placeholder" />';
+			if((get_post_type() == 'modules') || (get_post_type() == 'lessons')) { // Prevent filler image from showing up on basic content pages (e.g. Contact, About, etc.)
+				if (get_the_post_thumbnail()) {
+					echo get_the_post_thumbnail();
+				} else {
+					echo '<img src="http://placehold.it/300x171" alt="placeholder" />';
+				}
 			}
 
 			// Sidebar Menu
