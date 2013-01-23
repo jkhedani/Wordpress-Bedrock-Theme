@@ -127,13 +127,13 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 							echo '<ol class="lessons">';
 							while($getConnectedToParent->have_posts()) : $getConnectedToParent->the_post();
 								$postID = $post->ID;
-								echo '<li class="lesson"><a class="lesson-link" ';
+								echo '<li class="lesson"><a class="lesson-link ';
 								if ($currentPostID == $postID) {
 									$postType = get_post_type($postID);
 									$postTypeObject = get_post_type_object($postType);
-									echo 'class="current'.$postTypeObject->labels->singular_name.'"';
+									echo 'current'.$postTypeObject->labels->singular_name;
 								}
-								echo ' href="'.get_permalink().'">'.get_the_title().'</a></li>';
+								echo '" href="'.get_permalink().'">'.get_the_title().'</a></li>';
 							endwhile;
 							wp_reset_postdata();
 							echo '</ol>';
