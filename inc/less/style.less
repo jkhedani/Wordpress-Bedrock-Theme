@@ -67,7 +67,7 @@ body > img.full-background-image {
 // #page { min-height: 100% }
 // #main { overflow: auto; padding-bottom: 71px; /* Must be the same height as the footer */ }
 // footer#colophon { position: relative; margin-top: -71px; height: 71px; clear: both; }
-// /* Opera Fix */ body:before { content: ""; height: 100%; float: left; width: 0; margin-top: -32767; } 
+// /* Opera Fix */ body:before { content: ""; height: 100%; float: left; width: 0; margin-top: -32767; }
 
 header#navbar { 
 	#mixin > .shadow(0 0 8px 1px, #111, false);
@@ -88,7 +88,10 @@ header#navbar {
 		}
 	
 		nav {
-			.nav { margin: 0; }
+			//&.nav-collapse.in .nav { float: none; }
+			.nav {
+				margin: 0; 
+			}
 			ul.dropdown-menu a { color: @grayDark; &:hover { color: @white; } }
 			a.empty-top-nav { color: @white; }
 			.caret { border-top: 4px solid @white; margin: 0 0 0 9px; vertical-align: middle; }
@@ -102,11 +105,14 @@ header#navbar {
 		color: #FFF;
 		position: relative;
 		.college-branding {
-			height: 39px;
+			height: 73px;
 			overflow: hidden;
 			margin-bottom: 20px;
-			padding-bottom: 24px;
 			border-bottom: 1px solid #FFF;
+			img {
+				margin-top: -6px;
+
+			}
 			// &[data-affil=default] { img { margin: -588px 0 0 0; } }
 			// &[data-affil=system] { img { margin: -588px 0 0 0; } }
 			// &[data-affil=manoa] { img { margin: -478px 0 0 0; } }

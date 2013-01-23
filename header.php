@@ -85,7 +85,7 @@ if(is_home()){
         <a href="<?php echo home_url(); ?>" class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></a>
         <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
         <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
-        <nav class="nav-collapse collapse pull-right">
+        <nav class="nav-collapse collapse">
         	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
 					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
         	<?php
@@ -96,7 +96,7 @@ if(is_home()){
             wp_nav_menu( array(
               'theme_location' => 'primary',
               'container' => false,
-              'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav">%3$s</ul>',
+              'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav pull-right">%3$s</ul>',
               'fallback_cb' => false, // If no menu is present in primary, show nothing.
               'walker' => new dcdc_walker_nav_menu,
             ));

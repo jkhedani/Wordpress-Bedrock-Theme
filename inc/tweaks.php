@@ -12,7 +12,6 @@
 require( get_template_directory() . '/inc/theme-options/course-options.php' );
 
 //		 HELPER UTILITY FUNCTIONS 		//
-
 function get_current_user_role() {
 		global $current_user;
 		get_currentuserinfo();
@@ -20,7 +19,6 @@ function get_current_user_role() {
 		$user_role = array_shift($user_roles);
 		return $user_role;
 };
-
 //		 END HELPER UTILITY FUNCTIONS 		//
 
 // Login page scripts
