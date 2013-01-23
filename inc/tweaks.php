@@ -63,9 +63,16 @@ function custom_scripts() {
 	wp_enqueue_script('bootstrap-popover', "$stylesheetDir/inc/add-ons/js/bootstrap-collapse.js", array(), false, true);
 	wp_enqueue_script('bootstrap-tooltip', "$stylesheetDir/inc/bootstrap/js/bootstrap-tooltip.js", array(), false, true);
 	wp_enqueue_script('bootstrap-popover', "$stylesheetDir/inc/bootstrap/js/bootstrap-popover.js", array(), false, true);
+	wp_enqueue_script('bootstrap-alert', "$stylesheetDir/inc/add-ons/js/bootstrap-alert.js", array(), false, true);
 	wp_enqueue_script('bootstrap-custom-script', "$stylesheetDir/inc/js/scripts.js", array(), false, true);
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
+
+// Limit excerpt length to prevent overflow on the module list page.
+function new_excerpt_length($length) {
+	return 20;
+}
+add_filter('excerpt_length', 'new_excerpt_length');
 
 // Add additional contact fields
 // http://wpquicktips.wordpress.com/2010/06/21/add-or-change-user-contact-fields/
