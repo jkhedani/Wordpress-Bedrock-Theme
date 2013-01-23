@@ -7,7 +7,14 @@
  * @package _s
  * @since _s 1.0
  */
-?><!DOCTYPE html>
+
+// Home Image URL
+$homeImage = get_theme_mod('courses_home_representative_image', 'normal');
+// Home Image Options
+$homeImageOptions = get_theme_mod('courses_home_representative_image_options','normal');
+
+?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
@@ -52,9 +59,20 @@
 </head>
 
 <body <?php body_class(); ?>>
+<?php // If home image is full background, load it here
+if(is_home()){
+  if($homeImageOptions == 'fullBackground') {
+    if ($homeImage):
+    echo '<img class="full-background-image" src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
+    else:
+      if (is_user_logged_in()) {
+        echo '<div class="full-background-placeholder alert container"><button type="button" class="close" data-dismiss="alert">&times;</button>This image will be a full background image. Minimum dimensions: 1280x960</span></div>';
+      }
+    endif;
+  }
+} ?>
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
-
 	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
   	<div class="navbar-inner">
     	<div class="container">
