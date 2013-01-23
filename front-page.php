@@ -97,7 +97,12 @@ get_header(); ?>
 						if (is_user_logged_in()) {
 						echo 	 '<li class="module span5 last">';
 						echo 	 	 '<div class="no-content">';
-						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+						if(wp_count_posts('modules')->publish > 0) {
+							echo '<p>Add a new Module here.</p>';
+						} else {
+							echo '<p>It seems you don&#39;t have any Modules published.</p>';
+						}
+						echo 		 '<span class="plus">+</span><a class="btn btn-primary" href="';
 						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 						echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
 						echo 	 	 '</div>';
@@ -108,7 +113,12 @@ get_header(); ?>
 					} else { // If no required posts for this template exists...
 						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<div id='singularModulesLessons' class='span5 no-content $isHidden'>";
-						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+						if(wp_count_posts('modules')->publish > 0) {
+							echo '<p>Publish an additional Module.</p>';
+						} else {
+							echo '<p>It seems you don&#39;t have any Modules published.</p>';
+						}
+						echo '<span class="plus">+</span><a class="btn btn-primary" href="';						
 						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 						echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
 						echo '</div>';
@@ -177,7 +187,12 @@ get_header(); ?>
 						if (is_user_logged_in()) {
 						echo 	 '<li class="module span10 last">';
 						echo 	 	 '<div class="no-content">';
-						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+						if(wp_count_posts('modules')->publish > 0) {
+							echo '<p>Add a new Module here.</p>';
+						} else {
+							echo '<p>It seems you don&#39;t have any Modules published.</p>';
+						}
+						echo 		 '<span class="plus">+</span><a class="btn btn-primary" href="';
 						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 						echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
 						echo 	 	 '</div>';
@@ -188,7 +203,12 @@ get_header(); ?>
 					} else { // If no required posts for this template exists...
 						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hide" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<div id='nestedModulesLessons' class='span10 no-content $isHidden'>";
-						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+						if(wp_count_posts('modules')->publish > 0) {
+							echo '<p>Add a new Module here.</p>';
+						} else {
+							echo '<p>It seems you don&#39;t have any Modules published.</p>';
+						}
+						echo  	 '<span class="plus">+</span><a class="btn btn-primary" href="';
 						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 						echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
 						echo '</div>';
@@ -246,7 +266,12 @@ get_header(); ?>
 									if (is_user_logged_in()) {
 									echo 	 '<li class="module span5 last">';
 									echo 	 	 '<div class="no-content">';
-									echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+									if(wp_count_posts('modules')->publish > 0) {
+										echo '<p>Add a new Module here.</p>';
+									} else {
+										echo '<p>It seems you don&#39;t have any Modules published.</p>';
+									}
+									echo 		 '<span class="plus">+</span><a class="btn btn-primary" href="';
 									echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 									echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
 									echo 	 	 '</div>';
@@ -255,7 +280,12 @@ get_header(); ?>
 									echo '</ol>'; // .module
 								} else { // If no modules exist...
 									echo '<div class="span5 no-content">';
-									echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+									if(wp_count_posts('modules')->publish > 0) {
+										echo '<p>Add a new Module here.</p>';
+									} else {
+										echo '<p>It seems you don&#39;t have any Modules published.</p>';
+									}
+									echo     '<span class="plus">+</span><a class="btn btn-primary" href="';
 									echo 	 	 admin_url( 'post-new.php?post_type=modules' );
 									echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
 									echo '</div>';
@@ -267,9 +297,14 @@ get_header(); ?>
 						if (is_user_logged_in()) {
 							echo '<li class="unit span15 last">';
 							echo "<div id='unitsModulesLessons' class='no-content span15 $isHidden'>";
-							echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+							if(wp_count_posts('units')->publish > 0) {
+								echo '<p>Add a new Unit here.</p>';
+							} else {
+								echo '<p>It seems you don&#39;t have any Units published.</p>';
+							}
+							echo 		 '<span class="plus">+</span><a class="btn btn-primary" href="';
 							echo 	 	 admin_url( 'post-new.php?post_type=modules' );
-							echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
+							echo 	 	 '" title="Go to admin and create a unit." class="create-new">Create a new Unit</a>';
 							echo '</div>';
 							echo '</li>';
 						}
@@ -279,9 +314,14 @@ get_header(); ?>
 					} else { // If no required posts for this template exists...
 						$isHidden = (!$isCurrentLayout && isset($wp_customize)) ? "hidden" : ""; // For Customize Preview Only: Show/Hide correct layout
 						echo "<div id='unitsModulesLessons' class='no-content span15 $isHidden'>";
-						echo 	 	 '<p>It seems you don&#39;t have any Modules published.</p><span class="plus">+</span><a class="btn btn-primary" href="';
+						if(wp_count_posts('units')->publish > 0) {
+							echo '<p>Add a new Unit here.</p>';
+						} else {
+							echo '<p>It seems you don&#39;t have any Units published.</p>';
+						}
+						echo  	 '<span class="plus">+</span><a class="btn btn-primary" href="';
 						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
-						echo 	 	 '" title="Go to admin and create a module." class="create-new">Create a new Module</a>';
+						echo 	 	 '" title="Go to admin and create a unit." class="create-new">Create a new Unit</a>';
 						echo '</div>';
 					} // endif
 
