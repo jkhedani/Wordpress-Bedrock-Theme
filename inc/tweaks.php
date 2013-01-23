@@ -325,6 +325,47 @@ function course_theme_deactivate_disable_roles($newname, $newtheme) {
 add_action("switch_theme", "course_theme_deactivate_disable_roles", 10 , 2);
 
 
+// On theme activation, create some default content if it doesn't exist
+function course_theme_activate_create_default_content($old_name, $old_theme = false) {
+	// List of default pages to create
+	$default_pages = array(
+		array(
+			'name' => "Contact",
+			'content' => "<h1>Contact Information</h1><p>Pat Q. Instructor</p><ul><li>Office Hours: MWF 11-12pm</li><li><a href=''>V-Office Link</a></li><li>Email: <a href='mailto:'>pat_q_instructor@hawaii.edu</a></li></ul>",
+		),
+		array(
+			'name' => "Roster",
+			'content' => "<h1>Roster</h1><ul><li>Student 1</li><li>Student 2</li><li>Student 3</li></ul>",
+		),
+	);
+
+	// Create default pages if they don't already exist
+	$all_pages = get_pages(array(
+		'post_type' => 'page',
+		'post_status' => 'publish,private',
+	));
+	foreach($default_pages as $new_page) {
+		$page_exists = false;
+		foreach ($all_pages as $page) {
+			if ($page->post_title == $new_page['name']) {
+				$page_exists = true;
+				break;
+			}
+		}
+		if (!$page_exists) {
+			wp_insert_post(array(
+				'post_title' => $new_page['name'],
+				'post_name' => sanitize_title($new_page['name']),
+				'post_status' => 'publish',
+				'post_type' => 'page',
+				'post_content' => $new_page['content'],
+			));
+		}
+	}
+}
+add_action("after_switch_theme", "course_theme_activate_create_default_content", 10, 2);
+
+
 // Create custom post types for courses
 function course_page_types() {
 	if (!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
