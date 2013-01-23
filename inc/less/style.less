@@ -41,7 +41,6 @@ h1.site-title a:visited { color: @grayLighter; }
 }
 .breadcrumb a { color: @linkColor; }
 .crumbSpacer { margin: 0 10px; color: @gray; }
-
 body > img.full-background-image {
 	/* Set rules to fill background */
 	min-height: 100%;
@@ -62,6 +61,13 @@ body > img.full-background-image {
 	-moz-box-sizing:border-box; /* Firefox */
 	-webkit-box-sizing:border-box; /* Safari */
 }
+
+// http://www.cssstickyfooter.com/using-sticky-footer-code.html
+// html, body { height: 100%; }
+// #page { min-height: 100% }
+// #main { overflow: auto; padding-bottom: 71px; /* Must be the same height as the footer */ }
+// footer#colophon { position: relative; margin-top: -71px; height: 71px; clear: both; }
+// /* Opera Fix */ body:before { content: ""; height: 100%; float: left; width: 0; margin-top: -32767; } 
 
 header#navbar { 
 	#mixin > .shadow(0 0 8px 1px, #111, false);
@@ -182,7 +188,9 @@ header#navbar {
 					a { display: inline; padding: 5px; }
 				}
 				a.lesson-link { display: block;	background-color: @gray; padding: 15px; color: @white;
-					&:hover { background-color: @grayLight; color: @grayDark; }
+					&.currentLesson { .box-shadow(inset 0 1px 8px rgba(0,0,0,.8)); }
+					&:hover { text-decoration: none; .box-shadow(inset 0 1px 8px rgba(0,0,0,.4)); }
+					&:active { .box-shadow(inset 0 1px 8px rgba(0,0,0,.8)); }
 				}
 			} // li.lesson
 		} // ul.lessons
@@ -198,7 +206,10 @@ header#navbar {
 		}
 	}
 }
-footer { margin: 10px 0 0 0; background-color: @grayLighter; }
+footer {
+	margin: 10px 0 0 0;
+	&#colophon { background-color: @grayLighter; }
+}
 
 // Course Template Styles: Modules & Lessons
 body.modules-lessons {

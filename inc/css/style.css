@@ -6982,9 +6982,21 @@ header#navbar .navbar-inner nav .caret {
   padding: 15px;
   color: #ffffff;
 }
+#main #secondary ol.lessons li.lesson a.lesson-link.currentLesson {
+  -webkit-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.8);
+}
 #main #secondary ol.lessons li.lesson a.lesson-link:hover {
-  background-color: #999999;
-  color: #333333;
+  text-decoration: none;
+  -webkit-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+#main #secondary ol.lessons li.lesson a.lesson-link:active {
+  -webkit-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.8);
 }
 #main footer.entry-meta {
   margin: 0;
@@ -6998,6 +7010,8 @@ header#navbar .navbar-inner nav .caret {
 }
 footer {
   margin: 10px 0 0 0;
+}
+footer#colophon {
   background-color: #eeeeee;
 }
 body.modules-lessons.single-layout #main ol.modules {
