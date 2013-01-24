@@ -107,6 +107,13 @@ function my_remove_menu_pages() {
 	remove_menu_page('edit.php'); // "Posts"
 	remove_menu_page('link-manager.php'); // "Links"
 	
+	// Disable Comments from the get-go...
+	$option_name = 'default_comment_status' ;
+	$new_value = 'closed' ;
+	if ( get_option( $option_name ) != $new_value ) {
+    update_option( $option_name, $new_value );
+  }
+  
 	// Start removing menu items conditionally
 	if (get_option('default_comment_status') == 'closed')
 		remove_menu_page('edit-comments.php'); // "Comments"
