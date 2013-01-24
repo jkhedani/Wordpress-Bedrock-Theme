@@ -372,6 +372,23 @@ function course_theme_activate_create_default_content($old_name, $old_theme = fa
 			));
 		}
 	}
+
+	// Create a Unit if there aren't any (because we need at least one to start the course)
+	$units = wp_count_posts('units');
+	$num_units = 0;
+	foreach ($units as $property => $value) {
+		$num_units += $value;
+	}
+	if ($num_units < 1) {
+		wp_insert_post(array(
+			'post_title' => "Sample Unit",
+			'post_name' => sanitize_title("Sample Unit"),
+			'post_status' => 'draft',
+			'post_type' => 'units',
+			'post_content' => "<p>Replace this with your unit content.</p>",
+			'menu_order' => 1,
+		));
+	}
 }
 add_action("after_switch_theme", "course_theme_activate_create_default_content", 10, 2);
 
@@ -454,6 +471,10 @@ function course_page_types() {
 }
 add_action( 'init', 'course_page_types' );
 
+
+
+// Create global sort page that sorts all course content (Units, Modules, and Lessons)
+require_once("course-sortable.php");
 
 
 
