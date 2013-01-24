@@ -100,7 +100,7 @@ if(is_home()){
         	<?php
 
           if (is_user_logged_in() && !(has_nav_menu( 'primary' ))) { // Add link to Menus page if no menu exists
-            echo '<a class="empty-top-nav btn btn-primary" href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
+            echo '<a class="empty-top-nav btn btn-primary pull-right" href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
           } else {
             wp_nav_menu( array(
               'theme_location' => 'primary',
