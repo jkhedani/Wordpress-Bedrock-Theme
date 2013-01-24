@@ -6690,6 +6690,9 @@ ul.link-list li a {
 }
 @media (min-width: 979px) {
   body {
+    padding-top: 0;
+  }
+  #main {
     padding-top: 60px;
   }
 }
@@ -6698,6 +6701,9 @@ ul.link-list li a {
  */
 h1.site-title a:visited {
   color: #eeeeee;
+}
+hr {
+  clear: both;
 }
 .helper-text a,
 .helper-text a:link,
@@ -6737,7 +6743,25 @@ body > img.full-background-image {
   /* Safari */
 
 }
-header#navbar {
+html,
+body {
+  height: 100%;
+  margin-top: 0 !important;
+}
+#page {
+  min-height: 100%;
+}
+#main {
+  padding-bottom: 71px;
+  /* Must be the same height as the footer */
+}
+footer#colophon {
+  position: relative;
+  margin-top: -71px;
+  height: 70px;
+  clear: both;
+}
+/* Opera Fix */header#navbar {
   -webkit-box-shadow: 0 0 8px 1px #111111;
   -moz-box-shadow: 0 0 8px 1px #111111;
   box-shadow: 0 0 8px 1px #111111;
@@ -6830,6 +6854,12 @@ header#navbar .navbar-inner nav .caret {
   background-color: #1B1B1B;
   color: #FFF;
   position: relative;
+  -webkit-box-shadow: 2px 2px 8px 0 #444444;
+  -moz-box-shadow: 2px 2px 8px 0 #444444;
+  box-shadow: 2px 2px 8px 0 #444444;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 #main .intro-banner .college-branding {
   height: 73px;
@@ -6863,11 +6893,22 @@ header#navbar .navbar-inner nav .caret {
   margin: 0;
 }
 #main .no-content {
+  height: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
+
+  -webkit-box-sizing: border-box;
+  /* Safari */
+
   padding: 20px 15px;
   text-align: center;
-  border: 4px dashed #CCC;
   font-size: 16px;
   color: #555555;
+  background-color: #eeeeee;
+  -webkit-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -6907,8 +6948,18 @@ header#navbar .navbar-inner nav .caret {
   text-indent: -9999px;
   background: url('../images/edit-gear.png') no-repeat;
 }
+#main #content .modules h1.entry-title {
+  margin: 0 0 7px 0;
+  float: left;
+  clear: none;
+}
+#main #content .modules span.moduleCount {
+  font-size: 36px;
+  line-height: 40px;
+  float: left;
+}
 #main #content span.moduleCount {
-  color: #555555;
+  color: #999999;
   font-size: 16px;
 }
 #main #content h1.entry-title {
@@ -6981,6 +7032,12 @@ header#navbar .navbar-inner nav .caret {
 }
 #main footer.entry-meta {
   margin: 0;
+  border: none;
+}
+#main footer.entry-meta ol.pager {
+  border-top: 1px solid #CCC;
+  padding-top: 20px;
+  margin-top: 0;
 }
 #main footer.entry-meta ol.pager li a {
   background-color: #3A87AD;
@@ -6994,6 +7051,10 @@ footer {
 }
 footer#colophon {
   background-color: #eeeeee;
+  padding: 0;
+}
+footer#colophon .container {
+  margin-top: 15px;
 }
 body.modules-lessons.single-layout #main ol.modules {
   margin: 0;
@@ -7003,6 +7064,13 @@ body.modules-lessons.single-layout #main ol.modules li.module {
   margin-bottom: 20px;
   background-color: #555555;
   position: relative;
+  overflow: hidden;
+  -webkit-box-shadow: 1px 0px 9px 0 #888888;
+  -moz-box-shadow: 1px 0px 9px 0 #888888;
+  box-shadow: 1px 0px 9px 0 #888888;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 body.modules-lessons.single-layout #main ol.modules li.module a.edit-post-link {
   display: none;
@@ -7038,6 +7106,12 @@ body.modules-lessons.single-layout #main ol.modules li.module > a .module-conten
 }
 body.modules-lessons.single-layout #main ol.modules li.module.last {
   background: none;
+  -webkit-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+body.modules-lessons.single-layout #main ol.modules li.module .no-content {
+  padding: 50px 15px 15px;
 }
 body.modules-lessons.single-layout #main ol.modules li.module .no-content a {
   min-height: 0;
@@ -7137,7 +7211,13 @@ body.units-modules-lessons #main ol.units li.unit {
   display: block;
   min-height: 184px;
   background-color: #eeeeee;
-  padding-bottom: 10px;
+  overflow: hidden;
+  -webkit-box-shadow: 1px 0px 9px 0 #888888;
+  -moz-box-shadow: 1px 0px 9px 0 #888888;
+  box-shadow: 1px 0px 9px 0 #888888;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper {
   padding: 10px 15px;
@@ -7159,16 +7239,24 @@ body.units-modules-lessons #main ol.units li.unit .unit-title-wrapper .unit-titl
 }
 body.units-modules-lessons #main ol.units li.unit.last {
   background: none;
+  -webkit-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.5);
+  padding: 0;
 }
 body.units-modules-lessons #main ol.modules {
+  overflow: hidden;
   margin: 10px;
 }
 body.units-modules-lessons #main ol.modules li.module {
   list-style: none;
-  margin-bottom: 20px;
   background-color: #555555;
   position: relative;
   min-height: 250px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
 }
 body.units-modules-lessons #main ol.modules li.module a.edit-post-link {
   display: none;
@@ -7196,15 +7284,14 @@ body.units-modules-lessons #main ol.modules li.module a .module-title-wrapper .m
   display: block;
 }
 body.units-modules-lessons #main ol.modules li.module a .module-image {
+  height: 100%;
+  background: url('../images/notToSize.jpg');
   overflow: hidden;
   max-width: none;
 }
-body.units-modules-lessons #main ol.modules li.module a .module-image img {
-  height: 100%;
-}
 body.units-modules-lessons #main ol.modules li.module a .module-image .module-image-placeholder {
   position: absolute;
-  background: url('../images/image-icon.png') center 45px no-repeat;
+  background: url('../images/image-icon.png') center 45px no-repeat #555555;
   height: 100%;
   padding: 170px 15px 0;
   text-align: center;
@@ -7217,6 +7304,16 @@ body.units-modules-lessons #main ol.modules li.module:nth-child(3n+1) {
 }
 body.units-modules-lessons #main ol.modules li.module.last {
   background: none;
+}
+body.units-modules-lessons #main ol.modules li.module .no-content {
+  height: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
+
+  -webkit-box-sizing: border-box;
+  /* Safari */
+
 }
 body.units-modules-lessons #main ol.modules li.module .no-content a {
   min-height: 0;
@@ -7232,15 +7329,27 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
   body.modules-lessons.single-layout ol.modules li.module:nth-child(1) {
     display: none;
   }
+  body.modules-lessons.single-layout ol.modules li.module:nth-child(1) #inline-intro-banner {
+    display: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
   body.modules-lessons.single-layout ol.modules li.module:nth-child(3n+2) {
     margin-left: 0;
   }
 }
 @media (max-width: 1200px) and (min-width: 979px) {
+  #main .intro-banner .college-branding {
+    height: 56px;
+  }
   #main .intro-banner h1 {
     font-size: 48px;
   }
   body.modules-lessons.single-layout #main ol.modules li.module:nth-child(1) {
+    display: none;
+  }
+  body.modules-lessons.single-layout #main ol.modules li.module:nth-child(1) #inline-intro-banner {
     display: none;
   }
   body.modules-lessons.single-layout #main ol.modules li.module:nth-child(3n+2) {
@@ -7253,6 +7362,9 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
 @media (max-width: 979px) and (min-width: 768px) {
   #navbar .navbar-inner {
     padding: 0;
+  }
+  #main .intro-banner .college-branding {
+    height: 56px;
   }
   #main .intro-banner h1 {
     font-size: 45px;
@@ -7333,6 +7445,12 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
   }
   body.units-modules-lessons #main #intro-banner {
     display: none;
+  }
+  body.units-modules-lessons #main ol.modules li.module a .module-title-wrapper {
+    width: 100%;
+  }
+  body.units-modules-lessons #main ol.modules li.module a .module-image .module-image-placeholder {
+    width: 100%;
   }
 }
 @media (max-width: 480px) {
