@@ -223,11 +223,11 @@ add_action('admin_print_scripts', 'course_global_sortable_scripts');
 
 // Queue admin css for sorting custom post types
 function course_global_sortable_styles() {
-  global $pagenow;
-  $pages = array("admin.php");
-  if (in_array($pagenow, $pages)) {
+  //global $pagenow;
+  //$pages = array("admin.php","index.php","edit.php");
+  //if (in_array($pagenow, $pages)) {
     wp_enqueue_style('course_global_sortable', get_bloginfo('template_url').'/inc/css/course_global_sortable.css');
-  }
+  //}
 }
 add_action('admin_print_styles', 'course_global_sortable_styles');
 
