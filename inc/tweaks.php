@@ -66,6 +66,12 @@ function custom_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 
+// Removes automatic <code><html></code> spacing compensating for navbar 
+function my_filter_head() {
+	remove_action('wp_head', '_admin_bar_bump_cb');
+}
+add_action('get_header', 'my_filter_head');
+
 // Limit excerpt length to prevent overflow on the module list page.
 function new_excerpt_length($length) {
 	return 20;
@@ -414,7 +420,7 @@ function course_page_types() {
 		'capability_type' => 'page',
 		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
-		'supports' => array('title', 'editor', 'thumbnail','revisions'),
+		'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions'),
 		'labels' => $labels,
 		)
 	);
@@ -437,7 +443,7 @@ function course_page_types() {
 		'capability_type' => 'page',
 		'map_meta_cap' => true, // Needed to be true to make 'capability_type' work
 		'hierarchical' => true,
-		'supports' => array('title', 'editor', 'thumbnail','revisions'),
+		'supports' => array('title', 'editor', 'thumbnail', 'excerpt','revisions'),
 		'labels' => $labels,
 		)
 	);

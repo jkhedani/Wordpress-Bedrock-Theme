@@ -225,16 +225,18 @@ function dcdc_get_pager() {
 			'connected_items' => get_queried_object_id(),
 			'nopaging' => true,
 		));
-		echo 	'<ol class="pager">';
-		while($p2pConnectedParent->have_posts()) : $p2pConnectedParent->the_post();
-			// Only spit out the first 'child' connection
-			if ($i == 0) {
-				echo '<li class="next"><a href="'.get_permalink().'">Start '.get_the_title().' &rarr;</a></li>';
-			}
-			$i++;
-		endwhile;
-		echo 	'</ol>';
-		wp_reset_postdata();
+		if ($p2pConnectedParent->have_posts()) {
+			echo 	'<ol class="pager">';
+			while($p2pConnectedParent->have_posts()) : $p2pConnectedParent->the_post();
+				// Only spit out the first 'child' connection
+				if ($i == 0) {
+					echo '<li class="next"><a href="'.get_permalink().'">Start '.get_the_title().' &rarr;</a></li>';
+				}
+				$i++;
+			endwhile;
+			echo 	'</ol>';
+			wp_reset_postdata();
+		}
 	}
 }
 endif;
@@ -344,16 +346,19 @@ function dcdc_footer_credits() {
 }
 endif;
 
+/**
+ *  DCDC Module Count
+ */
 if ( ! function_exists( 'dcdc_get_module_count') ) :
-	/**
-	 * Module Count
-	 */
 	function dcdc_get_module_count() {
 		if(!(get_theme_mod('courses_layout_ia') == 'unitsModulesLessons')) {
 			global $post;
 			$menuOrder = $post->menu_order;
-			echo '<span class="moduleCount">Module ' .++$menuOrder. '</span>'; // Increment needed as menu_order starts at 0
-
+			if (get_post_type() == 'modules') {
+				echo '<span class="moduleCount">Module ' .++$menuOrder. '&nbsp;</span>';			// Increment needed as menu_order starts at 0
+			} elseif (get_post_type() == 'lessons') {
+				echo '<span class="moduleCount">Module ' .++$menuOrder. '</span>';						// Increment needed as menu_order starts at 0
+			}
 		} elseif (get_theme_mod('courses_layout_ia') == 'unitsModulesLessons') { 					// If unitsModulesLessons
 			global $post;
 			$currentPostType = get_post_type();
@@ -370,7 +375,7 @@ if ( ! function_exists( 'dcdc_get_module_count') ) :
 				while ($getUnits->have_posts()) : $getUnits->the_post();																	
 					foreach ( $post->modules as $post ) : setup_postdata( $post );							// Get all Modules connected to said units
 					if ($currentPostID == $post->ID):
-						echo '<span class="moduleCount">Module ' .$moduleCount. '</span>';				// When iteration lands on current module, print $i
+						echo '<span class="moduleCount">Module ' .$moduleCount. '&nbsp;</span>';	// When iteration lands on current module, print $i
 					endif;
 					$moduleCount++;
 					endforeach;
