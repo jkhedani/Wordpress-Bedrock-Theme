@@ -343,6 +343,10 @@ function course_theme_activate_create_default_content($old_name, $old_theme = fa
 			'name' => "Roster",
 			'content' => "<h1>Roster</h1><ul><li>Student 1</li><li>Student 2</li><li>Student 3</li></ul>",
 		),
+		array(
+			'name' => "Helpful Links",
+			'content' => "",
+		),
 	);
 
 	// Create default pages if they don't already exist
@@ -585,6 +589,82 @@ function course_connection_types() {
 	));
 }
 add_action( 'p2p_init', 'course_connection_types' );
+
+/**
+ * Advanced Custom Fields Auto-Load
+ * Register field groups
+ * The register_field_group function accepts 1 array which holds the relevant data to register a field group
+ * You may edit the array as you see fit. However, this may result in errors if the array is not compatible with ACF
+ * This code must run every time the functions.php file is read
+ */
+
+if(function_exists("register_field_group"))
+{
+	register_field_group(array (
+		'id' => '5100b98524453',
+		'title' => 'Sidebar Content',
+		'fields' => 
+		array (
+			0 => 
+			array (
+				'key' => 'field_1',
+				'label' => 'Did You Know',
+				'name' => 'did_you_know',
+				'type' => 'wysiwyg',
+				'order_no' => 0,
+				'instructions' => 'Place your "Did You Know" content here.',
+				'required' => 0,
+				'conditional_logic' => 
+				array (
+					'status' => 0,
+					'rules' => 
+					array (
+						0 => 
+						array (
+							'field' => 'null',
+							'operator' => '==',
+						),
+					),
+					'allorany' => 'all',
+				),
+				'default_value' => 'In June 2008,	a tornado hit Kansas State University\'s campus destroying only one building: their Wind Erosion Lab.',
+				'toolbar' => 'basic',
+				'media_upload' => 'no',
+				'the_content' => 'no',
+			),
+		),
+		'location' => 
+		array (
+			'rules' => 
+			array (
+				0 => 
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'modules',
+					'order_no' => '0',
+				),
+				1 => 
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'lessons',
+					'order_no' => '1',
+				),
+			),
+			'allorany' => 'any',
+		),
+		'options' => 
+		array (
+			'position' => 'normal',
+			'layout' => 'default',
+			'hide_on_screen' => 
+			array (
+			),
+		),
+		'menu_order' => 0,
+	));
+}
 
 
 /**
