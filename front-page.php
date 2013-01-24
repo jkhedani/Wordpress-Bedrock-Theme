@@ -88,7 +88,7 @@ get_header(); ?>
 						echo '<div id="intro-banner-content">';
 						echo '<span class="welcome">Welcome To</span>';
 						echo '<h1>'.get_bloginfo('name').'</h1>';
-						//echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>';
+						echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>';
 						//echo '<img src="http://placehold.it/250x275" alt="placeholder" />';
 						echo '</div>';
 						echo '<div id="alternate-brand"></div>';
@@ -97,9 +97,7 @@ get_header(); ?>
 						echo '</div>';
 						echo '</li>';
 
-
 						while ($moduleListContent->have_posts()) : $moduleListContent->the_post();
-							$ismore = @strpos( $post->post_content, '<!--more-->');
 							echo '<li class="module span5"><a href="'.get_permalink().'" title="Go to this module.">';
 							echo 		'<div class="module-count">Module '.$moduleCounter.'</div>';
 							echo 		'<h2 class="module-title">'.get_the_title().'</h2>';
@@ -111,8 +109,8 @@ get_header(); ?>
 							}
 							echo 		'</div>';
 							echo 		'<div class="module-content">';
-							if ((get_the_content()) && $ismore) { // There needs to be content as well as a <!--more--> tag
-							echo 		'<p>'.get_the_content('', true).'</p>';
+							if (get_the_excerpt()) { // There needs to be content as well as a <!--more--> tag
+							echo 		'<p>'.get_the_excerpt().'</p>';
 							} else {
 							echo 		'<p class="muted helper-text">You don&#39;t have a module blurb yet.</p>';
 							} // endif
@@ -185,10 +183,10 @@ get_header(); ?>
 							echo 	'<div class="module-content-wrapper">';
 							echo 	'<h2 class="module-title"><a href="'.get_permalink().'" title="Go the the '.get_the_title().' module">'.get_the_title().'</a></h2>';
 							echo 	'<div class="module-content">';
-							if (get_the_content()) {
-								echo 		'<p>'.get_the_content('', true).'</p>';
+							if (get_the_excerpt()) {
+								echo 		'<p>'.get_the_excerpt().'</p>';
 							} else {
-								echo 		'<p>You don&#39;t have a module blurb yet.</p>';
+								echo 		'<p class="muted">You don&#39;t have a module blurb yet.</p>';
 							}
 							echo 	'<hr />';
 								if ($post->lessons) {
@@ -326,7 +324,7 @@ get_header(); ?>
 						endwhile;
 						if (is_user_logged_in()) {
 							echo '<li class="unit span15 last">';
-							echo "<div id='unitsModulesLessons' class='no-content span15 $isHidden'>";
+							echo "<div class='no-content span15 $isHidden'>";
 							if(wp_count_posts('units')->publish > 0) {
 								echo '<p>Add a new Unit here.</p>';
 							} else {
