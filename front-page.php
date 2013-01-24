@@ -109,7 +109,7 @@ get_header(); ?>
 							}
 							echo 		'</div>';
 							echo 		'<div class="module-content">';
-							if (get_the_excerpt()) { // There needs to be content as well as a <!--more--> tag
+							if (!empty( $post->post_excerpt )) { // There needs to be content as well as a <!--more--> tag
 							echo 		'<p>'.get_the_excerpt().'</p>';
 							} else {
 							echo 		'<p class="muted helper-text">You don&#39;t have a module blurb yet.</p>';
@@ -183,7 +183,7 @@ get_header(); ?>
 							echo 	'<div class="module-content-wrapper">';
 							echo 	'<h2 class="module-title"><a href="'.get_permalink().'" title="Go the the '.get_the_title().' module">'.get_the_title().'</a></h2>';
 							echo 	'<div class="module-content">';
-							if (get_the_excerpt()) {
+							if (!empty( $post->post_excerpt )) {
 								echo 		'<p>'.get_the_excerpt().'</p>';
 							} else {
 								echo 		'<p class="muted">You don&#39;t have a module blurb yet.</p>';
