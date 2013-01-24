@@ -566,7 +566,7 @@ function course_connection_types() {
 		'sortable' => 'any',
 		'cardinality' => 'one-to-many', // Module can be connected to only one Unit
 		// Display Attributes
-		'admin_box' => 'any',
+		'admin_box' => 'false',
 		'admin_column' => 'any',
 		'title' => array( 'from' => __( 'Connected Modules', 'my-textdomain' ), 'to' => __( 'Connected Unit', 'my-textdomain' ) ),
 		'from_labels' => array(
@@ -592,7 +592,7 @@ function course_connection_types() {
 		'sortable' => 'any',
 		'cardinality' => 'one-to-many', // Lesson can be connected to only one Module
 		// Display Attributes
-		'admin_box' => 'any',
+		'admin_box' => 'false',
 		'admin_column' => 'any',
 		'title' => array( 'from' => __( 'Connected Lessons', 'my-textdomain' ), 'to' => __( 'Connected Module', 'my-textdomain' ) ),
 		'from_labels' => array(
@@ -610,83 +610,6 @@ function course_connection_types() {
 	));
 }
 add_action( 'p2p_init', 'course_connection_types' );
-
-/**
- * Advanced Custom Fields Auto-Load
- * Register field groups
- * The register_field_group function accepts 1 array which holds the relevant data to register a field group
- * You may edit the array as you see fit. However, this may result in errors if the array is not compatible with ACF
- * This code must run every time the functions.php file is read
- */
-
-if(function_exists("register_field_group"))
-{
-	register_field_group(array (
-		'id' => '5100b98524453',
-		'title' => 'Sidebar Content',
-		'fields' => 
-		array (
-			0 => 
-			array (
-				'key' => 'field_1',
-				'label' => 'Did You Know',
-				'name' => 'did_you_know',
-				'type' => 'wysiwyg',
-				'order_no' => 0,
-				'instructions' => 'Place your "Did You Know" content here.',
-				'required' => 0,
-				'conditional_logic' => 
-				array (
-					'status' => 0,
-					'rules' => 
-					array (
-						0 => 
-						array (
-							'field' => 'null',
-							'operator' => '==',
-						),
-					),
-					'allorany' => 'all',
-				),
-				'default_value' => 'In June 2008,	a tornado hit Kansas State University\'s campus destroying only one building: their Wind Erosion Lab.',
-				'toolbar' => 'basic',
-				'media_upload' => 'no',
-				'the_content' => 'no',
-			),
-		),
-		'location' => 
-		array (
-			'rules' => 
-			array (
-				0 => 
-				array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'modules',
-					'order_no' => '0',
-				),
-				1 => 
-				array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'lessons',
-					'order_no' => '1',
-				),
-			),
-			'allorany' => 'any',
-		),
-		'options' => 
-		array (
-			'position' => 'normal',
-			'layout' => 'default',
-			'hide_on_screen' => 
-			array (
-			),
-		),
-		'menu_order' => 0,
-	));
-}
-
 
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
