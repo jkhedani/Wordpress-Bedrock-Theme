@@ -52,8 +52,17 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
   // ADMIN: Move navbar down from under admin when user is
   // logged in but not in the theme customizer previewer
   global $wp_customize;
-  if(is_user_logged_in() && ! isset( $wp_customize ))
-    echo '<style type="text/css"> #navbar { margin-top: 28px; } @media (max-width: 979px) { #navbar {margin-top: 0px;} } </style>';
+  if(is_user_logged_in() && ! isset( $wp_customize )) {
+    echo '
+    <style type="text/css">
+      #navbar { margin-top: 28px; }
+      #main { padding-top: 88px; }
+      @media (max-width: 979px) {
+        #navbar {margin-top: 0px;}
+        #main { padding-top: 0px; }
+      }
+    </style>';
+  }
 ?>
 
 </head>
