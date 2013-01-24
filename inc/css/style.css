@@ -7246,7 +7246,7 @@ body.units-modules-lessons #main ol.units li.unit.last {
 }
 body.units-modules-lessons #main ol.modules {
   overflow: hidden;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
 }
 body.units-modules-lessons #main ol.modules li.module {
   list-style: none;
@@ -7256,6 +7256,7 @@ body.units-modules-lessons #main ol.modules li.module {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  margin-bottom: 10px;
   overflow: hidden;
 }
 body.units-modules-lessons #main ol.modules li.module a.edit-post-link {
