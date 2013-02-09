@@ -1,3 +1,0 @@
-[submodule "inc/bootstrap"]
-	path = inc/bootstrap
-	url = git@dcdc.beanstalkapp.com:/dcdc-bootstrap.git
