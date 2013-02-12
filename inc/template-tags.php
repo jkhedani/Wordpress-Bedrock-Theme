@@ -186,6 +186,7 @@ function dcdc_get_pager() {
 		$p2pConnectedParent = new WP_Query ( array(
 			'connected_type' => 'modules_to_lessons',
 			'connected_items' => get_queried_object(),
+			'connected_orderby' => 'order',
 			'nopaging' => true,
 		));
 		if ($p2pConnectedParent->have_posts()) {
@@ -195,6 +196,7 @@ function dcdc_get_pager() {
 				$p2pConnectedParentsChildren = new WP_Query( array(
 					'connected_type' => 'modules_to_lessons',
 					'connected_items' => $post->ID,
+					'connected_orderby' => 'order',
 					'nopaging' => true,
 				));
 				if($p2pConnectedParentsChildren->have_posts()) {
@@ -223,6 +225,7 @@ function dcdc_get_pager() {
 		$p2pConnectedParent = new WP_Query ( array(
 			'connected_type' => 'modules_to_lessons',
 			'connected_items' => get_queried_object_id(),
+			'connected_orderby' => 'order',
 			'nopaging' => true,
 		));
 		if ($p2pConnectedParent->have_posts()) {
