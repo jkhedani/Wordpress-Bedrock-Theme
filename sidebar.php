@@ -9,8 +9,6 @@
 global $wp_customize;
 // Home Image URL
 $homeImage = get_theme_mod('courses_home_representative_image', 'normal');
-// Home Image Options
-$homeImageOptions = get_theme_mod('courses_home_representative_image_options','normal');
 // College Affiliation Options
 $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_value');
 
@@ -78,24 +76,13 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 				<h1><?php bloginfo('name'); ?></h1>
 				<?php echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>'; ?>
 				<?php
-					if ($homeImageOptions == 'normal') {
-						if ($homeImage):
+					if ($homeImage):
 						echo '<img src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
-						else:
+					else:
 						echo '<img src="http://placehold.it/260x275" alt="placeholder" />';
-						endif;
-					}
+					endif;
 				?>
 			</div>
-
-			<?php // If Full Sidebar Background, load appropriate image
-			if($homeImageOptions == 'fullSidebar'){
-				if ($homeImage):
-				echo '<img class="full-background-image" src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
-				else:
-				echo '<img class="full-background-image" src="http://placehold.it/300x543" alt="placeholder" />';
-				endif;
-			} ?>
 
 			<div class="alternate-brand"></div>
 			
@@ -122,6 +109,7 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 				$sidebarNavContent = new WP_Query ( array(
 					'connected_type' => 'modules_to_lessons',
 					'connected_items' => get_queried_object(),
+					'connected_orderby' => 'order',
 				));
 
 				echo '<ol class="lessons">';
@@ -144,6 +132,7 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 				$sidebarNavContent = new WP_Query ( array(
 					'connected_type' => 'modules_to_lessons',
 					'connected_items' => get_queried_object(),
+					'connected_orderby' => 'order',
 					'nopaging' => true,
 				));
 				if ($sidebarNavContent->have_posts()) {
@@ -154,6 +143,7 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 						$getConnectedToParent = new WP_Query( array(
 							'connected_type' => 'modules_to_lessons',
 							'connected_items' => $parentID,
+							'connected_orderby' => 'order',
 							'nopaging' => true
 						));
 						if($getConnectedToParent->have_posts()) {

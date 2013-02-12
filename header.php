@@ -69,17 +69,18 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
 
 <body <?php body_class(); ?>>
 <?php // If home image is full background, load it here
-if(is_home()){
-  if($homeImageOptions == 'fullBackground') {
-    if ($homeImage):
-    echo '<img class="full-background-image" src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
-    else:
-      if (is_user_logged_in()) {
-        echo '<div class="full-background-placeholder alert container"><button type="button" class="close" data-dismiss="alert">&times;</button>This image will be a full background image. Minimum dimensions: 1280x960</span></div>';
-      }
-    endif;
-  }
-} ?>
+  // if(is_home()){
+  //   if($homeImageOptions == 'fullBackground') {
+  //     if ($homeImage):
+  //     echo '<img class="full-background-image" src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
+  //     else:
+  //       if (is_user_logged_in()) {
+  //         echo '<div class="full-background-placeholder alert container"><button type="button" class="close" data-dismiss="alert">&times;</button>This image will be a full background image. Minimum dimensions: 1280x960</span></div>';
+  //       }
+  //     endif;
+  //   }
+  // }
+?>
 <div id="page" class="hfeed site">
 	<?php do_action( 'before' ); ?>
 	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">

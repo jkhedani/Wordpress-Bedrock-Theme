@@ -78,12 +78,6 @@ function courses_customize_register($wp_customize) {
     'transport'      => 'postMessage'
   ));
 
-  // SETTING: Home Representative Image Options
-  $wp_customize->add_setting( 'courses_home_representative_image_options', array(
-    'default'        => 'normal',
-    'transport'      => 'postMessage'
-  ));
-
   // CONTROLS
 
   // CONTROL: Course Description
@@ -138,19 +132,6 @@ function courses_customize_register($wp_customize) {
     'section'    => 'home_representative_image',
     'settings'   => 'courses_home_representative_image',
   )));
-
-  // CONTROL: Home Representative Image Options
-  $wp_customize->add_control( 'ourses_home_representative_image_options', array(
-    'label'      => __( 'Choose an image location', 'courses' ),
-    'section'    => 'home_representative_image',
-    'settings'   => 'courses_home_representative_image_options',
-    'type'       => 'radio',
-    'choices'    => array(
-      'normal'         => 'Normal',
-      'fullSidebar'    => 'Full Background in Sidebar',
-      'fullBackground' => 'Full Background Entire Page',
-    ),
-  ));
 
 }
 add_action( 'customize_register', 'courses_customize_register' );
