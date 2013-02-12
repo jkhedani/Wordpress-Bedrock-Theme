@@ -35,40 +35,42 @@ jQuery(document).ready(function($){
 	
 	// Make it so that the heights of the Single Module layouts all have equal heights
 	var windowWidth = $(window).width();
-	if ($('body').hasClass('home')) {
-		if ($('body').hasClass('modules-lessons') && $('body').hasClass('single-layout'))
-			$('body.modules-lessons.single-layout #main ol#singularModulesLessons').equalHeights();
-		
-		if ($('body').hasClass('units-modules-lessons'))
-			$('body.units-modules-lessons #main ol#unitsModulesLessons ol.modules').equalHeights();
+	$(window).bind("load", function(){
+		if ($('body').hasClass('home')) {
+			if ($('body').hasClass('modules-lessons') && $('body').hasClass('single-layout'))
+				$('body.modules-lessons.single-layout #main ol#singularModulesLessons').equalHeights();
+			
+			if ($('body').hasClass('units-modules-lessons'))
+				$('body.units-modules-lessons #main ol#unitsModulesLessons ol.modules').equalHeights();
 
-		// Use delay to help prevent crazy javascript firing on resize
-		// http://pastie.org/pastes/5100802/text
-		var delay = (function(){
-	  	var timer = 0;
-	  	return function(callback, ms){
-	  		clearTimeout (timer);
-	    	timer = setTimeout(callback, ms);
-	   	};
-		})();
+			// Use delay to help prevent crazy javascript firing on resize
+			// http://pastie.org/pastes/5100802/text
+			var delay = (function(){
+		  	var timer = 0;
+		  	return function(callback, ms){
+		  		clearTimeout (timer);
+		    	timer = setTimeout(callback, ms);
+		   	};
+			})();
 
-		$(function() {
-	    var pause = 350; // will only process code within delay(function() { ... }) every 350ms.
-	    $(window).resize(function() {
-	      delay(function() {
-	      	var windowWidth = $(window).width();
-	      	//if (windowWidth > '767') {
-						if ($('body').hasClass('modules-lessons') && $('body').hasClass('single-layout'))
-							$('body.modules-lessons.single-layout #main ol#singularModulesLessons').equalHeights();
-		
-						if ($('body').hasClass('units-modules-lessons'))
-							$('body.units-modules-lessons #main ol#unitsModulesLessons ol.modules').equalHeights();
-	      	//}
-	      }, pause );
-	  	});
-	    $(window).resize();
-		});
-	} // end if is_home
+			$(function() {
+		    var pause = 350; // will only process code within delay(function() { ... }) every 350ms.
+		    $(window).resize(function() {
+		      delay(function() {
+		      	var windowWidth = $(window).width();
+		      	//if (windowWidth > '767') {
+							if ($('body').hasClass('modules-lessons') && $('body').hasClass('single-layout'))
+								$('body.modules-lessons.single-layout #main ol#singularModulesLessons').equalHeights();
+			
+							if ($('body').hasClass('units-modules-lessons'))
+								$('body.units-modules-lessons #main ol#unitsModulesLessons ol.modules').equalHeights();
+		      	//}
+		      }, pause );
+		  	});
+		    $(window).resize();
+			});
+		} // end if is_home
+	});
 
 	//	# UI Scripts #
 	//	Hide/Show Edit Link for...
