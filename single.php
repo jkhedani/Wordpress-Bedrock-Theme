@@ -25,6 +25,13 @@ get_header(); ?>
 
 			<?php endwhile; // end of the loop. ?>
 
+			<?php
+				// Add "Back To Top" Link
+				if(!$post->post_content=="") {
+					echo '<a id="backToTop" href="" title="Scroll to the top of this page.">Back To Top</a>'; // back to top link
+				}
+			?>
+
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->
 		<?php get_sidebar(); ?>

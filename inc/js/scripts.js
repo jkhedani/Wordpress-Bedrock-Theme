@@ -72,6 +72,11 @@ jQuery(document).ready(function($){
 		} // end if is_home
 	});
 
+	// Scroll To Top of Page
+	$('#backToTop').click(function(){
+		$('body').animate({ scrollTop: 0 }, 'fast' );
+	});
+
 	//	# UI Scripts #
 	//	Hide/Show Edit Link for...
 	if ($('body').hasClass('home') && $('body').hasClass('logged-in')) {
