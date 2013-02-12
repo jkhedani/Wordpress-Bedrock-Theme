@@ -7418,6 +7418,17 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
   #main #secondary {
     display: none;
   }
+  #main {
+    padding-bottom: 96px;
+  }
+  footer#colophon {
+    margin-top: -96px;
+    height: 95px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 28px;
+  }
   body.modules-lessons.single-layout #intro-banner {
     display: none;
   }
@@ -7468,6 +7479,18 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
     float: left;
     margin-bottom: 5px;
   }
+  #main {
+    padding-bottom: 96px;
+    /* Must be the same height as the footer */
+  }
+  footer#colophon {
+    margin-top: -96px;
+    height: 95px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 28px;
+  }
   .module-image {
     display: none;
   }
@@ -7487,7 +7510,18 @@ body.units-modules-lessons #main ol.modules li.module .no-content a {
   }
 }
 @media (max-width: 320px) {
-  
+  #main {
+    padding-bottom: 96px;
+    /* Must be the same height as the footer */
+  }
+  footer#colophon {
+    margin-top: -96px;
+    height: 95px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 28px;
+  }
 }
 @media (max-width: 979px) and (min-width: 768px) {
   .container {

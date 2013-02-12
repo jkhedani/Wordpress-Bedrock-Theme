@@ -498,6 +498,16 @@ body.units-modules-lessons {
 		}
 		#secondary { display: none; }
 	}
+	// Sticky Footer Adjustments
+	#main { padding-bottom: 96px; }
+	footer#colophon {
+		margin-top: -96px; height: 95px;
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 28px;
+	}
+	// end Sticky Footer Adjustments
 	body.modules-lessons {
 		&.single-layout {
 			#intro-banner { display: none; }
@@ -550,6 +560,17 @@ body.units-modules-lessons {
 			}
 		}
 	}
+	// Sticky Footer Adjustments
+	#main { padding-bottom: 96px; /* Must be the same height as the footer */ }
+	//footer#colophon { position: relative;  clear: both; }
+	footer#colophon {
+		margin-top: -96px; height: 95px;
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 28px;
+	}
+	// end Sticky Footer Adjustments
 	.module-image { display: none; }
 	body.modules-lessons.single-layout {
 		#intro-banner { display: none; }
@@ -562,7 +583,17 @@ body.units-modules-lessons {
 }
 
 @media (max-width: 320px) {
-
+	// Sticky Footer Adjustments
+	#main { padding-bottom: 96px; /* Must be the same height as the footer */ }
+	//footer#colophon { position: relative;  clear: both; }
+	footer#colophon {
+		margin-top: -96px; height: 95px;
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 28px;
+	}
+	// end Sticky Footer Adjustments
 }
 
 
