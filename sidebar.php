@@ -70,10 +70,11 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
   		}
 
 			echo '</div>'; // .college-branding ?>
-
 			<div class="intro-banner-content">
-				<span class="welcome">Welcome to</span>
+				<hr />
 				<h1><?php bloginfo('name'); ?></h1>
+        <h2><?php bloginfo( 'description' ); ?></h2>
+        <hr />
 				<?php echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>'; ?>
 				<?php
 					if ($homeImage):

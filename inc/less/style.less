@@ -111,10 +111,8 @@ header#navbar {
 		#mixin > .shadow(2px 2px 8px 0, #444, false);
 		.border-radius(3px);
 		.college-branding {
-			height: 73px;
+			height: 63px;
 			overflow: hidden;
-			margin-bottom: 20px;
-			border-bottom: 1px solid #FFF;
 			img { margin-top: -6px; }
 			// &[data-affil=default] { img { margin: -588px 0 0 0; } }
 			// &[data-affil=system] { img { margin: -588px 0 0 0; } }
@@ -122,8 +120,9 @@ header#navbar {
 			// &[data-affil=hcc] { height: 86px; img { margin: -702px 0 0 0; } }
 			// &[data-affil=kcc] { height: 86px; img { margin: -702px 0 0 0;} }
 		}
-		.welcome { font-size: 25px; }
-		h1 { font-size: 51px; font-weight: normal; margin: 11px 0 19px 0; } // Course Number
+		hr { border-top: 1px solid #050505; border-bottom: none; background-color: #202020; margin: 10px -20px 20px -20px; }
+		h1 { font-size: 51px; font-weight: normal; margin: 11px 0; } // Course Number
+		h2 { font-weight: normal; color: @gray; } // Course Name
 		img { margin: 10px 0 0 0; }
 		&.full-background {
 			background: none;
@@ -136,6 +135,10 @@ header#navbar {
 				margin: 0;
 			}
 		}
+	}
+	#inline-intro-banner {
+		h1 { font-size: 51px; font-weight: normal; margin: 11px 0; } // Course Number
+		h2 { font-weight: normal; color: @gray; } // Course Name
 	}
 	.no-content {
 		//height: 200px;

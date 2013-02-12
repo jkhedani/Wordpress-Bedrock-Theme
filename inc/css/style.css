@@ -6862,21 +6862,26 @@ header#navbar .navbar-inner nav .caret {
   border-radius: 3px;
 }
 #main .intro-banner .college-branding {
-  height: 73px;
+  height: 63px;
   overflow: hidden;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #FFF;
 }
 #main .intro-banner .college-branding img {
   margin-top: -6px;
 }
-#main .intro-banner .welcome {
-  font-size: 25px;
+#main .intro-banner hr {
+  border-top: 1px solid #050505;
+  border-bottom: none;
+  background-color: #202020;
+  margin: 10px -20px 20px -20px;
 }
 #main .intro-banner h1 {
   font-size: 51px;
   font-weight: normal;
-  margin: 11px 0 19px 0;
+  margin: 11px 0;
+}
+#main .intro-banner h2 {
+  font-weight: normal;
+  color: #555555;
 }
 #main .intro-banner img {
   margin: 10px 0 0 0;
@@ -6891,6 +6896,15 @@ header#navbar .navbar-inner nav .caret {
   top: 0;
   left: 0;
   margin: 0;
+}
+#main #inline-intro-banner h1 {
+  font-size: 51px;
+  font-weight: normal;
+  margin: 11px 0;
+}
+#main #inline-intro-banner h2 {
+  font-weight: normal;
+  color: #555555;
 }
 #main .no-content {
   height: 100%;

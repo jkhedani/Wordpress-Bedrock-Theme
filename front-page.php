@@ -86,8 +86,9 @@ get_header(); ?>
 			  		}
 						echo '</div>'; // .college-branding
 						echo '<div id="intro-banner-content">';
-						echo '<span class="welcome">Welcome To</span>';
-						echo '<h1>'.get_bloginfo('name').'</h1>';
+						echo '<hr />';
+						echo '<h1>'.get_bloginfo( 'name' ).'</h1>';
+        		echo '<h2>'.get_bloginfo( 'description' ).'</h2>';
 						echo '<p>'.get_theme_mod( 'courses_short_desc', 'default_value' ).'</p>';
 						//echo '<img src="http://placehold.it/250x275" alt="placeholder" />';
 						echo '</div>';
