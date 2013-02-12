@@ -331,7 +331,7 @@ get_header(); ?>
 								echo '<p>It seems you don&#39;t have any Units published.</p>';
 							}
 							echo 		 '<span class="plus">+</span><a class="btn btn-primary" href="';
-							echo 	 	 admin_url( 'post-new.php?post_type=modules' );
+							echo 	 	 admin_url( 'post-new.php?post_type=units' );
 							echo 	 	 '" title="Go to admin and create a unit." class="create-new">Create a new Unit</a>';
 							echo '</div>';
 							echo '</li>';
@@ -348,7 +348,7 @@ get_header(); ?>
 							echo '<p>It seems you don&#39;t have any Units published.</p>';
 						}
 						echo  	 '<span class="plus">+</span><a class="btn btn-primary" href="';
-						echo 	 	 admin_url( 'post-new.php?post_type=modules' );
+						echo 	 	 admin_url( 'post-new.php?post_type=units' );
 						echo 	 	 '" title="Go to admin and create a unit." class="create-new">Create a new Unit</a>';
 						echo '</div>';
 					} // endif
