@@ -58,7 +58,7 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
       #navbar { margin-top: 28px; }
       #main { padding-top: 88px; }
       @media (max-width: 979px) {
-        #navbar {margin-top: 0px;}
+        
         #main { padding-top: 0px; }
       }
     </style>';
