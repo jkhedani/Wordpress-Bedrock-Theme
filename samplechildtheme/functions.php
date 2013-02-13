@@ -22,30 +22,35 @@ add_action( 'wp_enqueue_scripts', 'course_scripts' );
  * Use these hooks to add/insert functions/content at specific load points within the Wordpress loading process.
  * Inspired by Thematic
  * A list of all hook functions and what templates they are used in:
-
-		dcdc_before()
-				dcdc_aboveheader()
-				dcdc_belowheader()
-				dcdc_mainfirst() 
-						dcdc_contentfirst()
-						dcdc_abovepostcontent()
-								dcdc_postcontentfirst()
-								dcdc_postcontentlast()
-						dcdc_belowpostcontent()
-						dcdc_contentlast()
-						dcdc_sidebarfirst()
-						dcdc_sidebarlast()
-				dcdc_mainlast()
-		dcdc_after()
-
-	* Here is an example of how to properly hook into a function:
-		
-		function nameOfMyNewFunction() {
-			// content to output
-		}
-		add_action('theNameOfTheHookTheContentAboveWillGetLoaded','nameOfMyNewFunction');
-
-*/
+ *
+ *	dcdc_before()
+ *		dcdc_aboveheader()
+ *		(header)
+ *		dcdc_belowheader()
+ *		dcdc_mainstart()
+ *			dcdc_contentstart()
+ *			(breadcrumbs)
+ *			dcdc_abovepostcontent()
+ *				dcdc_postcontentstart()
+ *				(postcontent)
+ *				dcdc_postcontentend()
+ *			dcdc_belowpostcontent()
+ *			dcdc_contentend()
+ *			dcdc_sidebarstart()
+ *			(sidebar)
+ *			dcdc_sidebarend()
+ *			(pager)
+ *		dcdc_mainend()
+ *	dcdc_after()
+ *
+ * Here is an example of how to properly hook into a function:
+ *
+ *		function nameOfMyNewFunction() {
+ *			// content to output
+ *		}
+ *		add_action('theNameOfTheHookTheContentAboveWillGetLoaded','nameOfMyNewFunction');
+ *
+ */
 
 
 
