@@ -11,8 +11,7 @@
  */
 function course_scripts() {
 	wp_enqueue_style( 'course-style', get_stylesheet_directory_uri().'/css/course-style.css' );
-
-	wp_enqueue_script('bootstrap-custom-script', get_stylesheet_directory_uri().'/inc/js/scripts.js', array(), false, true);
+	wp_enqueue_script('course-custom-script', get_stylesheet_directory_uri().'/inc/js/scripts.js', array(), false, true);
 }
 add_action( 'wp_enqueue_scripts', 'course_scripts' );
 
