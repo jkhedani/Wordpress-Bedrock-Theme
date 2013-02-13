@@ -91,7 +91,7 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 		</div>
 	<?php } else { // End Sidebar for Home Page ?>
 		<div id="secondary" class="widget-area span4 offset1" role="complementary">
-			<?php dcdc_sidebarfirst(); ?>
+			<?php dcdc_sidebarstart(); ?>
 			
 			<?php // Module/Lesson Sidebar
 
@@ -194,7 +194,7 @@ $collegeAffilOption = get_theme_mod('courses_branding_college_affil', 'default_v
 			// endif; // end sidebar widget area
 			?>
 
-		<?php dcdc_sidebarlast(); ?>
+		<?php dcdc_sidebarend(); ?>
 		
 		</div><!-- #secondary .widget-area -->
 	<?php } // end is_home() ?>

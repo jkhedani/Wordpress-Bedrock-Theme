@@ -12,7 +12,7 @@ get_header(); ?>
 		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">
 			
-			<?php dcdc_contentfirst(); ?>
+			<?php dcdc_contentstart(); ?>
 
 			<?php dcdc_get_breadcrumbs(); ?>
 
@@ -38,7 +38,7 @@ get_header(); ?>
 
 			<?php dcdc_belowpostcontent(); ?>
 
-			<?php dcdc_contentlast(); ?>
+			<?php dcdc_contentend(); ?>
 
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->

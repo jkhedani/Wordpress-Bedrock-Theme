@@ -110,4 +110,4 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
 
   	<div id="main" role="main" class="site-main container">
 
-    <?php dcdc_mainfirst(); ?>
+    <?php dcdc_mainstart(); ?>

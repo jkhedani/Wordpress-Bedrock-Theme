@@ -35,23 +35,23 @@ function dcdc_belowheader() {
 }
 
 /**
- * Hook: dcdc_mainfirst
+ * Hook: dcdc_mainstart
  * 
  * Located directly after the #main tag before any content
  * in: header.php
  */
-function dcdc_mainfirst() {
-    do_action('dcdc_mainfirst');
+function dcdc_mainstart() {
+    do_action('dcdc_mainstart');
 }
 
 /**
- * Hook: dcdc_contentfirst
+ * Hook: dcdc_contentstart
  * 
  * Located above all content, below the header and above the footer, on any page/post
  * in: page.php, single.php
  */
-function dcdc_contentfirst() {
-    do_action('dcdc_contentfirst');
+function dcdc_contentstart() {
+    do_action('dcdc_contentstart');
 }
 
 /**
@@ -65,23 +65,23 @@ function dcdc_abovepostcontent() {
 }
 
 /**
- * Hook: dcdc_postcontentfirst
+ * Hook: dcdc_postcontentstart
  * 
  * Located above the post/page title, inside the loop container,
  * in: content-page.php, content-single.php
  */
-function dcdc_postcontentfirst() {
-    do_action('dcdc_postcontentfirst');
+function dcdc_postcontentstart() {
+    do_action('dcdc_postcontentstart');
 }
 
 /**
- * Hook: dcdc_postcontentlast
+ * Hook: dcdc_postcontentend
  * 
  * Located below the post/page content, inside the loop container,
  * in: content-page.php, content-single.php
  */
-function dcdc_postcontentlast() {
-    do_action('dcdc_postcontentlast');
+function dcdc_postcontentend() {
+    do_action('dcdc_postcontentend');
 }
 
 /**
@@ -95,43 +95,43 @@ function dcdc_belowpostcontent() {
 }
 
 /**
- * Hook: dcdc_contentlast
+ * Hook: dcdc_contentend
  * 
  * Located below all content, below the header and above the footer, on any page/post
  * in: page.php, single.php
  */
-function dcdc_contentlast() {
-    do_action('dcdc_contentlast');
+function dcdc_contentend() {
+    do_action('dcdc_contentend');
 }
 
 /**
- * Hook: dcdc_sidebarfirst
+ * Hook: dcdc_sidebarstart
  * 
  * Located above any sidebar content
  * in: sidebar.php
  */
-function dcdc_sidebarfirst() {
-    do_action('dcdc_sidebarfirst');
+function dcdc_sidebarstart() {
+    do_action('dcdc_sidebarstart');
 }
 
 /**
- * Hook: dcdc_sidebarlast
+ * Hook: dcdc_sidebarend
  * 
  * Located below sidebar content
  * in: sidebar.php
  */
-function dcdc_sidebarlast() {
-    do_action('dcdc_sidebarlast');
+function dcdc_sidebarend() {
+    do_action('dcdc_sidebarend');
 }
 
 /**
- * Hook: dcdc_mainlast
+ * Hook: dcdc_mainend
  * 
  * Located directly before the #main close tag after any content
  * in: footer.php
  */
-function dcdc_mainlast() {
-    do_action('dcdc_mainlast');
+function dcdc_mainend() {
+    do_action('dcdc_mainend');
 }
 
 /**

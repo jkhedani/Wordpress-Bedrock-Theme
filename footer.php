@@ -9,7 +9,7 @@
  */
 ?>
 	
-	<?php dcdc_mainlast(); ?>
+	<?php dcdc_mainend(); ?>
 
 	</div><!-- #main .site-main -->
 	</div><!-- #page .hfeed .site -->
