@@ -8,6 +8,9 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<?php dcdc_postcontentfirst(); ?>
+
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 	</header><!-- .entry-header -->
@@ -17,4 +20,7 @@
 		<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', '_s' ), 'after' => '</div>' ) ); ?>
 		<?php edit_post_link( __( 'Edit', '_s' ), '<span class="edit-link">', '</span>' ); ?>
 	</div><!-- .entry-content -->
+
+	<?php dcdc_postcontentfirst(); ?>
+
 </article><!-- #post-<?php the_ID(); ?> -->

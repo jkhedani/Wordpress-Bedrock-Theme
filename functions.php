@@ -32,6 +32,11 @@ function _s_setup() {
 	require( get_template_directory() . '/inc/template-tags.php' );
 
 	/**
+	 * Custom template hooks for use in this theme
+	 */
+	require( get_template_directory() . '/inc/dcdc-hooks.php' );
+
+	/**
 	 * Custom functions that act independently of the theme templates
 	 */
 	require( get_template_directory() . '/inc/tweaks.php' );

@@ -12,8 +12,8 @@
 $homeImage = get_theme_mod('courses_home_representative_image', 'normal');
 // Home Image Options
 $homeImageOptions = get_theme_mod('courses_home_representative_image_options','normal');
-
 ?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -39,7 +39,7 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
 	if ( $paged >= 2 || $page >= 2 )
 		echo ' | ' . sprintf( __( 'Page %s', '_s' ), max( $paged, $page ) );
 
-	?></title>
+?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <!--[if lt IE 9]>
@@ -58,63 +58,56 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
       #navbar { margin-top: 28px; }
       #main { padding-top: 88px; }
       @media (max-width: 979px) {
-        
         #main { padding-top: 0px; }
       }
     </style>';
   }
-?>
-
-</head>
+?></head>
 
 <body <?php body_class(); ?>>
-<?php // If home image is full background, load it here
-  // if(is_home()){
-  //   if($homeImageOptions == 'fullBackground') {
-  //     if ($homeImage):
-  //     echo '<img class="full-background-image" src="'.$homeImage.'" alt="Representative Image for the Home Page" />';
-  //     else:
-  //       if (is_user_logged_in()) {
-  //         echo '<div class="full-background-placeholder alert container"><button type="button" class="close" data-dismiss="alert">&times;</button>This image will be a full background image. Minimum dimensions: 1280x960</span></div>';
-  //       }
-  //     endif;
-  //   }
-  // }
-?>
-<div id="page" class="hfeed site">
-	<?php do_action( 'before' ); ?>
-	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
-  	<div class="navbar-inner">
-    	<div class="container">
-    		<!-- Bootstrap: Collapses to form mobile toggle menu -->
-      	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        	<span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a href="<?php echo home_url(); ?>" class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></a>
-        <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-        <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
-        <nav class="nav-collapse collapse">
-        	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
-					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
-        	<?php
 
-          if (is_user_logged_in() && !(has_nav_menu( 'primary' ))) { // Add link to Menus page if no menu exists
-            echo '<a class="empty-top-nav btn btn-primary pull-right" href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
-          } else {
-            wp_nav_menu( array(
-              'theme_location' => 'primary',
-              'container' => false,
-              'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav pull-right">%3$s</ul>',
-              'fallback_cb' => false, // If no menu is present in primary, show nothing.
-              'walker' => new dcdc_walker_nav_menu,
-            ));
-          }
-          ?>
-      	</nav><!--/.nav-collapse -->
-    	</div><!-- .container -->
-  	</div><!-- .navbar-inner -->
-  </header>
+  <?php dcdc_before(); ?>
+  
+  <div id="page" class="hfeed site">
+   
+    <?php dcdc_aboveheader();?>
+  
+  	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    	<div class="navbar-inner">
+      	<div class="container">
+      		<!-- Bootstrap: Collapses to form mobile toggle menu -->
+        	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          	<span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a href="<?php echo home_url(); ?>" class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></a>
+          <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+          <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
+          <nav class="nav-collapse collapse">
+          	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
+  					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
+          	<?php
 
-	<div id="main" role="main" class="site-main container">
+            if (is_user_logged_in() && !(has_nav_menu( 'primary' ))) { // Add link to Menus page if no menu exists
+              echo '<a class="empty-top-nav btn btn-primary pull-right" href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
+            } else {
+              wp_nav_menu( array(
+                'theme_location' => 'primary',
+                'container' => false,
+                'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav pull-right">%3$s</ul>',
+                'fallback_cb' => false, // If no menu is present in primary, show nothing.
+                'walker' => new dcdc_walker_nav_menu,
+              ));
+            }
+            ?>
+        	</nav><!--/.nav-collapse -->
+      	</div><!-- .container -->
+    	</div><!-- .navbar-inner -->
+    </header>
+
+    <?php dcdc_belowheader();?>
+
+  	<div id="main" role="main" class="site-main container">
+
+    <?php dcdc_mainfirst(); ?>

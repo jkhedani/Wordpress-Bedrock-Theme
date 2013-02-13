@@ -40,48 +40,48 @@ get_header(); ?>
 						if(is_user_logged_in() && ! isset( $wp_customize )) {
 			  			switch ($collegeAffilOption) {
 								case 'default':
-									echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';
+									echo '<img src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';
 								break;
 								case 'system':
-									echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';
+									echo '<img src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';
 								break;
 								case 'manoa':
-									echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
+									echo '<img src="'.get_template_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
 								break;
 								case 'hcc':
-									echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
+									echo '<img src="'.get_template_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
 								break;
 								case 'kcc':
-									echo '<img src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
+									echo '<img src="'.get_template_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
 								break;
 							}
 			  		} else {
 			  			// For display in course previewer only!
 			  			if($collegeAffilOption == 'default') {
-			  				echo '<img data-affil="system" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
-			  				echo '<img class="hide" data-affil="manoa" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
-			  				echo '<img class="hide" data-affil="hcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
-			  				echo '<img class="hide" data-affil="kcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
+			  				echo '<img data-affil="system" src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
+			  				echo '<img class="hide" data-affil="manoa" src="'.get_template_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
+			  				echo '<img class="hide" data-affil="hcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
+			  				echo '<img class="hide" data-affil="kcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
 			  			} elseif ($collegeAffilOption == 'system') {
-			  				echo '<img data-affil="system" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
-			  				echo '<img class="hide" data-affil="manoa" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
-			  				echo '<img class="hide" data-affil="hcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
-			  				echo '<img class="hide" data-affil="kcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
+			  				echo '<img data-affil="system" src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
+			  				echo '<img class="hide" data-affil="manoa" src="'.get_template_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
+			  				echo '<img class="hide" data-affil="hcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
+			  				echo '<img class="hide" data-affil="kcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
 			  			} elseif ($collegeAffilOption == 'manoa') {
-			  				echo '<img class="hide" data-affil="system" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
-			  				echo '<img data-affil="manoa" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
-			  				echo '<img class="hide" data-affil="hcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
-			  				echo '<img class="hide" data-affil="kcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
+			  				echo '<img class="hide" data-affil="system" src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
+			  				echo '<img data-affil="manoa" src="'.get_template_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
+			  				echo '<img class="hide" data-affil="hcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
+			  				echo '<img class="hide" data-affil="kcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
 			  			} elseif ($collegeAffilOption == 'hcc') {
-			  				echo '<img class="hide" data-affil="system" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
-			  				echo '<img class="hide"data-affil="manoa" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
-			  				echo '<img data-affil="hcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
-			  				echo '<img class="hide" data-affil="kcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
+			  				echo '<img class="hide" data-affil="system" src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
+			  				echo '<img class="hide"data-affil="manoa" src="'.get_template_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
+			  				echo '<img data-affil="hcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
+			  				echo '<img class="hide" data-affil="kcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
 			  			} elseif ($collegeAffilOption == 'kcc') {
-			  				echo '<img class="hide" data-affil="system" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
-			  				echo '<img class="hide" data-affil="manoa" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
-			  				echo '<img class="hide" data-affil="hcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
-			  				echo '<img data-affil="kcc" src="'.get_stylesheet_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
+			  				echo '<img class="hide" data-affil="system" src="'.get_template_directory_uri().'/inc/images/logos/uh-system-light.png" alt="University of Hawaii System logo" />';	
+			  				echo '<img class="hide" data-affil="manoa" src="'.get_template_directory_uri().'/inc/images/logos/uh-manoa-light.png" alt="University of Hawaii Manoa logo" />';
+			  				echo '<img class="hide" data-affil="hcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-honolulu-cc-light.png" alt="University of Hawaii Honolulu Community College logo" />';
+			  				echo '<img data-affil="kcc" src="'.get_template_directory_uri().'/inc/images/logos/uh-kapiolani-cc-light.png" alt="University of Hawaii Kapiolani Community College logo" />';
 			  			}
 			  		}
 						echo '</div>'; // .college-branding

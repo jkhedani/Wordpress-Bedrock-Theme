@@ -23,7 +23,7 @@ function get_current_user_role() {
 
 // Login page scripts
 function login_scripts() {
-	$stylesheetDir = get_stylesheet_directory_uri();
+	$stylesheetDir = get_template_directory_uri();
 
 	wp_enqueue_style( 'login-custom-style', "$stylesheetDir/inc/css/login-style.css" );
 }
@@ -31,7 +31,7 @@ add_action('login_head','login_scripts');
 
 // Admin theme scripts
 function admin_scripts() {
-	$stylesheetDir = get_stylesheet_directory_uri();
+	$stylesheetDir = get_template_directory_uri();
 	wp_enqueue_style( 'admin-custom-style', "$stylesheetDir/inc/css/admin-style.css" );
 	wp_enqueue_script('admin-custom-scripts', "$stylesheetDir/inc/js/admin-scripts.js", array(), false, true); ////// HACK! (just for now)
 }
@@ -52,9 +52,9 @@ add_action('wp_dashboard_setup', 'DCDC_remove_dashboard_widgets' );
 
 // Load resources and hook in bootstrap
 function custom_scripts() {
-	$stylesheetDir = get_stylesheet_directory_uri();
+	$stylesheetDir = get_template_directory_uri();
 	// Bootstrap scripts
-	wp_enqueue_style( 'bootstrap-custom-style', "$stylesheetDir/inc/css/style.css" );
+	wp_enqueue_style( 'bootstrap-parent-style', "$stylesheetDir/inc/css/style.css" );
 	wp_enqueue_style('open-sans-google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700', array(), false, 'all');
 
 	wp_enqueue_script('bootstrap-dropdown', "$stylesheetDir/inc/bootstrap/js/bootstrap-dropdown.js", array(), false, true);
@@ -556,9 +556,6 @@ function course_save_sort_order() {
 	die(1);
 }
 add_action('wp_ajax_course_sortable', 'course_save_sort_order');
-
-
-
 
 // Create connection types for course structure
 // https://github.com/scribu/wp-posts-to-posts/wiki

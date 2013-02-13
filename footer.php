@@ -8,6 +8,8 @@
  * @since _s 1.0
  */
 ?>
+	
+	<?php dcdc_mainlast(); ?>
 
 	</div><!-- #main .site-main -->
 	</div><!-- #page .hfeed .site -->
@@ -19,8 +21,8 @@
 		</div><!-- .container -->
 	</footer><!-- #colophon .site-footer -->
 
-
 <?php wp_footer(); ?>
+<?php dcdc_after(); ?>
 
 </body>
 </html>

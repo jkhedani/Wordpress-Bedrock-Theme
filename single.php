@@ -7,12 +7,17 @@
  */
 
 get_header(); ?>
-	<!-- <div class="row-fluid"></div> -->
+
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
 		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">
+			
+			<?php dcdc_contentfirst(); ?>
 
 			<?php dcdc_get_breadcrumbs(); ?>
+
+			<?php dcdc_abovepostcontent(); ?>
+
 			<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php get_template_part( 'content', 'single' ); ?>
@@ -26,11 +31,14 @@ get_header(); ?>
 			<?php endwhile; // end of the loop. ?>
 
 			<?php
-				// Add "Back To Top" Link
-				if(!$post->post_content=="") {
-					echo '<a id="backToTop" href="" title="Scroll to the top of this page.">Back To Top</a>'; // back to top link
-				}
+				// "Back To Top" Link
+				if(!$post->post_content == "")
+					echo '<a id="backToTop" href="" title="Scroll to the top of this page.">Back To Top</a>';
 			?>
+
+			<?php dcdc_belowpostcontent(); ?>
+
+			<?php dcdc_contentlast(); ?>
 
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->
