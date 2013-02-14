@@ -7,7 +7,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php dcdc_postcontentfirst(); ?>
+	<?php dcdc_postcontentstart(); ?>
 
 	<header class="entry-header">
 		<?php dcdc_get_module_count(); ?>
@@ -67,6 +67,6 @@
 			//edit_post_link( __( 'Edit', '_s' ), '<span class="edit-link">', '</span>' );
 	//echo '</footer>';// .entry-meta ?>
 
-	<?php dcdc_postcontentlast(); ?>
+	<?php dcdc_postcontentend(); ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

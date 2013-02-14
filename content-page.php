@@ -9,7 +9,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php dcdc_postcontentfirst(); ?>
+	<?php dcdc_postcontentstart(); ?>
 
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -21,6 +21,6 @@
 		<?php edit_post_link( __( 'Edit', '_s' ), '<span class="edit-link">', '</span>' ); ?>
 	</div><!-- .entry-content -->
 
-	<?php dcdc_postcontentfirst(); ?>
+	<?php dcdc_postcontentend(); ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
