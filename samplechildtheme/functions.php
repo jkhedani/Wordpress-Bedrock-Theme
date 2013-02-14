@@ -32,6 +32,8 @@ add_action( 'wp_enqueue_scripts', 'course_scripts' );
  *			dcdc_abovepostcontent()
  *				dcdc_postcontentstart()
  *				(postcontent)
+ *					dcdc_abovetitle()
+ *					dcdc_belowtitle()
  *				dcdc_postcontentend()
  *			dcdc_belowpostcontent()
  *			dcdc_contentend()

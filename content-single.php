@@ -10,8 +10,15 @@
 	<?php dcdc_postcontentstart(); ?>
 
 	<header class="entry-header">
+
 		<?php dcdc_get_module_count(); ?>
+		
+		<?php dcdc_abovetitle(); ?>
+		
 		<h1 class="entry-title"><?php the_title(); ?></h1>
+		
+		<?php dcdc_belowtitle(); ?>
+		
 		<hr />
 		<div class="entry-meta">
 			<?php //_s_posted_on(); ?>

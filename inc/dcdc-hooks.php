@@ -75,6 +75,26 @@ function dcdc_postcontentstart() {
 }
 
 /**
+ * Hook: dcdc_abovetitle
+ * 
+ * Located above the post/page title, inside the loop container, below the module content.
+ * in: content-page.php, content-single.php
+ */
+function dcdc_abovetitle() {
+    do_action('dcdc_abovetitle');
+}
+
+/**
+ * Hook: dcdc_belowtitle
+ * 
+ * Located directly below the post/page title, inside the loop container,
+ * in: content-page.php, content-single.php
+ */
+function dcdc_belowtitle() {
+    do_action('dcdc_belowtitle');
+}
+
+/**
  * Hook: dcdc_postcontentend
  * 
  * Located below the post/page content, inside the loop container,

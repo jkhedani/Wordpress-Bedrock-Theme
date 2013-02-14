@@ -12,7 +12,9 @@
 	<?php dcdc_postcontentstart(); ?>
 
 	<header class="entry-header">
+		<?php dcdc_abovetitle(); ?>
 		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<?php dcdc_belowtitle(); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
