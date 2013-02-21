@@ -266,7 +266,8 @@ function course_save_global_module_order() {
 //error_log("reordering modules: " . $_POST['parent_id']);
   global $wpdb;
   $order = explode(',', $_POST['order']);
-  $counter = 1;
+  $priorModules = intval($_POST['priorModules']);
+  $counter = 1 + $priorModules; // start numbering at next available if there is a previous unit with modules in it
   foreach ($order as $post_id) {
     $wpdb->update(
       $wpdb->posts, 

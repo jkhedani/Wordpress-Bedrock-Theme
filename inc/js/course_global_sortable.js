@@ -51,6 +51,10 @@ jQuery(document).ready(function($) {
     update: function(event, ui) {
       $('#loading-animation').show(); // Show the animate loading gif while waiting
 
+      // Count of modules in any units before this unit (we need this so we can keep the module numbering
+      // accumulative, i.e., module numbering doesn't restart in each unit, if there are any units).
+      var numPriorModules = ui.item.parent().parent().prevAll().children('ul').children().length;
+
       // Update Module numbers in database
       opts = {
         url: ajaxurl, // ajaxurl is defined by WordPress and points to /wp-admin/admin-ajax.php
@@ -58,7 +62,8 @@ jQuery(document).ready(function($) {
         async: true,
         cache: false,
         dataType: 'json',
-        data:{
+        data: {
+          priorModules: numPriorModules,
           action: 'course_update_global_sortable_module', // Tell WordPress how to handle this ajax request
           order: ui.item.parent().sortable('toArray').toString(), // Passes ID's of list items in 1,3,2 format
           parent_id: ui.item.parent().attr('id'),
@@ -75,13 +80,17 @@ jQuery(document).ready(function($) {
       };
       $.ajax(opts);
 
-      // Update Module numbering
+      // Update Module numbering in this unit
       ui.item.parent().children().each(function(index) {
-        $('.module_order', this).html(index+1);
+        $('.module_order', this).html(index+1+numPriorModules);
       });
     },
     remove: function(event, ui) {
       $('#loading-animation').show(); // Show the animate loading gif while waiting
+
+      // Count of modules in any units before this unit (we need this so we can keep the module numbering
+      // sequential, i.e., module numbering doesn't restart in each unit, if there are any units).
+      var numPriorModules = $(event.target).parent().prevAll().children('ul').children().length;
 
       // Update Module numbers in database
       opts = {
@@ -90,7 +99,8 @@ jQuery(document).ready(function($) {
         async: true,
         cache: false,
         dataType: 'json',
-        data:{
+        data: {
+          priorModules: numPriorModules,
           action: 'course_update_global_sortable_module', // Tell WordPress how to handle this ajax request
           order: $(event.target).sortable('toArray').toString(), // Passes ID's of list items in 1,3,2 format
           parent_id: $(event.target).attr('id'),
@@ -109,7 +119,7 @@ jQuery(document).ready(function($) {
 
       // Update Module numbering
       $(event.target).children().each(function(index) {
-        $('.module_order', this).html(index+1);
+        $('.module_order', this).html(index+1+numPriorModules);
       });
     },
     receive: function(event, ui) {
