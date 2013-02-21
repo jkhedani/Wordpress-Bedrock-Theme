@@ -159,15 +159,7 @@ function course_global_sort_modules($unit_id) {
   array_multisort($menu_order, SORT_ASC, $connected_modules);
 ?>
     <ul id="toc-unit-<?php print $unit_id; ?>">
-      <?php if (count($connected_modules) < 1) : ?>
-        <li id="module-0">
-          <span class='handle'>+</span>
-          <?php course_global_sort_lessons(0); ?>
-        </li>
-      <?php endif; ?>
       <?php foreach ($connected_modules as $module) : ?>
-<?php
-?>
         <li id="<?php print $module->ID; ?>">
           <span class='handle'>+</span>
           <span class='info'>Module <span class='module_order'><?php print $module->menu_order; ?></span></span>:
