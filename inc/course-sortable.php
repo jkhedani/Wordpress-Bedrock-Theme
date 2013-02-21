@@ -32,11 +32,13 @@ function course_global_sort() {
     <ul id="toc-units">
       <?php if ( !$units->have_posts()) : ?>
         <li id="unit-0">
+          <span class='handle'>+</span>
           <?php course_global_sort_modules(0); ?>
         </li>
       <?php endif; ?>
       <?php foreach ($units->posts as $unit) : ?>
         <li id="<?php print $unit->ID; ?>">
+          <span class='handle'>+</span>
           <span class='info'>Unit <span class='unit_order'><?php print $unit->menu_order; ?></span></span>:
           <?php print $unit->post_title; ?>
           <?php if (get_post_status($unit->ID) !== 'publish') : ?>
@@ -76,11 +78,15 @@ function course_global_sort() {
       ?>
         <?php if (count($connected) < 1): ?>
           <li id="<?php print $module->ID; ?>">
-            <span class='info'>Module <span class='module_order'>0</span></span>:
+            <span class='handle'>+</span>
+            <span class='info'>Module <span class='module_order'><?php print $module->menu_order; ?></span></span>:
             <?php print $module->post_title; ?>
             <?php if (get_post_status($module->ID) !== 'publish') : ?>
               <span class='warning right'>(Unpublished)</span>
             <?php endif; ?>
+            <span class='right detach detach-module'>x</span>
+            <ul id="toc-module-<?php print $module->ID; ?>">
+            </ul>
           </li>
         <?php endif; ?>
       <?php endforeach; ?>
@@ -115,11 +121,13 @@ function course_global_sort() {
       ?>
         <?php if (count($connected) < 1): ?>
           <li id="<?php print $lesson->ID; ?>">
-            <span class='info'>Lesson <span class='lesson_order'>-</span></span>:
+            <span class='handle'>+</span>
+            <span class='info'>Lesson <span class='lesson_order'><?php print $lesson->menu_order; ?></span></span>:
             <?php print $lesson->post_title; ?>
             <?php if (get_post_status($lesson->ID) !== 'publish') : ?>
               <span class='warning right'>(Unpublished)</span>
             <?php endif; ?>
+            <span class='right detach detach-lesson'>x</span>
           </li>
         <?php endif; ?>
       <?php endforeach; ?>
@@ -127,6 +135,7 @@ function course_global_sort() {
   </div><!-- End div#wrap //-->
 <?php
 }
+
 
 
 function course_global_sort_modules($unit_id) {
@@ -152,6 +161,7 @@ function course_global_sort_modules($unit_id) {
     <ul id="toc-unit-<?php print $unit_id; ?>">
       <?php if (count($connected_modules) < 1) : ?>
         <li id="module-0">
+          <span class='handle'>+</span>
           <?php course_global_sort_lessons(0); ?>
         </li>
       <?php endif; ?>
@@ -159,17 +169,20 @@ function course_global_sort_modules($unit_id) {
 <?php
 ?>
         <li id="<?php print $module->ID; ?>">
+          <span class='handle'>+</span>
           <span class='info'>Module <span class='module_order'><?php print $module->menu_order; ?></span></span>:
           <?php print $module->post_title; ?>
           <?php if (get_post_status($module->ID) !== 'publish') : ?>
             <span class='warning right'>(Unpublished)</span>
           <?php endif; ?>
+          <span class='right detach detach-module'>x</span>
           <?php course_global_sort_lessons($module->ID); ?>
         </li>
       <?php endforeach; ?>
     </ul>
 <?php
 }
+
 
 
 function course_global_sort_lessons($module_id) {
@@ -195,11 +208,13 @@ function course_global_sort_lessons($module_id) {
     <ul id="toc-module-<?php print $module_id; ?>">
       <?php foreach ($connected_lessons as $lesson) : ?>
         <li id="<?php print $lesson->ID; ?>">
+          <span class='handle'>+</span>
           <span class='info'>Lesson <span class='lesson_order'><?php print $lesson->menu_order; ?></span></span>:
           <?php print $lesson->post_title; ?>
           <?php if (get_post_status($lesson->ID) !== 'publish') : ?>
             <span class='warning right'>(Unpublished)</span>
           <?php endif; ?>
+          <span class='right detach detach-lesson'>x</span>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -316,7 +331,7 @@ function course_attach_global_sortable_lesson() {
 add_action('wp_ajax_course_receive_global_sortable_lesson', 'course_attach_global_sortable_lesson');
 
 
-// Event handler: p2p detach new Module
+// Event handler: p2p detach Module
 // http://wordpress.stackexchange.com/questions/23012/control-attachments-menu-order-with-jquery-sortable
 function course_detach_global_sortable_module() {
   $module_id = $_POST['module_id'];
@@ -326,7 +341,7 @@ function course_detach_global_sortable_module() {
 }
 add_action('wp_ajax_course_detach_global_sortable_module', 'course_detach_global_sortable_module');
 
-// Event handler: p2p attach new Lesson
+// Event handler: p2p detach Lesson
 // http://wordpress.stackexchange.com/questions/23012/control-attachments-menu-order-with-jquery-sortable
 function course_detach_global_sortable_lesson() {
   $lesson_id = $_POST['lesson_id'];
