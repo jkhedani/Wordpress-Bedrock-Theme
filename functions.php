@@ -34,7 +34,7 @@ function _s_setup() {
 	/**
 	 * Custom template hooks for use in this theme
 	 */
-	require( get_template_directory() . '/inc/dcdc-hooks.php' );
+	require( get_template_directory() . '/inc/bedrock-hooks.php' );
 
 	/**
 	 * Custom functions that act independently of the theme templates

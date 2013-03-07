@@ -9,9 +9,10 @@
  */
 ?>
 	
-	<?php dcdc_mainend(); ?>
+	<?php bedrock_mainend(); ?>
 
 	</div><!-- #main .site-main -->
+	<div id="push"></div>
 	</div><!-- #page .hfeed .site -->
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="container">
@@ -22,7 +23,7 @@
 	</footer><!-- #colophon .site-footer -->
 
 <?php wp_footer(); ?>
-<?php dcdc_after(); ?>
+<?php bedrock_after(); ?>
 
 </body>
 </html>

@@ -7,8 +7,8 @@
  */
 ?>
 
-<div id="secondary" class="widget-area span4 offset1" role="complementary">
-	<?php dcdc_sidebarstart(); ?>
+<div id="secondary" class="widget-area span4" role="complementary">
+	<?php bedrock_sidebarstart(); ?>
 	<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 
 		<aside id="search" class="widget widget_search">

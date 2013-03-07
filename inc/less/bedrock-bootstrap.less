@@ -8,12 +8,13 @@
  * Modified default inclusions for the base DCDC front-end framework.
  */
 
+// Core variables and mixins
+@import "bedrock-variables.less"; // Replace default variables
+@import "../bootstrap/less/mixins.less";
+
+
 // CSS Reset
 @import "../bootstrap/less/reset.less";
-
-// Core variables and mixins
-@import "../bootstrap/less/variables.less";
-@import "../bootstrap/less/mixins.less";
 
 // Grid system and page structure
 @import "../bootstrap/less/scaffolding.less";
@@ -42,15 +43,7 @@
 @import "../bootstrap/less/navs.less";
 @import "../bootstrap/less/navbar.less";
 @import "../bootstrap/less/breadcrumbs.less";
-@import "pager.less";
-
-// Add-ons
-//@import "../add-ons/less/tables.less"; // Example: If you wanted to use the bootstrap tables style;
-
-// Reponsive Layout REQUIRES: add-ons/js/bootstrap-collapse.js;
-@import "../bootstrap/less/bootstrap-responsive.less"; // Comment out if you don't need a responsive layout
+@import "../bootstrap/less/pager.less";
 
 // Utility classes
-@import "../bootstrap/less/custom-conventions.less";
 @import "../bootstrap/less/utilities.less"; // Has to be last to override when necessary
-@import "override-variables.less";

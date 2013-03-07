@@ -11,6 +11,8 @@
 html,
 body {
   height: 100%;
+  padding: 0;
+  margin: 0;
   /* The html and body elements cannot have any padding or margin. */
 
 }
@@ -23,10 +25,10 @@ body {
   /* Negative indent footer by it's height */
 
 }
-#main {
-  padding: 60px 0 0 0;
+#page #primary {
+  margin-top: 60px;
 }
-#push {
+#page #push {
   /* Set the fixed height of the footer here */
 
   height: 60px;
@@ -43,11 +45,6 @@ footer#colophon .container .site-info {
   margin: 15px 0;
 }
 /* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 979px) {
-  #main {
-    padding: 0;
-  }
-}
 @media (max-width: 767px) {
   footer#colophon {
     margin-left: -20px;

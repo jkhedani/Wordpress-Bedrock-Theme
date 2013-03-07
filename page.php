@@ -17,11 +17,11 @@ get_header(); ?>
 		<div id="primary" class="content-area span10">
 			<div id="content" class="site-content" role="main">
 
-			<?php dcdc_contentstart(); ?>
+			<?php bedrock_contentstart(); ?>
 
 			<?php dcdc_get_breadcrumbs(); ?>
 
-			<?php dcdc_abovepostcontent(); ?>
+			<?php bedrock_abovepostcontent(); ?>
 				
 			<?php while ( have_posts() ) : the_post(); ?>
 
@@ -31,9 +31,9 @@ get_header(); ?>
 
 			<?php endwhile; // end of the loop. ?>
 
-			<?php dcdc_belowpostcontent(); ?>
+			<?php bedrock_belowpostcontent(); ?>
 
-			<?php dcdc_contentend(); ?>
+			<?php bedrock_contentend(); ?>
 			
 			</div><!-- #content .site-content -->
 		</div><!-- #primary .content-area -->

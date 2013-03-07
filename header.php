@@ -7,11 +7,6 @@
  * @package _s
  * @since _s 1.0
  */
-
-// Home Image URL
-$homeImage = get_theme_mod('courses_home_representative_image', 'normal');
-// Home Image Options
-$homeImageOptions = get_theme_mod('courses_home_representative_image_options','normal');
 ?>
 
 <!DOCTYPE html>
@@ -20,17 +15,16 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
 <title><?php
-	/*
-	 * Print the <title> tag based on what is being viewed.
-	 */
+	//Print the <title> tag based on what is being viewed. 
 	global $page, $paged;
 
+  //Add page/content title
 	wp_title( '|', true, 'right' );
 
-	// Add the blog name.
+	// Add the site name.
 	bloginfo( 'name' );
 
-	// Add the blog description for the home/front page.
+	// Add the site description for the home/front page.
 	$site_description = get_bloginfo( 'description', 'display' );
 	if ( $site_description && ( is_home() || is_front_page() ) )
 		echo " | $site_description";
@@ -42,6 +36,7 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
 ?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+<link rel="shortcut icon" href="<?php bloginfo('stylesheet_directory'); ?>/inc/images/favicon.ico" />
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/inc/js/html5.js" type="text/javascript"></script>
 <![endif]-->
@@ -55,10 +50,10 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
   if(is_user_logged_in() && ! isset( $wp_customize )) {
     echo '
     <style type="text/css">
-      #navbar { margin-top: 28px; }
-      #main { padding-top: 88px; }
+      #navbar { margin-top: 28px; } /* Positions navbar below admin bar */
+      #main { padding-top: 88px; } /* Lowers all content below navbar to approximate position */
       @media (max-width: 979px) {
-        #main { padding-top: 0px; }
+        #main { padding-top: 0px; } /* Navbar turns static, no need for compensation here*/
       }
     </style>';
   }
@@ -66,11 +61,11 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
 
 <body <?php body_class(); ?>>
 
-  <?php dcdc_before(); ?>
+  <?php bedrock_before(); ?>
   
   <div id="page" class="hfeed site">
    
-    <?php dcdc_aboveheader();?>
+    <?php bedrock_aboveheader();?>
   
   	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
@@ -81,33 +76,18 @@ $homeImageOptions = get_theme_mod('courses_home_representative_image_options','n
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a href="<?php echo home_url(); ?>" class="site-affiliation" data-affil="<?php echo get_theme_mod("courses_branding_college_affil", "default_value"); ?>"><div class="site-logo"></div></a>
-          <h1 class="site-title brand"><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-          <h2 class="site-description description"><?php bloginfo( 'description' ); ?></h2>
+          <a class="brand site-title" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+          <span class="site-description"><?php bloginfo( 'description' ); ?></span>
           <nav class="nav-collapse collapse">
           	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
   					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
-          	<?php
-
-            if (is_user_logged_in() && !(has_nav_menu( 'primary' ))) { // Add link to Menus page if no menu exists
-              echo '<a class="empty-top-nav btn btn-primary pull-right" href="'.get_site_url().'/wp-admin/nav-menus.php" title="Select a menu to add here.">Add a menu!</a>';
-            } else {
-              wp_nav_menu( array(
-                'theme_location' => 'primary',
-                'container' => false,
-                'items_wrap' => '<ul role="navigation" id="%1$s" class="%2$s nav pull-right">%3$s</ul>',
-                'fallback_cb' => false, // If no menu is present in primary, show nothing.
-                'walker' => new dcdc_walker_nav_menu,
-              ));
-            }
-            ?>
         	</nav><!--/.nav-collapse -->
       	</div><!-- .container -->
     	</div><!-- .navbar-inner -->
     </header>
 
-    <?php dcdc_belowheader();?>
+    <?php bedrock_belowheader();?>
 
   	<div id="main" role="main" class="site-main container">
 
-    <?php dcdc_mainstart(); ?>
+    <?php bedrock_mainstart(); ?>

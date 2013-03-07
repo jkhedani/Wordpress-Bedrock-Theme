@@ -9,12 +9,12 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php dcdc_postcontentstart(); ?>
+	<?php bedrock_postcontentstart(); ?>
 
 	<header class="entry-header">
-		<?php dcdc_abovetitle(); ?>
+		<?php bedrock_abovetitle(); ?>
 		<h1 class="entry-title"><?php the_title(); ?></h1>
-		<?php dcdc_belowtitle(); ?>
+		<?php bedrock_belowtitle(); ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
@@ -23,6 +23,6 @@
 		<?php edit_post_link( __( 'Edit', '_s' ), '<span class="edit-link">', '</span>' ); ?>
 	</div><!-- .entry-content -->
 
-	<?php dcdc_postcontentend(); ?>
+	<?php bedrock_postcontentend(); ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

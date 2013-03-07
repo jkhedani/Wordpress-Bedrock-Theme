@@ -1,1 +1,93 @@
-/* Bedrock Styles */
+@import "bedrock-variables.less";
+
+/*
+=================================
+===== Default Global styles =====
+=================================
+*/
+
+
+
+/*
+================================
+===== Sticky Footer styles =====
+================================
+*/
+
+// Remove the following CSS to deactivate sticky footers 
+// without disrupting your current layout.
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#page {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -70px;  /* Negative indent footer by it's height */
+}
+#main { padding: 60px 0 0 0; }
+#push { /* Set the fixed height of the footer here */
+  height: 60px;
+  padding: 0;
+  border: none;
+}
+
+footer#colophon {
+	height: 70px;
+	padding: 0;
+  border: none;
+  background-color: #f5f5f5;
+  .container {
+  	.site-info { margin: 15px 0; }
+  }
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 979px) {
+  #main { padding: 0; }
+}
+
+@media (max-width: 767px) {
+  footer#colophon {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/*
+==================================
+===== Base Responsive Styles =====
+================================== 
+*/
+
+// Desktop & Beyond
+@media (min-width: 1200px) {
+
+}
+
+// Desktop & Below
+@media (max-width: 979px) {  
+  .container { padding: 0 20px; }
+}
+
+// Tablets & Below
+@media (max-width: 767px) {
+  .navbar-fixed-top, // The "All-important Navbar Fix"
+  .navbar-fixed-bottom,
+  .navbar-static-top {
+    //margin-left: 0;
+    //margin-right: 0;
+  }
+}
+
+// Phones & Below
+@media (max-width: 479px) {
+
+}

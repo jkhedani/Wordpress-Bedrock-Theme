@@ -2,6 +2,7 @@
 // Scaffolding
 // --------------------------------------------------
 
+
 // Body reset
 // -------------------------
 
@@ -22,7 +23,8 @@ a {
   color: @linkColor;
   text-decoration: none;
 }
-a:hover {
+a:hover,
+a:focus {
   color: @linkColorHover;
   text-decoration: underline;
 }
@@ -48,12 +50,4 @@ a:hover {
 // Perfect circle
 .img-circle {
   .border-radius(500px); // crank the border-radius so it works with most reasonably sized images
-}
-
-// Footer
-// -------------------------
-
-footer {
-  border-top: 1px solid #DDD;
-  padding: 15px 0;
 }
