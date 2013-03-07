@@ -9,11 +9,11 @@
  * Properly add new script files using this function.
  * http://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts
  */
-function course_scripts() {
-	wp_enqueue_style( 'course-style', get_stylesheet_directory_uri().'/css/course-style.css' );
-	wp_enqueue_script('course-custom-script', get_stylesheet_directory_uri().'/inc/js/scripts.js', array(), false, true);
+function diamond_scripts() {
+	wp_enqueue_style( 'diamond-style', get_stylesheet_directory_uri().'/css/diamond-style.css' );
+	wp_enqueue_script('diamond-custom-script', get_stylesheet_directory_uri().'/inc/js/scripts.js', array(), false, true);
 }
-add_action( 'wp_enqueue_scripts', 'course_scripts' );
+add_action( 'wp_enqueue_scripts', 'diamond_scripts' );
 
 /**
  * Custom Hook Functions
@@ -22,27 +22,27 @@ add_action( 'wp_enqueue_scripts', 'course_scripts' );
  * Inspired by Thematic
  * A list of all hook functions and what templates they are used in:
  *
- *	dcdc_before()
- *		dcdc_aboveheader()
+ *	bedrock_before()
+ *		bedrock_aboveheader()
  *		(header)
- *		dcdc_belowheader()
- *		dcdc_mainstart()
- *			dcdc_contentstart()
+ *		bedrock_belowheader()
+ *		bedrock_mainstart()
+ *			bedrock_contentstart()
  *			(breadcrumbs)
- *			dcdc_abovepostcontent()
- *				dcdc_postcontentstart()
+ *			bedrock_abovepostcontent()
+ *				bedrock_postcontentstart()
  *				(postcontent)
- *					dcdc_abovetitle()
- *					dcdc_belowtitle()
- *				dcdc_postcontentend()
- *			dcdc_belowpostcontent()
- *			dcdc_contentend()
- *			dcdc_sidebarstart()
+ *					bedrock_abovetitle()
+ *					bedrock_belowtitle()
+ *				bedrock_postcontentend()
+ *			bedrock_belowpostcontent()
+ *			bedrock_contentend()
+ *			bedrock_sidebarstart()
  *			(sidebar)
- *			dcdc_sidebarend()
+ *			bedrock_sidebarend()
  *			(pager)
- *		dcdc_mainend()
- *	dcdc_after()
+ *		bedrock_mainend()
+ *	bedrock_after()
  *
  * Here is an example of how to properly hook into a function:
  *
