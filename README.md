@@ -7,6 +7,6 @@ Version 1.0:
 
 Version 1.1:
 
-+ Child theme didn't have a registered template (doh!)
++ Register parent theme template in samplechildtheme (doh!)
 + Updated all template tag names
 + Page layouts aren't broken by default
