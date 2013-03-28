@@ -9,12 +9,12 @@
 get_header(); ?>
 
 	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
-		<div id="primary" class="content-area span10">
+		<div id="primary" class="content-area span8">
 			<div id="content" class="site-content" role="main">
 			
 			<?php bedrock_contentstart(); ?>
 
-			<?php dcdc_get_breadcrumbs(); ?>
+			<?php bedrock_get_breadcrumbs(); ?>
 
 			<?php bedrock_abovepostcontent(); ?>
 
@@ -44,8 +44,5 @@ get_header(); ?>
 		</div><!-- #primary .content-area -->
 		<?php get_sidebar(); ?>
 	</div><!-- .row-fluid -->
-	<footer class="entry-meta span10">
-		<?php dcdc_get_pager(); ?>
-	</footer>
 
 <?php get_footer(); ?>

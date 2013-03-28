@@ -77,7 +77,6 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand site-title" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-          <span class="site-description"><?php bloginfo( 'description' ); ?></span>
           <nav class="nav-collapse collapse">
           	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
   					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>

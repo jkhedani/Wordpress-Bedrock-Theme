@@ -10,8 +10,6 @@
 	<?php bedrock_postcontentstart(); ?>
 
 	<header class="entry-header">
-
-		<?php bedrock_get_module_count(); ?>
 		
 		<?php bedrock_abovetitle(); ?>
 		
