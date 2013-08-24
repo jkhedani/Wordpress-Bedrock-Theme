@@ -174,14 +174,6 @@ function _s_category_transient_flusher() {
 add_action( 'edit_category', '_s_category_transient_flusher' );
 add_action( 'save_post', '_s_category_transient_flusher' );
 
-/**
- * Prints breadcrumbs based on p2p connections.
- */
-if ( ! function_exists( 'bedrock_get_breadcrumbs') ) :
-function bedrock_get_breadcrumbs() {
-	// Add breadcrumb structure based on your IA
-}
-endif;
 
 if ( ! function_exists( 'bedrock_footer_credits') ) :
 /**

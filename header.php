@@ -13,7 +13,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php
 	//Print the <title> tag based on what is being viewed. 
 	global $page, $paged;
@@ -53,40 +53,22 @@
       #navbar { margin-top: 28px; } /* Positions navbar below admin bar */
       #main { padding-top: 88px; } /* Lowers all content below navbar to approximate position */
       @media (max-width: 979px) {
-        #main { padding-top: 0px; } /* Navbar turns static, no need for compensation here*/
+        
       }
     </style>';
   }
 ?></head>
 
 <body <?php body_class(); ?>>
-
-  <?php bedrock_before(); ?>
   
   <div id="page" class="hfeed site">
-   
-    <?php bedrock_aboveheader();?>
-  
+
   	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
     	<div class="navbar-inner">
       	<div class="container">
-      		<!-- Bootstrap: Collapses to form mobile toggle menu -->
-        	<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          	<span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
           <a class="brand site-title" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-          <nav class="nav-collapse collapse">
-          	<h1 class="assistive-text"><?php _e( 'Menu', '_s' ); ?></h1>
-  					<div class="assistive-text skip-link"><a href="#content" title="<?php esc_attr_e( 'Skip to content', '_s' ); ?>"><?php _e( 'Skip to content', '_s' ); ?></a></div>
-        	</nav><!--/.nav-collapse -->
       	</div><!-- .container -->
     	</div><!-- .navbar-inner -->
     </header>
 
-    <?php bedrock_belowheader();?>
-
   	<div id="main" role="main" class="site-main container">
-
-    <?php bedrock_mainstart(); ?>

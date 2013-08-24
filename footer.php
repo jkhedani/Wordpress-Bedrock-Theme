@@ -8,8 +8,6 @@
  * @since _s 1.0
  */
 ?>
-	
-	<?php bedrock_mainend(); ?>
 
 	</div><!-- #main .site-main -->
 	<div id="push"></div>
@@ -23,7 +21,6 @@
 	</footer><!-- #colophon .site-footer -->
 
 <?php wp_footer(); ?>
-<?php bedrock_after(); ?>
 
 </body>
 </html>

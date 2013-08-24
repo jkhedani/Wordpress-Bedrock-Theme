@@ -8,41 +8,40 @@
 
 get_header(); ?>
 
-	<div class="row-fluid"><!-- Bootstrap: REQUIRED! -->
-		<div id="primary" class="content-area span8">
-			<div id="content" class="site-content" role="main">
-			
-			<?php bedrock_contentstart(); ?>
+	<div id="primary" class="content-area row">
+		<div id="content" class="site-content span8" role="main">
+		
+		<?php bedrock_contentstart(); ?>
 
-			<?php bedrock_get_breadcrumbs(); ?>
+		<?php bedrock_get_breadcrumbs(); ?>
 
-			<?php bedrock_abovepostcontent(); ?>
+		<?php bedrock_abovepostcontent(); ?>
 
-			<?php while ( have_posts() ) : the_post(); ?>
+		<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php get_template_part( 'content', 'single' ); ?>
-
-				<?php
-					// If comments are open or we have at least one comment, load up the comment template
-					if ( comments_open() || '0' != get_comments_number() )
-						comments_template( '', true );
-				?>
-
-			<?php endwhile; // end of the loop. ?>
+			<?php get_template_part( 'templates/content', 'single' ); ?>
 
 			<?php
-				// "Back To Top" Link
-				if(!$post->post_content == "")
-					echo '<a id="backToTop" href="" title="Scroll to the top of this page.">Back To Top</a>';
+				// If comments are open or we have at least one comment, load up the comment template
+				if ( comments_open() || '0' != get_comments_number() )
+					comments_template( '', true );
 			?>
 
-			<?php bedrock_belowpostcontent(); ?>
+		<?php endwhile; // end of the loop. ?>
 
-			<?php bedrock_contentend(); ?>
+		<?php
+			// "Back To Top" Link
+			if(!$post->post_content == "")
+				echo '<a id="backToTop" href="" title="Scroll to the top of this page.">Back To Top</a>';
+		?>
 
-			</div><!-- #content .site-content -->
-		</div><!-- #primary .content-area -->
-		<?php get_sidebar(); ?>
-	</div><!-- .row-fluid -->
+		<?php bedrock_belowpostcontent(); ?>
+
+		<?php bedrock_contentend(); ?>
+
+		</div><!-- #content .site-content -->
+	</div><!-- #primary .content-area -->
+	
+	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>
