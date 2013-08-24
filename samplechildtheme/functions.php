@@ -19,44 +19,6 @@ function diamond_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'diamond_scripts' );
 
-/**
- * Custom Hook Functions
- *
- * Use these hooks to add/insert functions/content at specific load points within the Wordpress loading process.
- * Inspired by Thematic
- * A list of all hook functions and what templates they are used in:
- *
- *	bedrock_before()
- *		bedrock_aboveheader()
- *		(header)
- *		bedrock_belowheader()
- *		bedrock_mainstart()
- *			bedrock_contentstart()
- *			(breadcrumbs)
- *			bedrock_abovepostcontent()
- *				bedrock_postcontentstart()
- *				(postcontent)
- *					bedrock_abovetitle()
- *					bedrock_belowtitle()
- *				bedrock_postcontentend()
- *			bedrock_belowpostcontent()
- *			bedrock_contentend()
- *			bedrock_sidebarstart()
- *			(sidebar)
- *			bedrock_sidebarend()
- *			(pager)
- *		bedrock_mainend()
- *	bedrock_after()
- *
- * Here is an example of how to properly hook into a function:
- *
- *		function nameOfMyNewFunction() {
- *			// content to output
- *		}
- *		add_action('theNameOfTheHookTheContentAboveWillGetLoaded','nameOfMyNewFunction');
- *
- */
-
 
 
 
