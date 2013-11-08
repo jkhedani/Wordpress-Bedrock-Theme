@@ -36,7 +36,7 @@ function custom_scripts() {
 	wp_enqueue_style(	'bootstrap-base-styles', "$stylesheetDir/inc/css/bedrock-bootstrap.css");
 	//wp_enqueue_style(	'bootstrap-responsive-styles', "$stylesheetDir/inc/css/bedrock-bootstrap-responsive.css");
 	wp_enqueue_style( 'bootstrap-parent-style', "$stylesheetDir/inc/css/style.css" );
-	wp_enqueue_style( 'open-sans-google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700', array(), false, 'all');
+	wp_enqueue_style( 'open-sans-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700', array(), false, 'all');
 
 	wp_enqueue_script('bootstrap-dropdown', "$stylesheetDir/inc/bootstrap/js/bootstrap-dropdown.js", array(), false, true);
 	wp_enqueue_script('bootstrap-popover', "$stylesheetDir/inc/bootstrap/js/bootstrap-collapse.js", array(), false, true);
