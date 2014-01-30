@@ -17,4 +17,5 @@ A great place to start for both child themes and base themes. Aimed at developer
 looking to create WP sites that aren't blogs and want to limite the amount of control
 users have on design! Very content focused! Many useful defaults!
 
-+ 
++ Remove Bootstrap from build. Creating a leaner, more developer-friendly version.
++ Streamline markup and update some base functionality.
