@@ -8,8 +8,8 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area image-attachment row">
-		<div id="content" class="site-content span8" role="main">
+	<div id="primary" class="content-area image-attachment">
+		<div id="content" class="site-content" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 

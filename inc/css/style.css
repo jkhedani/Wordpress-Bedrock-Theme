@@ -1,22 +1,75 @@
-/*
-=================================
-===== Default Global styles =====
-=================================
-*/
-/*
-==================================
-===== Base Responsive Styles =====
-================================== 
-*/
-@media (min-width: 1200px) {
-  
+/**
+ *	Useful Mixins
+ *	General array of mixins to help ease memorization of vendor prefixing
+ *	as well as provide useful shortcuts for everyday css 'hacks'.
+ *	By Justin Hedani
+ *	Installation
+ *		At the top of your LESS document, insert the following:
+ *			@import 'path-to-this-file.less';
+ *		And that's it!
+ *	Usage
+ *		Reference mixins by just calling the appropriate mixin class within
+ *		the class you wish the css to be applied.
+ *		http://www.lesscss.org/#docs
+ */
+/**
+ * Default Global Styles
+ */
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
-@media (max-width: 979px) {
-  
+img {
+  box-sizing: content-box;
 }
-@media (max-width: 767px) {
-  
+.container {
+  width: 960px;
+  margin: 0 auto;
 }
-@media (max-width: 479px) {
-  
+.container:before,
+.container:after {
+  content: " ";
+  display: table;
+}
+.container:after {
+  clear: both;
+}
+form label {
+  display: block;
+  clear: both;
+}
+form input,
+form textarea {
+  padding: 9px;
+}
+/**
+ * Default Theme Styles
+ */
+#navbar {
+  padding: 20px;
+  background: #222;
+}
+#navbar a {
+  color: #FFF;
+  text-decoration: none;
+}
+#main:before,
+#main:after {
+  content: " ";
+  display: table;
+}
+#main:after {
+  clear: both;
+}
+#primary {
+  width: 600px;
+  float: left;
+}
+#secondary {
+  width: 320px;
+  float: right;
+  margin-top: 25px;
 }

@@ -46,18 +46,18 @@
 <?php
   // ADMIN: Move navbar down from under admin when user is
   // logged in but not in the theme customizer previewer
-  global $wp_customize;
-  if(is_user_logged_in() && ! isset( $wp_customize )) {
-    echo '
-    <style type="text/css">
-      #navbar { margin-top: 28px; } /* Positions navbar below admin bar */
-      #main { padding-top: 88px; } /* Lowers all content below navbar to approximate position */
-      @media (max-width: 979px) {
-        
-      }
-    </style>';
-  }
-?></head>
+  // global $wp_customize;
+  // if(is_user_logged_in() && ! isset( $wp_customize )) {
+  //   echo '
+  //   <style type="text/css">
+  //     #navbar { margin-top: 28px; } /* Positions navbar below admin bar */
+  //     #main { padding-top: 88px; } /* Lowers all content below navbar to approximate position */
+  //     @media (max-width: 979px) {
+  //     }
+  //   </style>';
+  // }
+?>
+</head>
 
 <body <?php body_class(); ?>>
   

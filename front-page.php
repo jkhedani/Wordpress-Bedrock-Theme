@@ -12,21 +12,16 @@
  */
 
 get_header(); ?>
-		<div id="primary" class="content-area row">
-			<div id="content" class="site-content span8" role="main">
-			<h1>Welcome back, Justin!</h1>
-			<p>Grab a starter template from <a href="http://getbootstrap.com/2.3.2/getting-started.html#examples" title="Bootstrap 2.3.2 HTML template examples">Bootstrap</a> or start your own!</p>
-			<?php while ( have_posts() ) : the_post(); ?>
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
 
-				<?php //get_template_part( 'templates/content', 'page' ); ?>
+			<h1><?php echo bloginfo('name'); ?></h1>
+			<h2><?php echo bloginfo('description'); ?></h2>
+			<p>Welcome to the Bedrock theme!</p>
+		
+		</div><!-- #content .site-content -->
+	</div><!-- #primary .content-area -->
 
-				<?php //comments_template( '', true ); ?>
-
-			<?php endwhile; // end of the loop. ?>
-			
-			</div><!-- #content .site-content -->
-		</div><!-- #primary .content-area -->
-
-		<?php // get_sidebar(); ?>
+	<?php // get_sidebar(); ?>
 
 <?php get_footer(); ?>

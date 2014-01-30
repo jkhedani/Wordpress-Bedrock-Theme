@@ -9,16 +9,17 @@
  */
 ?>
 
-	</div><!-- #main .site-main -->
-	<div id="push"></div>
-	</div><!-- #page .hfeed .site -->
+		</div><!-- #main .site-main -->
+
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="container">
 			<div class="site-info">
-				<?php bedrock_footer_credits(); ?>
+				<p>&copy; <?php echo get_the_date('Y'); ?></p>
 			</div><!-- .site-info -->
 		</div><!-- .container -->
 	</footer><!-- #colophon .site-footer -->
+
+	</div><!-- #page .hfeed .site -->
 
 <?php wp_footer(); ?>
 

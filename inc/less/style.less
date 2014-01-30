@@ -1,86 +1,30 @@
-@import "bedrock-variables.less";
+// Include basic mixins
+@import 'less-mixins/less-mixins.less';
 
-/*
-=================================
-===== Default Global styles =====
-=================================
-*/
+/**
+ * Default Global Styles
+ */
 
-// /*
-// ================================
-// ===== Sticky Footer styles =====
-// ================================
-// */
+// Layout
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+img { box-sizing: content-box; } // Prevents performance hit for resizing on images.
+.container { width: 960px; margin: 0 auto; .clearfix(); }
 
-// // Remove the following CSS to deactivate sticky footers 
-// // without disrupting your current layout.
-
-// html,
-// body {
-//   height: 100%;
-//   /* The html and body elements cannot have any padding or margin. */
-// }
-
-// /* Wrapper for page content to push down footer */
-// #page {
-//   min-height: 100%;
-//   height: auto !important;
-//   height: 100%;
-//   margin: 0 auto -70px;  /* Negative indent footer by it's height */
-// }
-// #main { padding: 60px 0 0 0; }
-// #push { /* Set the fixed height of the footer here */
-//   height: 60px;
-//   padding: 0;
-//   border: none;
-// }
-
-// footer#colophon {
-// 	height: 70px;
-// 	padding: 0;
-//   border: none;
-//   background-color: #f5f5f5;
-//   .container {
-//   	.site-info { margin: 15px 0; }
-//   }
-// }
-
-// /* Lastly, apply responsive CSS fixes as necessary */
-// @media (max-width: 979px) {
-//   //#main { padding: 0; }
-// }
-
-// @media (max-width: 767px) {
-//   footer#colophon {
-//     margin-left: -20px;
-//     margin-right: -20px;
-//     padding-left: 20px;
-//     padding-right: 20px;
-//   }
-// }
-
-/*
-==================================
-===== Base Responsive Styles =====
-================================== 
-*/
-
-// Desktop & Beyond
-@media (min-width: 1200px) {
-
+// Forms
+form {
+	label { display: block; clear: both; }
+	input, textarea { padding: 9px; }
 }
 
-// Desktop & Below
-@media (max-width: 979px) {  
-
+/**
+ * Default Theme Styles
+ */
+#navbar {
+	padding: 20px;
+	background: #222;
+	a { color: #FFF; text-decoration: none; }
 }
-
-// Tablets & Below
-@media (max-width: 767px) {
-
-}
-
-// Phones & Below
-@media (max-width: 479px) {
-
-}
+#main { .clearfix(); }
+#primary { width: 600px; float: left; }
+#secondary { width: 320px; float: right; margin-top: 25px; }

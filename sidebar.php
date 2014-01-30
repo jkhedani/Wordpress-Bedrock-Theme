@@ -7,7 +7,7 @@
  */
 ?>
 
-<div id="secondary" class="widget-area span4" role="complementary">
+<div id="secondary" class="widget-area" role="complementary">
 	
 	<?php if ( ! dynamic_sidebar( 'sidebar-1' ) ) : ?>
 

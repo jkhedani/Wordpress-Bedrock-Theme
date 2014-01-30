@@ -34,18 +34,62 @@ function _s_setup() {
 	/**
 	 * Custom functions that act independently of the theme templates
 	 */
-	require( get_template_directory() . '/inc/tweaks.php' );
+	// Admin theme scripts
+	function admin_scripts() {
+		$stylesheetDir = get_template_directory_uri();
+	}
+	add_action('admin_enqueue_scripts','admin_scripts');
+
+	// Dashboard widgets
+	// http://codex.wordpress.org/Dashboard_Widgets_API
+	function DCDC_remove_dashboard_widgets() {
+		remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_primary', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' );
+		remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' );
+		remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+	} 
+	add_action('wp_dashboard_setup', 'DCDC_remove_dashboard_widgets' );
+
+	// Load resources and hook in bootstrap
+	function custom_scripts() {
+		$stylesheetDir = get_template_directory_uri();
+		// Base Styles
+		wp_enqueue_style( 'normalize', "$stylesheetDir/inc/css/normalize.css" );
+		wp_enqueue_style( 'bedrock-style', "$stylesheetDir/inc/css/style.css" );
+	}
+	add_action( 'wp_enqueue_scripts', 'custom_scripts' );
+
+	// Removes automatic <code><html></code> spacing compensating for toolbar 
+	// NOTE: Leaving this uncommented just in case we rip out the toolbar bar.
+	// function my_filter_head() {
+	// 	remove_action('wp_head', '_admin_bar_bump_cb');
+	// }
+	// add_action('get_header', 'my_filter_head');
+
+
+	/**
+	 * Adds custom classes to the array of body classes.
+	 *
+	 * @since _s 1.0
+	 */
+	function _s_body_classes( $classes ) {
+		// Adds a class of group-blog to blogs with more than 1 published author
+		if ( is_multi_author() ) {
+			$classes[] = 'group-blog';
+		}
+
+		return $classes;
+	}
+	add_filter( 'body_class', '_s_body_classes' );
 
 	/**
 	 * Custom Theme Options
 	 */
 	//require( get_template_directory() . '/inc/theme-options/theme-options.php' );
 	//require( get_template_directory() . '/inc/theme-options/dcdc-theme-options.php' );
-
-	/**
-	 * WordPress.com-specific functions and definitions
-	 */
-	//require( get_template_directory() . '/inc/wpcom.php' );
 
 	/**
 	 * Make theme available for translation
