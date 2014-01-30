@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php
 	//Print the <title> tag based on what is being viewed. 
-	global $page, $paged;
+	global $page, $paged, $bedrock_options;
 
   //Add page/content title
 	wp_title( '|', true, 'right' );
@@ -44,19 +44,14 @@
 <?php wp_head(); ?>
 
 <?php
-  // ADMIN: Move navbar down from under admin when user is
-  // logged in but not in the theme customizer previewer
-  // global $wp_customize;
-  // if(is_user_logged_in() && ! isset( $wp_customize )) {
-  //   echo '
-  //   <style type="text/css">
-  //     #navbar { margin-top: 28px; } /* Positions navbar below admin bar */
-  //     #main { padding-top: 88px; } /* Lowers all content below navbar to approximate position */
-  //     @media (max-width: 979px) {
-  //     }
-  //   </style>';
-  // }
-?>
+  // Integrate LESS into a live theme workflow
+  // http://kopepasah.com/tutorials/using-less-in-a-live-wordpress-theme/
+
+  if ( $bedrock_options['site_mode'] == 'development' ) { ?>
+    <link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/inc/less/style.less" />
+    <script src="<?php echo get_template_directory_uri(); ?>/inc/js/less-1.6.1.min.js" type="text/javascript"></script>
+<?php } ?>
+
 </head>
 
 <body <?php body_class(); ?>>
