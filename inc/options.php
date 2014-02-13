@@ -21,10 +21,10 @@ class MySettingsPage {
   public function add_plugin_page() {
     // This page will be under "Settings"
     add_options_page(
-      'Settings Admin', // <title> 
-      'My Settings',  // Menu name
+      'Bedrock Settings', // <title> 
+      'Bedrock Settings',  // Menu name
       'manage_options', // Permission required to edit
-      'my-setting-admin', // Menu slug
+      'bedrock-settings-admin', // Menu slug
       array( $this, 'create_admin_page' )
     );
   }
@@ -34,15 +34,15 @@ class MySettingsPage {
    */
   public function create_admin_page() {
     // Set class property
-    $this->options = get_option( 'my_option_name' );
+    $this->options = get_option( 'bedrock_option' );
     ?>
     <div class="wrap">
-      <h2>My Settings</h2>           
+      <h2>Bedrock Settings</h2>           
       <form method="post" action="options.php">
       <?php
           // This prints out all hidden setting fields
-          settings_fields( 'my_option_group' );   
-          do_settings_sections( 'my-setting-admin' );
+          settings_fields( 'bedrock_option_group' );   
+          do_settings_sections( 'bedrock-settings-admin' );
           submit_button(); 
       ?>
       </form>
@@ -54,42 +54,26 @@ class MySettingsPage {
    * Register and add settings
    */
   public function page_init() {        
-      register_setting(
-        'my_option_group', // Option group
-        'my_option_name', // Option name
-        array( $this, 'sanitize' ) // Sanitize
-      );
+    register_setting(
+      'bedrock_option_group', // Option group
+      'bedrock_option', // Option name
+      array( $this, 'sanitize' ) // Sanitize
+    );
 
-      add_settings_section(
-        'general_settings', // ID
-        'My Custom Settings', // Title
-        array( $this, 'print_section_info' ), // Callback
-        'my-setting-admin' // Page
+    add_settings_section(
+      'general_settings', // ID
+      'General Settings', // Title
+      array( $this, 'print_section_info' ), // Callback
+      'bedrock-settings-admin' // Page
+    );  
+
+      add_settings_field(
+        'site_mode', // ID
+        'Site Mode', // Title 
+        array( $this, 'site_mode_callback' ), // Callback
+        'bedrock-settings-admin', // Page
+        'general_settings' // Section           
       );  
-
-          add_settings_field(
-            'site_mode', // ID
-            'Site Mode', // Title 
-            array( $this, 'site_mode_callback' ), // Callback
-            'my-setting-admin', // Page
-            'general_settings' // Section           
-          );
-
-		      add_settings_field(
-		        'id_number', // ID
-		        'ID Number', // Title 
-		        array( $this, 'id_number_callback' ), // Callback
-		        'my-setting-admin', // Page
-		        'general_settings' // Section           
-		      );      
-
-		      add_settings_field(
-		        'title', 
-		        'Title', 
-		        array( $this, 'title_callback' ), // Callback
-		        'my-setting-admin', 
-		        'general_settings'
-		      );      
   }
 
   /**
@@ -127,10 +111,10 @@ class MySettingsPage {
     $prodChecked = checked('production', $this->options['site_mode'], false);
 
     printf(
-      '<input type="radio" id="site_mode_1" name="my_option_name[site_mode]" value="%1$s" '. $devChecked .' />
-       <label class="description" for="my_option_name[site_mode]">Development</label>
-       <input type="radio" id="site_mode_2" name="my_option_name[site_mode]" value="%2$s" '. $prodChecked .' />
-       <label class="description" for="my_option_name[site_mode]">Production</label>
+      '<input type="radio" id="site_mode_1" name="bedrock_option[site_mode]" value="%1$s" '. $devChecked .' />
+       <label class="description" for="bedrock_option[site_mode]">Development</label>
+       <input type="radio" id="site_mode_2" name="bedrock_option[site_mode]" value="%2$s" '. $prodChecked .' />
+       <label class="description" for="bedrock_option[site_mode]">Production</label>
        <p>Make sure your style.css file is properly compiled before switching to production.</p>',
       isset( $this->options['site_mode'] ) ? 'development' : '',
       isset( $this->options['site_mode'] ) ? 'production' : ''
@@ -142,7 +126,7 @@ class MySettingsPage {
    */
   public function id_number_callback() {
     printf(
-      '<input type="text" id="id_number" name="my_option_name[id_number]" value="%s" />',
+      '<input type="text" id="id_number" name="bedrock_option[id_number]" value="%s" />',
       isset( $this->options['id_number'] ) ? esc_attr( $this->options['id_number']) : ''
     );
   }
@@ -152,7 +136,7 @@ class MySettingsPage {
    */
   public function title_callback() {
     printf(
-        '<input type="text" id="title" name="my_option_name[title]" value="%s" />',
+        '<input type="text" id="title" name="bedrock_option[title]" value="%s" />',
         isset( $this->options['title'] ) ? esc_attr( $this->options['title']) : ''
     );
   }

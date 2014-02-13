@@ -43,27 +43,17 @@
 
 <?php wp_head(); ?>
 
-<?php
-  // Integrate LESS into a live theme workflow
-  // http://kopepasah.com/tutorials/using-less-in-a-live-wordpress-theme/
-
-  if ( $bedrock_options['site_mode'] == 'development' ) { ?>
-    <link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/inc/less/style.less" />
-    <script src="<?php echo get_template_directory_uri(); ?>/inc/js/less-1.6.1.min.js" type="text/javascript"></script>
-<?php } ?>
-
 </head>
 
 <body <?php body_class(); ?>>
   
   <div id="page" class="hfeed site">
 
-  	<header id="navbar" class="navbar navbar-inverse navbar-fixed-top">
-    	<div class="navbar-inner">
-      	<div class="container">
-          <a class="brand site-title" href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-      	</div><!-- .container -->
-    	</div><!-- .navbar-inner -->
+  	<header id="navbar" class="navbar">
+      <div class="container">
+      <!-- Header Menu -->
+      <?php wp_nav_menu( array( 'theme_location' => 'header' ) ); ?>
+      </div>
     </header>
 
   	<div id="main" role="main" class="site-main container">

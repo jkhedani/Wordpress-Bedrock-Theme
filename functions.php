@@ -14,12 +14,6 @@
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
 
-/**
- * Load options page and settings.
- */
-$bedrock_options = get_option('my_option_name');
-require( get_template_directory() . '/inc/options.php' );
-
 if ( ! function_exists( '_s_setup' ) ):
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -61,13 +55,8 @@ function _s_setup() {
 
 	// Load resources and hook in bootstrap
 	function custom_scripts() {
-		global $bedrock_options;
-		$themeDir = get_template_directory_uri();
-		// Base Styles
-		wp_enqueue_style( 'normalize', "$themeDir/inc/css/normalize.css" );
-		// Currently loading final .css file for real users.
-		if ( $bedrock_options['site_mode'] == 'production' )
-			wp_enqueue_style( 'bedrock-style', "$stylesheetDir/inc/css/style.css" );
+		wp_enqueue_style( 'normalize', get_template_directory_uri() . '/inc/css/normalize.css' );
+		wp_enqueue_style( 'bedrock-style', get_template_directory_uri() . '/inc/css/style.css', 'normalize' );
 	}
 	add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 
